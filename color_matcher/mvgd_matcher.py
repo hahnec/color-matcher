@@ -22,7 +22,7 @@ __license__ = """
 
 import numpy as np
 
-from baseclass import MatcherBaseclass
+from .baseclass import MatcherBaseclass
 
 
 class TransferMVGD(MatcherBaseclass):
@@ -51,7 +51,7 @@ class TransferMVGD(MatcherBaseclass):
         transfer_mat = self._fun(cov_r, cov_z)
 
         mu_r = np.repeat(np.mean(r, axis=0)[..., np.newaxis], r.shape[0], axis=1).T
-        mu_z = np.repeat(np.mean(z, axis=0)[..., np.newaxis], z.shape[0], axis=1).T
+        mu_z = np.repeat(np.mean(z, axis=0)[..., np.newaxis], r.shape[0], axis=1).T
 
         t_r = np.dot((r - mu_r), transfer_mat) + mu_z
         t_r = np.reshape(t_r, src.shape)

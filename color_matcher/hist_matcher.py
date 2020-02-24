@@ -22,7 +22,7 @@ __license__ = """
 
 import numpy as np
 
-from baseclass import MatcherBaseclass
+from .baseclass import MatcherBaseclass
 
 
 class HistogramMatcher(MatcherBaseclass):

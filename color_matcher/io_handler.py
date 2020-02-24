@@ -70,7 +70,7 @@ def load_img_file(file_path):
     # get file extension
     file_type = file_path.split('.')[-1]
 
-    if any(file_type in ext for ext in FILE_EXTS):
+    if any(file_type.lower() in ext for ext in FILE_EXTS):
         try:
             import imageio
             suppress_user_warning(True, category=UserWarning)
@@ -79,7 +79,7 @@ def load_img_file(file_path):
         except ImportError:
             try:
                 img = Image.open(file_path)
-            except OSError:
+            except OSError or TypeError:
                 # support load of truncated images
                 from PIL import ImageFile
                 ImageFile.LOAD_TRUNCATED_IMAGES = True

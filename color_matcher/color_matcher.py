@@ -20,8 +20,8 @@ __license__ = """
 
 """
 
-from color_matcher.hist_matcher import HistogramMatcher
-from color_matcher.mvgd_matcher import TransferMVGD
+from .hist_matcher import HistogramMatcher
+from .mvgd_matcher import TransferMVGD
 
 
 class ColorMatcher(HistogramMatcher, TransferMVGD):

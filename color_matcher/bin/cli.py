@@ -53,8 +53,8 @@ def parse_options(argv):
     cfg = dict()
 
     # default settings (use test data images for MKL conversion)
-    cfg['src_path'] = os.path.join('..', 'tests', 'data', 'scotland_house.png')
-    cfg['ref_path'] = os.path.join('..', 'tests', 'data', 'scotland_plain.png')
+    cfg['src_path'] = '' #os.path.join('..', 'tests', 'data', 'scotland_house.png')
+    cfg['ref_path'] = '' #os.path.join('..', 'tests', 'data', 'scotland_plain.png')
 
     if opts:
         for (opt, arg) in opts:
@@ -84,7 +84,8 @@ def main():
     if os.path.isdir(cfg['src_path']):
         filenames = [f for f in os.listdir(cfg['src_path']) if f.lower().endswith(FILE_EXTS)]
     elif not os.path.isfile(cfg['src_path']):
-        filenames = [select_file(cfg['src_path'], 'Select source image')]
+        cfg['src_path'] = select_file(cfg['src_path'], 'Select source image')
+        filenames = [cfg['src_path']]
     else:
         filenames = [cfg['src_path']]
 
