@@ -20,16 +20,13 @@ __license__ = """
 
 """
 
-import unittest
+from color_matcher.top_level import ColorMatcher
+from color_matcher.io_handler import *
+from .img_downloader import main
 
-import requests
-import zipfile
-import io
+import unittest
 import os
 import numpy as np
-
-from color_matcher import ColorMatcher
-from color_matcher.io_handler import *
 
 
 class ColorMatchTester(unittest.TestCase):
@@ -39,39 +36,21 @@ class ColorMatchTester(unittest.TestCase):
 
     def setUp(self):
 
-        self.path = os.path.join(os.getcwd(), 'data')
-        self.fnames = ['f197with4m11pxf16Final.bmp', 'f197Inf9pxFinalShift12.7cmf22.bmp']
+        self.path = os.path.join(os.getcwd(), 'tests', 'data')
+        self.fnames = ['IMG'+str(i+1).zfill(4)+'.bmp' for i in range(24)]
 
         # url path to dataset
-        url = 'http://r0k.us/graphics/kodak/'
+        url = 'https://www.math.purdue.edu/~lucier/PHOTO_CD/BMP_IMAGES/'
 
         for fn in self.fnames:
             if not os.path.exists(os.path.join(self.path, fn)):
-                self.download_data(url)
+                main(url, os.path.join(os.getcwd(), 'data'))
 
         self.runTest()
 
     def runTest(self):
 
         self.test_color_matcher()
-
-    def download_data(self, url):
-        ''' download image data '''
-
-        print('Downloading data ...')
-
-        # establish internet connection for test data download
-        try:
-            request = requests.get(url, stream=True)
-        except requests.exceptions.ConnectionError:
-            raise(Exception('Check your internet connection, which is required for downloading test data.'))
-
-        # tbd: extract content from downloaded data
-        print(request.content)
-
-        print('Progress: Finished')
-
-        return True
 
     @staticmethod
     def avg_hist_dist(img1, img2, bins=2**8-1):
@@ -84,22 +63,29 @@ class ColorMatchTester(unittest.TestCase):
     def test_color_matcher(self):
 
         # create folder (if it doesn't already exist)
-        os.makedirs(os.path.join(self.path, ))
+        try:
+            os.makedirs(os.path.join(self.path, 'results'), 0o755)
+        except:
+            pass
 
-        for fn_img1, fn_img2 in self.fnames:
+        for fn_img1 in self.fnames:
+            for fn_img2 in self.fnames:
 
-            # load images
-            img1 = load_img_file(fn_img1)
-            img2 = load_img_file(fn_img2)
+                # load images
+                img1 = load_img_file(os.path.join(self.path, fn_img1))
+                img2 = load_img_file(os.path.join(self.path, fn_img2))
 
-            # create color match object
-            res = ColorMatcher(img1, img2).main()
+                # create color match object
+                res = ColorMatcher(img1, img2, method='hm-mkl-hm').main()
 
-            # assess quality
-            val = self.avg_hist_dist(res, img2)
+                # assess quality
+                val = self.avg_hist_dist(res, img2)
 
-            # assertion
-            self.assertEqual(True, val)
+                # save result
+                save_img_file(res, file_path=os.path.join(self.path, 'results', fn_img1.split('.')[0]+'_from_'+fn_img2))
+
+                # assertion
+                self.assertEqual(True, val!=0)
 
 
 if __name__ == '__main__':
