@@ -30,8 +30,6 @@ class TransferMVGD(MatcherBaseclass):
     def __init__(self, *args, **kwargs):
         super(TransferMVGD, self).__init__(*args, **kwargs)
 
-        self._ref = kwargs['ref'] if 'ref' in kwargs else None
-        self._src = kwargs['src'] if 'src' in kwargs else None
         self._fun = kwargs['fun'] if 'fun' in kwargs else self.mkl
 
     def transfer(self, src=None, ref=None, fun=None):

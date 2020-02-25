@@ -24,7 +24,7 @@ import getopt
 import sys, os
 
 from color_matcher import __version__
-from color_matcher.color_matcher import ColorMatcher
+from color_matcher.top_level import ColorMatcher
 from color_matcher.io_handler import *
 
 

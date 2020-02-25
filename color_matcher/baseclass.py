@@ -22,10 +22,14 @@ import numpy as np
 class MatcherBaseclass(object):
 
     def __init__(self, *args, **kwargs):
-        #super(MatcherBaseclass, self).__init__(*args, **kwargs)
 
-        self._src = kwargs['src'] if 'src' in kwargs else None
-        self._ref = kwargs['ref'] if 'ref' in kwargs else None
+        if len(args) == 2:
+            self._src = args[0]
+            self._ref = args[1]
+
+        if bool(kwargs):
+            self._src = kwargs['src'] if 'src' in kwargs else None
+            self._ref = kwargs['ref'] if 'ref' in kwargs else None
 
         self.validate_img_dims()
 

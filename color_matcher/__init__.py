@@ -18,5 +18,6 @@ Copyright (c) 2020 Christopher Hahne <inbox@christopherhahne.de>
 
 __version__ = '0.0.1'
 
-from . import color_matcher
-from .color_matcher import ColorMatcher
+from .top_level import ColorMatcher
+from .hist_matcher import HistogramMatcher
+from .mvgd_matcher import TransferMVGD

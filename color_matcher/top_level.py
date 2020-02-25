@@ -20,8 +20,8 @@ __license__ = """
 
 """
 
-from .hist_matcher import HistogramMatcher
-from .mvgd_matcher import TransferMVGD
+from color_matcher.hist_matcher import HistogramMatcher
+from color_matcher.mvgd_matcher import TransferMVGD
 
 
 class ColorMatcher(HistogramMatcher, TransferMVGD):
@@ -29,8 +29,6 @@ class ColorMatcher(HistogramMatcher, TransferMVGD):
     def __init__(self, *args, **kwargs):
         super(ColorMatcher, self).__init__(*args, **kwargs)
 
-        self._src = kwargs['src'] if 'src' in kwargs else None
-        self._ref = kwargs['ref'] if 'ref' in kwargs else None
         self._method = kwargs['method'] if 'method' in kwargs else 'default'
 
     def main(self):
