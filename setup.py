@@ -24,6 +24,7 @@ from setuptools import setup, find_packages
 from color_matcher import __version__
 from sys import platform
 from docutils import core
+import os
 
 APP = ['color_matcher/bin/cli.py']
 
@@ -48,7 +49,7 @@ OPTIONS = {
     "argv_emulation": True,
     "compressed": True,
     "optimize": 2,
-    "iconfile": 'color_matcher/gui/icns/1055104.icns',
+    #"iconfile": 'color_matcher/icns/1055104.icns',
     "excludes": ['matplotlib'],
     "plist": dict(NSHumanReadableCopyright='2020 Christopher Hahne'),
     "packages": ['numpy', 'docutils'],
@@ -74,7 +75,8 @@ else:
  )
 
 # parse description section text
-with open("README.rst", "r") as f:
+readme_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'README.rst')
+with open(readme_path, "r") as f:
     data = f.read()
     readme_nodes = list(core.publish_doctree(data))
     for node in readme_nodes:
@@ -84,10 +86,10 @@ with open("README.rst", "r") as f:
 setup(
       name='color_matcher',
       version=__version__,
-      description='Package for matching the color of a reference to a target image',
+      description='Package enabling color transfer across images',
       long_description=long_description,
       long_description_content_type='text/x-rst',
-      url='http://github.com/hahnec/colormatcher',
+      url='http://github.com/hahnec/color_matcher',
       author='Christopher Hahne',
       author_email='inbox@christopherhahne.de',
       license='GNU GPL V3.0',
@@ -95,8 +97,9 @@ setup(
       scripts=['color_matcher/bin/cli.py'],
       entry_points={'console_scripts': ['color_matcher=color_matcher.bin.cli:main'], },
       packages=find_packages(),
-      install_requires=['numpy', 'docutils'],
+      install_requires=['numpy', 'imageio', 'docutils'],
       include_package_data=True,
+      python_requires='>=3',
       zip_safe=False,
       **extra_options
       )
