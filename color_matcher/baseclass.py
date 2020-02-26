@@ -23,13 +23,16 @@ class MatcherBaseclass(object):
 
     def __init__(self, *args, **kwargs):
 
+        self._src = None
+        self._ref = None
+
         if len(args) == 2:
             self._src = args[0]
             self._ref = args[1]
 
         if bool(kwargs):
-            self._src = kwargs['src'] if 'src' in kwargs else None
-            self._ref = kwargs['ref'] if 'ref' in kwargs else None
+            self._src = kwargs['src'] if 'src' in kwargs else self._src
+            self._ref = kwargs['ref'] if 'ref' in kwargs else self._ref
 
         self.validate_img_dims()
 

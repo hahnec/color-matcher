@@ -31,7 +31,7 @@ class HistogramMatcher(MatcherBaseclass):
         super(HistogramMatcher, self).__init__(*args, **kwargs)
 
     def hist_match(self, src=None, ref=None):
-        ''' channel-wise histogram matching inspired by Matthew Perry's implementation '''
+        ''' channel-wise histogram matching '''
 
         # override source and reference image with arguments (if provided)
         self._src = src if src is not None else self._src

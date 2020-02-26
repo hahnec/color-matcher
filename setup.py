@@ -29,19 +29,19 @@ APP = ['color_matcher/bin/cli.py']
 
 MAC_FILES = [
         # ('subdir' , ['file_path'])
-        ('tests/data', ['color_matcher/tests/data/scotland_house.png']),
-        ('tests/data', ['color_matcher/tests/data/scotland_plain.png'])
+        ('test/data', ['test/data/scotland_house.png']),
+        ('test/data', ['test/data/scotland_plain.png'])
 ]
 
 WIN_FILES = [
         # ('subdir' , ['file_path'])
-        ('tests/data', ['color_matcher/tests/data/scotland_house.png']),
-        ('tests/data', ['color_matcher/tests/data/scotland_plain.png'])
+        ('test/data', ['test/data/scotland_house.png']),
+        ('test/data', ['test/data/scotland_plain.png'])
 ]
 UNIX_FILES = [
         # ('subdir' , ['file_path'])
-        ('tests/data', ['color_matcher/tests/data/scotland_house.png']),
-        ('tests/data', ['color_matcher/tests/data/scotland_plain.png'])
+        ('test/data', ['test/data/scotland_house.png']),
+        ('test/data', ['test/data/scotland_plain.png'])
 ]
 
 OPTIONS = {

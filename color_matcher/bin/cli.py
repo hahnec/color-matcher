@@ -35,6 +35,7 @@ def usage():
     print("-s <path>,     --src=<path>       Specify source image file or folder of source files to process")
     print("-r <filepath>, --ref=<filepath>   Specify target image file")
     print("-m <method>,   --method=<method>  Provide color transfer method, e.g. 'hist' or 'mvgd'")
+    print("-w ,           --win              Select files from window")
     print("")
     print("-h,            --help             Print this help message")
     print("")
@@ -45,7 +46,7 @@ def usage():
 def parse_options(argv):
 
     try:
-        opts, args = getopt.getopt(argv, "hs:r:m:", ["help", "src=", "ref=", "method="])
+        opts, args = getopt.getopt(argv, "hs:r:m:w", ["help", "src=", "ref=", "method="])
     except getopt.GetoptError as e:
         print(e)
         sys.exit(2)
@@ -53,8 +54,9 @@ def parse_options(argv):
     cfg = dict()
 
     # default settings (use test data images for MKL conversion)
-    cfg['src_path'] = '' #os.path.join('..', 'tests', 'data', 'scotland_house.png')
-    cfg['ref_path'] = '' #os.path.join('..', 'tests', 'data', 'scotland_plain.png')
+    cfg['src_path'] = '' #os.path.join('..', 'test', 'data', 'scotland_house.png')
+    cfg['ref_path'] = '' #os.path.join('..', 'test', 'data', 'scotland_plain.png')
+    cfg['win'] = None
 
     if opts:
         for (opt, arg) in opts:
@@ -67,6 +69,8 @@ def parse_options(argv):
                 cfg['ref_path'] = arg
             if opt in ("-m", "--method"):
                 cfg['method'] = arg
+            if opt in ("-w", "--win"):
+                cfg['win'] = True
 
     # create dictionary containing all parameters for the light field
     return cfg
@@ -80,21 +84,19 @@ def main():
     # parse options
     cfg = parse_options(sys.argv[1:])
 
+    # select files from window
+    if cfg['win']:
+        cfg['src_path'] = select_file(cfg['src_path'], 'Select source image')
+        cfg['ref_path'] = select_file(cfg['ref_path'], 'Select reference image')
+
     # select light field image(s) considering provided folder or file
     if os.path.isdir(cfg['src_path']):
         filenames = [f for f in os.listdir(cfg['src_path']) if f.lower().endswith(FILE_EXTS)]
-    elif not os.path.isfile(cfg['src_path']):
-        cfg['src_path'] = select_file(cfg['src_path'], 'Select source image')
-        filenames = [cfg['src_path']]
+    elif not os.path.isfile(cfg['src_path']) or not os.path.isfile(cfg['ref_path']):
+        print('File not found \n')
+        sys.exit()
     else:
         filenames = [cfg['src_path']]
-
-    if not cfg['ref_path']:
-        # open selection window (at current lfp file directory) to set calibration folder path
-        cfg['ref_path'] = select_file(cfg['ref_path'], 'Select reference image')
-
-    # provide number of found images to user
-    print("\n %s Image(s) found" % len(filenames))
 
     # cancel if file paths not provided
     if not cfg['src_path'] or not cfg['ref_path']:
