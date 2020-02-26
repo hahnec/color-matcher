@@ -5,7 +5,7 @@ ColorMatcher
 Description
 -----------
 
-*ColorMatcher* is a Python package to enable color transfer across images.
+*ColorMatcher* is a Python package enabling color transfer across images.
 It can be used for automatic color-grading of photographs or film sequences.
 
 Results
@@ -27,8 +27,6 @@ Installation
 * via pip:
     1. install with ``pip3 install color_matcher``
     2. type ``color_matcher -h`` to the command line once installation finished
-
-|
 
 * from source:
     1. install Python from https://www.python.org/
