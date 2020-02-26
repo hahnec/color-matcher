@@ -6,7 +6,7 @@ Description
 -----------
 
 *ColorMatcher* is a Python package enabling color transfer across images.
-It can be used for automatic color-grading of photographs or film sequences.
+This tool comes handy for automatic color-grading of photographs or film sequences.
 
 Results
 -------
@@ -38,11 +38,11 @@ Installation
 Command Line Usage
 ==================
 
-From the root directory of your downloaded repo, you can type
+From the root directory of your downloaded repo, you can run the tool on the provided test data by
 
 ``color_matcher -s './test/data/scotland_house.png' -r './test/data/scotland_plain.png'``
 
-on a UNIX system. A windows equivalent command may be
+on a UNIX system where the result is found at ``./test/data/``. A windows equivalent of the above command is
 
 ``color_matcher --src=".\\test\\data\\scotland_house.png" --ref=".\\test\\data\\scotland_plain.png"``
 

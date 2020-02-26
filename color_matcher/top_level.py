@@ -23,6 +23,8 @@ __license__ = """
 from color_matcher.hist_matcher import HistogramMatcher
 from color_matcher.mvgd_matcher import TransferMVGD
 
+METHODS = ('default', 'mvgd', 'hm', 'hm-mkl-hm')
+
 
 class ColorMatcher(HistogramMatcher, TransferMVGD):
 
@@ -34,13 +36,13 @@ class ColorMatcher(HistogramMatcher, TransferMVGD):
     def main(self):
 
         # color transfer methods (to be iterated through)
-        if self._method == 'default':
+        if self._method == METHODS[0]:
             funs = [self.transfer]
-        elif self._method == 'mvgd':
+        elif self._method == METHODS[1]:
             funs = [self.transfer]
-        elif self._method == 'hist':
+        elif self._method == METHODS[2]:
             funs = [self.hist_match]
-        elif self._method == 'hm-mkl-hm':
+        elif self._method == METHODS[3]:
             funs = [self.hist_match, self.transfer, self.hist_match]
         else:
             raise BaseException('Method type not recognized')
