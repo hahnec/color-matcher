@@ -30,7 +30,7 @@ except ImportError:
 
 from color_matcher.normalizer import Normalizer
 
-FILE_EXTS = ['bmp', 'png', 'tiff', 'tif', 'jpeg', 'jpg']
+FILE_EXTS = ('bmp', 'png', 'tiff', 'tif', 'jpeg', 'jpg')
 
 
 def save_img_file(img, file_path=None, file_type=None):
@@ -42,7 +42,7 @@ def save_img_file(img, file_path=None, file_type=None):
         file_type = ext if ext == 'png' or ext == 'tiff' else 'tiff' if img.dtype == 'uint16' else 'png'
 
     # compose new file path string if extension type changed
-    file_path = os.path.splitext(file_path)[-2] if file_path.endswith(('.tiff', '.png', '.bmp')) else file_path
+    file_path = os.path.splitext(file_path)[-2] if file_path.endswith(FILE_EXTS) else file_path
     file_type = 'png' if file_type is None else file_type
     file_path += '.' + file_type
 

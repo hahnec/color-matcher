@@ -87,8 +87,13 @@ def main():
 
     # select files from window (if option set)
     if cfg['win']:
-        cfg['src_path'] = select_file(cfg['src_path'], 'Select source image')
-        cfg['ref_path'] = select_file(cfg['ref_path'], 'Select reference image')
+        cfg['src_path'] = select_file('.', 'Select source image')
+        cfg['ref_path'] = select_file(cfg['src_path'], 'Select reference image')
+
+    # cancel if file paths not provided
+    if not cfg['src_path'] or not cfg['ref_path']:
+        print('Canceled due to missing image file path\n')
+        sys.exit()
 
     # select light field image(s) considering provided folder or file
     if os.path.isdir(cfg['src_path']):
@@ -99,10 +104,6 @@ def main():
     else:
         filenames = [cfg['src_path']]
 
-    # cancel if file paths not provided
-    if not cfg['src_path'] or not cfg['ref_path']:
-        print('Canceled due to missing image file path')
-        sys.exit()
 
     # method handling
     cfg['method'] = cfg['method'] if cfg['method'] in METHODS else 'mvgd'
@@ -116,7 +117,8 @@ def main():
         src = load_img_file(f)
         res = ColorMatcher(src=src, ref=ref, method=cfg['method']).main()
         filename = os.path.splitext(os.path.basename(cfg['src_path']))[0]+'_'+cfg['method']
-        save_img_file(res, file_path=os.path.join(output_path, filename))
+        file_ext = os.path.splitext(cfg['src_path'])[-1]
+        save_img_file(res, file_path=os.path.join(output_path, filename), file_type=file_ext[1:])
 
 
 if __name__ == "__main__":
