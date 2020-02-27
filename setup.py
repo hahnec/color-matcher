@@ -93,7 +93,7 @@ setup(
       author='Christopher Hahne',
       author_email='inbox@christopherhahne.de',
       license='GNU GPL V3.0',
-      keywords='color match histogram matching image colour transfer monge kantorovich',
+      keywords='color match histogram matching image colour transfer color-grading monge kantorovich mkl pitie reinhard',
       scripts=['color_matcher/bin/cli.py'],
       entry_points={'console_scripts': ['color_matcher=color_matcher.bin.cli:main'], },
       packages=find_packages(),
