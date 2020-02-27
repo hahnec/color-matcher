@@ -30,7 +30,7 @@ import sys, os
 
 def usage():
 
-    print("Usage: color_matcher <options>\n")
+    print("Usage: color-matcher <options>\n")
     print("Options:")
     print("-s <path>,     --src=<path>       Specify source image file or folder of source files to process")
     print("-r <filepath>, --ref=<filepath>   Specify target image file")
@@ -80,7 +80,7 @@ def parse_options(argv):
 def main():
 
     # program info
-    print("\ncolor_matcher v%s \n" % __version__)
+    print("\ncolor-matcher v%s \n" % __version__)
 
     # parse options
     cfg = parse_options(sys.argv[1:])

@@ -26,7 +26,7 @@ from sys import platform
 from docutils import core
 import os
 
-APP = ['color_matcher/bin/cli.py']
+APP = ['color-matcher/bin/cli.py']
 
 MAC_FILES = [
         # ('subdir' , ['file_path'])
@@ -49,7 +49,7 @@ OPTIONS = {
     "argv_emulation": True,
     "compressed": True,
     "optimize": 2,
-    #"iconfile": 'color_matcher/icns/1055104.icns',
+    #"iconfile": 'color-matcher/icns/1055104.icns',
     "excludes": ['matplotlib'],
     "plist": dict(NSHumanReadableCopyright='2020 Christopher Hahne'),
     "packages": ['numpy', 'docutils'],
@@ -84,18 +84,18 @@ with open(readme_path, "r") as f:
                 long_description = node.astext().rsplit('\n\n')[1]
 
 setup(
-      name='color_matcher',
+      name='color-matcher',
       version=__version__,
       description='Package enabling color transfer across images',
       long_description=long_description,
       long_description_content_type='text/x-rst',
-      url='http://github.com/hahnec/color_matcher',
+      url='http://github.com/hahnec/color-matcher',
       author='Christopher Hahne',
       author_email='inbox@christopherhahne.de',
       license='GNU GPL V3.0',
-      keywords='color match histogram matching image colour transfer monge kantorovich',
-      scripts=['color_matcher/bin/cli.py'],
-      entry_points={'console_scripts': ['color_matcher=color_matcher.bin.cli:main'], },
+      keywords='color match histogram matching image colour transfer monge kantorovich mkl pitie reinhard',
+      scripts=['color-matcher/bin/cli.py'],
+      entry_points={'console_scripts': ['color-matcher=color-matcher.bin.cli:main'], },
       packages=find_packages(),
       install_requires=['numpy', 'imageio', 'docutils'],
       include_package_data=True,
