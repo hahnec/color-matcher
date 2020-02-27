@@ -7,8 +7,7 @@ python3 -m pip install --user --upgrade twine
 sudo rm -rf build dist
 
 # bundle pypi package
-#python3 ../setup.py sdist
-#python3 setup.py sdist bdist_wheel
+sudo python3 setup.py sdist bdist_wheel
 
 # auto-update colour-matcher (cos of similar name)
 sed -i '' 's/color_matcher=/colour_matcher=/' setup.py
