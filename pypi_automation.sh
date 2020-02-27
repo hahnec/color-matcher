@@ -17,9 +17,6 @@ sed -i '' 's/colour_matcher=/color_matcher=/' setup.py
 sed -i '' "s/name='colour_matcher'/name='color_matcher'/" setup.py
 #for file in dist/color_matcher-*; do sudo cp -a $file "dist/colour_matcher-"$(echo $file | sed 's/.*matcher-//'); done
 
-# occupy colour-matcher (cos of similar name)
-for file in dist/color_matcher-*; do sudo cp -a $file "dist/colour_matcher-"$(echo $file | sed 's/.*matcher-//'); done
-
 # test upload and download
 python3 -m twine upload --repository testpypi dist/*
 python3 -m pip install --index-url https://test.pypi.org/simple/ color_matcher
