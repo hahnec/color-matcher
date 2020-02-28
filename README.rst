@@ -1,11 +1,11 @@
-============
-ColorMatcher
-============
+=============
+color-matcher
+=============
 
 Description
 -----------
 
-*ColorMatcher* is a Python package enabling color transfer across images.
+*color-matcher* is a Python package enabling color transfer across images.
 This tool comes handy for automatic color-grading of photographs or film sequences.
 
 Results
