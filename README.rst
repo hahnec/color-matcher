@@ -11,12 +11,28 @@ This tool comes handy for automatic color-grading of photographs or film sequenc
 Results
 -------
 
+Photography
+===========
+
 .. list-table::
    :widths: 8 8 8
 
-   * - |src|
-     - |ref|
-     - |res|
+   * - |src_photo|
+     - |ref_photo|
+     - |res_photo|
+   * - Source image
+     - Target image
+     - Result
+
+Paintings
+=========
+
+.. list-table::
+   :widths: 8 8 8
+
+   * - |src_paint|
+     - |ref_paint|
+     - |res_paint|
    * - Source image
      - Target image
      - Result
@@ -65,14 +81,26 @@ Credits
 
 .. _source: https://github.com/hahnec/color_matcher/archive/master.zip
 
-.. |src| raw:: html
+.. |src_photo| raw:: html
 
     <img src="https://raw.githubusercontent.com/hahnec/color_matcher/master/test/data/scotland_house.png" height="187px" max-width:"100%">
 
-.. |ref| raw:: html
+.. |ref_photo| raw:: html
 
     <img src="https://raw.githubusercontent.com/hahnec/color_matcher/master/test/data/scotland_plain.png" height="187px" max-width:"100%">
 
-.. |res| raw:: html
+.. |res_photo| raw:: html
 
     <img src="https://raw.githubusercontent.com/hahnec/color_matcher/master/test/data/scotland_pitie.png" height="187px" max-width:"100%">
+
+.. |src_paint| raw:: html
+
+    <img src="https://raw.githubusercontent.com/hahnec/color_matcher/master/test/data/parismusees/cezanne_paul_trois_baigneuses.png" height="187px" max-width:"100%">
+
+.. |ref_paint| raw:: html
+
+    <img src="https://raw.githubusercontent.com/hahnec/color_matcher/master/test/data/parismusees/cezanne_paul_portrait_dambroise_vollard.png" height="187px" max-width:"100%">
+
+.. |res_paint| raw:: html
+
+    <img src="https://raw.githubusercontent.com/hahnec/color_matcher/master/test/data/parismusees/cezanne_paul_trois_baigneuses_mvgd.png" height="187px" max-width:"100%">
