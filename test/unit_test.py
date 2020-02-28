@@ -39,9 +39,9 @@ class ColorMatchTester(unittest.TestCase):
         self.dir_path = os.path.dirname(os.path.realpath(__file__))
         self.dat_path = os.path.join(self.dir_path, 'data')
 
-        self.runTest()
+        self.test_run()
 
-    def runTest(self):
+    def test_run(self):
 
         # test command line interface
         #self.test_cli()
@@ -49,8 +49,11 @@ class ColorMatchTester(unittest.TestCase):
         # validate performance using Pities images
         self.test_mvgd_matcher()
 
+        # validation histogram matcher
+        self.test_hist_matcher()
+
         # iterate through Kodak data set
-        self.test_kodak_images()
+        #self.test_kodak_images()
 
     @staticmethod
     def avg_hist_dist(img1, img2, bins=2**8-1):
@@ -77,6 +80,32 @@ class ColorMatchTester(unittest.TestCase):
 
         # assertion
         self.assertEqual(True, refer_val > match_val)
+
+    def test_hist_matcher(self):
+
+        # get test data from imageio lib
+        import imageio
+        fn_img1 = 'chelsea'
+        fn_img2 = 'coffee'
+        img1 = imageio.imread('imageio:'+fn_img1+'.png')
+        img2 = imageio.imread('imageio:'+fn_img2+'.png')
+
+        # create color match object
+        match = ColorMatcher(img1, img2, method='hm').main()
+
+        # assess quality
+        match_val = self.avg_hist_dist(match, img2)
+        print('Avg. histogram distances %s vs %s' % (float('inf'), match_val))
+
+        # save result
+        loc_path = './test/data'
+        output_filename = os.path.join(loc_path, fn_img1.split('.')[0] + '_from_' + fn_img2)
+        save_img_file(img1, file_path=os.path.join(loc_path, fn_img1))
+        save_img_file(img2, file_path=os.path.join(loc_path, fn_img2))
+        save_img_file(match, file_path=output_filename)
+
+        # assertion
+        self.assertEqual(True, float('inf') > match_val)
 
     def test_kodak_images(self):
 
