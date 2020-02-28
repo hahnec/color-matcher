@@ -30,7 +30,7 @@ import sys, os
 
 def usage():
 
-    print("Usage: color_matcher <options>\n")
+    print("Usage: color-matcher <options>\n")
     print("Options:")
     print("-s <path>,     --src=<path>       Specify source image file or folder of source files to process")
     print("-r <filepath>, --ref=<filepath>   Specify target image file")

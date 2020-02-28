@@ -84,7 +84,7 @@ with open(readme_path, "r") as f:
                 long_description = node.astext().rsplit('\n\n')[1]
 
 setup(
-      name='color_matcher',
+      name='color-matcher',
       version=__version__,
       description='Package enabling color transfer across images',
       long_description=long_description,
@@ -95,7 +95,7 @@ setup(
       license='GNU GPL V3.0',
       keywords='color match histogram matching image colour transfer monge kantorovich',
       scripts=['color_matcher/bin/cli.py'],
-      entry_points={'console_scripts': ['color_matcher=color_matcher.bin.cli:main'], },
+      entry_points={'console_scripts': ['color-matcher=color_matcher.bin.cli:main'], },
       packages=find_packages(),
       install_requires=['numpy', 'imageio', 'docutils'],
       include_package_data=True,
