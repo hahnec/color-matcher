@@ -30,7 +30,7 @@ class TransferMVGD(MatcherBaseclass):
     def __init__(self, *args, **kwargs):
         super(TransferMVGD, self).__init__(*args, **kwargs)
 
-        self._fun = kwargs['fun'] if 'fun' in kwargs else self.mkl
+        self._fun = kwargs['fun'] if 'fun' in kwargs else self.mkl_solver
 
     def transfer(self, src=None, ref=None, fun=None):
 
@@ -57,7 +57,7 @@ class TransferMVGD(MatcherBaseclass):
         return t_r
 
     @staticmethod
-    def mkl(cov_r, cov_z):
+    def mkl_solver(cov_r, cov_z):
 
         [Da2, Ua] = np.linalg.eig(cov_r)
         Ua = np.array([Ua[:, 2] * -1, Ua[:, 1], Ua[:, 0] * -1]).T

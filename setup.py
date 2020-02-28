@@ -28,18 +28,7 @@ import os
 
 APP = ['color_matcher/bin/cli.py']
 
-MAC_FILES = [
-        # ('subdir' , ['file_path'])
-        ('test/data', ['test/data/scotland_house.png']),
-        ('test/data', ['test/data/scotland_plain.png'])
-]
-
-WIN_FILES = [
-        # ('subdir' , ['file_path'])
-        ('test/data', ['test/data/scotland_house.png']),
-        ('test/data', ['test/data/scotland_plain.png'])
-]
-UNIX_FILES = [
+FILES = [
         # ('subdir' , ['file_path'])
         ('test/data', ['test/data/scotland_house.png']),
         ('test/data', ['test/data/scotland_plain.png'])
@@ -59,19 +48,19 @@ if platform == 'darwin':
     extra_options = dict(
         setup_requires=['py2app'],
         app=APP,
-        data_files=MAC_FILES,
+        data_files=FILES,
         options=dict(py2app=OPTIONS),
     )
 elif platform == 'win32':
     extra_options = dict(
         setup_requires=[],
         #app=APP,
-        data_files=WIN_FILES,
+        data_files=FILES,
     )
 else:
     extra_options = dict(
         setup_requires=[],
-        data_files=UNIX_FILES,
+        data_files=FILES,
  )
 
 # parse description section text
@@ -89,7 +78,7 @@ setup(
       description='Package enabling color transfer across images',
       long_description=long_description,
       long_description_content_type='text/x-rst',
-      url='http://github.com/hahnec/color_matcher',
+      url='http://github.com/hahnec/color-matcher',
       author='Christopher Hahne',
       author_email='inbox@christopherhahne.de',
       license='GNU GPL V3.0',
