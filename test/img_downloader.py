@@ -1,8 +1,12 @@
 import requests
 import os
 from tqdm import tqdm
-from bs4 import BeautifulSoup as bs
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urlparse
+
+try:
+    from bs4 import BeautifulSoup as bs
+except ImportError:
+    raise Exception('Please install bs4 package')
 
 
 def is_valid(url):
@@ -17,6 +21,7 @@ def get_all_images(url):
     """
     Returns all image URLs on a single `url`
     """
+
     soup = bs(requests.get(url).content, "html.parser")
 
     filenames = [x.attrs.get('href') for x in soup.find_all("a") if x.attrs.get('href').__contains__('bmp')]
