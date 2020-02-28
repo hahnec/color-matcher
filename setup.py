@@ -93,7 +93,8 @@ setup(
       author='Christopher Hahne',
       author_email='inbox@christopherhahne.de',
       license='GNU GPL V3.0',
-      keywords='color match histogram matching image colour transfer monge kantorovich recoulor recolor paintings '
+      keywords='color match histogram matching image colour transfer monge kantorovich '
+               'recolor re-color recolour re-colour paintings '
                'film movie sequence automatic grading color-grading colour-grading '
                'equalize equalise equalization equalisation light-field lightfield stop-motion stopmotion',
       scripts=['color_matcher/bin/cli.py'],
