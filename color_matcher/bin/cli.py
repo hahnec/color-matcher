@@ -32,15 +32,12 @@ def usage():
 
     print("Usage: color-matcher <options>\n")
     print("Options:")
-    print("-s <path>,     --src=<path>       Specify source image file or folder of source files to process")
+    print("-s <path>,     --src=<path>       Specify source image file or folder to process")
     print("-r <filepath>, --ref=<filepath>   Specify target image file")
     print("-m <method>,   --method=<method>  Provide color transfer method, e.g. 'hist' or 'mvgd'")
     print("-w ,           --win              Select files from window")
-    print("")
     print("-h,            --help             Print this help message")
     print("")
-
-    sys.exit()
 
 
 def parse_options(argv):
@@ -92,6 +89,7 @@ def main():
 
     # cancel if file paths not provided
     if not cfg['src_path'] or not cfg['ref_path']:
+        usage()
         print('Canceled due to missing image file path\n')
         sys.exit()
 
