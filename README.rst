@@ -1,11 +1,11 @@
-============
-ColorMatcher
-============
+=============
+color-matcher
+=============
 
 Description
 -----------
 
-*ColorMatcher* is a Python package enabling color transfer across images.
+*color-matcher* is a Python package enabling color transfer across images.
 This tool comes handy for automatic color-grading of photographs or film sequences.
 
 Results
@@ -25,34 +25,34 @@ Installation
 ------------
 
 * via pip:
-    1. install with ``pip3 install color_matcher``
-    2. type ``color_matcher -h`` to the command line once installation finished
+    1. install with ``pip3 install color-matcher``
+    2. type ``color-matcher -h`` to the command line once installation finished
 
 * from source:
     1. install Python from https://www.python.org/
-    2. download the source_ using ``git clone https://github.com/hahnec/color_matcher.git``
-    3. go to the root directory ``cd color_matcher``
+    2. download the source_ using ``git clone https://github.com/hahnec/color-matcher.git``
+    3. go to the root directory ``cd color-matcher``
     4. install with ``python3 setup.py install``
-    5. if installation ran smoothly, enter ``color_matcher -h`` to the command line
+    5. if installation ran smoothly, enter ``color-matcher -h`` to the command line
 
 Command Line Usage
 ==================
 
 From the root directory of your downloaded repo, you can run the tool on the provided test data by
 
-``color_matcher -s './test/data/scotland_house.png' -r './test/data/scotland_plain.png'``
+``color-matcher -s './test/data/scotland_house.png' -r './test/data/scotland_plain.png'``
 
 on a UNIX system where the result is found at ``./test/data/``. A windows equivalent of the above command is
 
-``color_matcher --src=".\\test\\data\\scotland_house.png" --ref=".\\test\\data\\scotland_plain.png"``
+``color-matcher --src=".\\test\\data\\scotland_house.png" --ref=".\\test\\data\\scotland_plain.png"``
 
 Alternatively, you can specify the method or select your images manually with
 
-``color_matcher --win --method='hm-mkl-hm'``
+``color-matcher --win --method='hm-mkl-hm'``
 
 More information on optional arguments, can be found using the help parameter
 
-``color_matcher -h``
+``color-matcher -h``
 
 Credits
 -------
