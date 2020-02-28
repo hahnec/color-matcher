@@ -80,7 +80,7 @@ def parse_options(argv):
 def main():
 
     # program info
-    print("\ncolor_matcher v%s \n" % __version__)
+    print("\ncolor-matcher v%s \n" % __version__)
 
     # parse options
     cfg = parse_options(sys.argv[1:])
