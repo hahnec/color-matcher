@@ -11,10 +11,10 @@ except:
     raise Exception('Please install pillow')
 
 dir_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data')
-fn_img2 = "wave_orig.gif"
+fn_img2 = "wave.gif"
 im = Image.open(os.path.join(dir_path, fn_img2))
 duration = 40  #im.info['duration'] if 'duration' in im.info else
-img2 = load_img_file(os.path.join(dir_path, 'parismusees', 'cezanne_paul_portrait_dambroise_vollard.png'))
+img2 = load_img_file(os.path.join(dir_path, 'parismusees', 'cezanne_paul_trois_baigneuses_mvgd.png'))
 
 sequence = []
 method = 'mvgd'

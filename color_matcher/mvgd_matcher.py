@@ -61,18 +61,14 @@ class TransferMVGD(MatcherBaseclass):
 
         [Da2, Ua] = np.linalg.eig(cov_r)
         Ua = np.array([Ua[:, 2] * -1, Ua[:, 1], Ua[:, 0] * -1]).T
-        # Da2 = np.diag(Da2)
         Da2[Da2 < 0] = 0
-        # Da = np.diag(np.sqrt(Da2) + np.spacing(1))  # + eps
         Da = np.diag(np.sqrt(Da2[::-1]))
         C = np.dot(Da, np.dot(Ua.T, np.dot(cov_z, np.dot(Ua, Da))))
         [Dc2, Uc] = np.linalg.eig(C)
-        # Uc = np.array([Uc[:, 2] * -1, Uc[:, 1], Uc[:, 0] * -1]).T
-        # Dc2 = np.diag(Dc2)
         Dc2[Dc2 < 0] = 0
-        # Dc = np.diag(np.sqrt(Dc2) + np.spacing(1))    #  + eps
-        Dc = np.diag(np.sqrt(Dc2))  # [::-1]
+        Dc = np.diag(np.sqrt(Dc2))
         Da_inv = np.diag(1. / (np.diag(Da + np.spacing(1))))
+
         T = np.dot(Ua, np.dot(Da_inv, np.dot(Uc, np.dot(Dc, np.dot(Uc.T, np.dot(Da_inv, Ua.T))))))
 
         return T

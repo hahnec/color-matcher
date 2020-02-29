@@ -11,11 +11,11 @@ sudo python3 setup.py sdist bdist_wheel
 
 # test upload and download
 python3 -m twine upload --repository testpypi dist/*
-python3 -m pip install --index-url https://test.pypi.org/simple/ color_matcher
+python3 -m pip install --index-url https://test.pypi.org/simple/ color-matcher
 
 # production upload and download
 python3 -m twine upload dist/*
-python3 -m pip install color_matcher
+python3 -m pip install color-matcher
 
 # auto-update colour-matcher (cos of similar name)
 sed -i '' 's/color-matcher/colour-matcher/' setup.py
