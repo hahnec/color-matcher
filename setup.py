@@ -31,7 +31,8 @@ APP = ['color_matcher/bin/cli.py']
 FILES = [
         # ('subdir' , ['file_path'])
         ('test/data', ['test/data/scotland_house.png']),
-        ('test/data', ['test/data/scotland_plain.png'])
+        ('test/data', ['test/data/scotland_plain.png']),
+        ('test/data', ['test/data/scotland_pitie.png'])
 ]
 
 OPTIONS = {
