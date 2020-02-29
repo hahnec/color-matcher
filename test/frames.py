@@ -11,15 +11,17 @@ except:
     raise Exception('Please install pillow')
 
 dir_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data')
-fn_img2 = "wave.gif"
+fn_img2 = "wave_orig.gif"
 im = Image.open(os.path.join(dir_path, fn_img2))
 duration = 40  #im.info['duration'] if 'duration' in im.info else
 img2 = load_img_file(os.path.join(dir_path, 'parismusees', 'cezanne_paul_portrait_dambroise_vollard.png'))
 
 sequence = []
 method = 'mvgd'
+#size = 200, 200
 for frame in ImageSequence.Iterator(im):
 
+    #img1 = np.asarray(frame.convert('RGB').resize(size, Image.ANTIALIAS), np.uint8)
     img1 = np.asarray(frame.convert('RGB'), np.uint8)
 
     # create color match object
