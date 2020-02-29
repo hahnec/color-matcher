@@ -11,10 +11,11 @@ except:
     raise Exception('Please install pillow')
 
 dir_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data')
-fn_img2 = "wave.gif"
-im = Image.open(os.path.join(dir_path, fn_img2))
+fn_img1 = "wave.gif"
+if fn_img1.endswith('gif'):
+    im = Image.open(os.path.join(dir_path, fn_img1))
 duration = 40  #im.info['duration'] if 'duration' in im.info else
-img2 = load_img_file(os.path.join(dir_path, 'parismusees', 'cezanne_paul_trois_baigneuses_mvgd.png'))
+img2 = load_img_file(os.path.join(dir_path, 'sunrise_mvgd.png'))
 
 sequence = []
 method = 'mvgd'
@@ -29,5 +30,5 @@ for frame in ImageSequence.Iterator(im):
 
     sequence.append(Image.fromarray(Normalizer(match).uint8_norm()))
 
-output_fn = os.path.join(dir_path, os.path.splitext(fn_img2)[0] + '_' + method + '.gif')
+output_fn = os.path.join(dir_path, os.path.splitext(fn_img1)[0] + '_' + method + '.gif')
 imageio.mimwrite(output_fn, sequence, duration=1/duration, palettesize=2**8)

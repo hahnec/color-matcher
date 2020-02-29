@@ -24,19 +24,6 @@ Photography
      - Target colors
      - Result
 
-Paintings
-=========
-
-.. list-table::
-   :widths: 8 8 8
-
-   * - |src_paint|
-     - |ref_paint|
-     - |res_paint|
-   * - Source image
-     - Target colors
-     - Result
-
 Film sequences
 ==============
 
@@ -47,6 +34,32 @@ Film sequences
      - |ref_seq|
      - |res_seq|
    * - Source sequence
+     - Target colors
+     - Result
+
+Light-field corrections
+=======================
+
+.. list-table::
+   :widths: 8 8 8
+
+   * - |src_lfp|
+     - |ref_lfp|
+     - |res_lfp|
+   * - Source sequence
+     - Target colors
+     - Result
+
+Paintings
+=========
+
+.. list-table::
+   :widths: 8 8 8
+
+   * - |src_paint|
+     - |ref_paint|
+     - |res_paint|
+   * - Source image
      - Target colors
      - Result
 
@@ -126,8 +139,20 @@ Credits
 
 .. |ref_seq| raw:: html
 
-    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/parismusees/cezanne_paul_portrait_dambroise_vollard.png" width="200px" max-width:"100%">
+    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/sunrise.png" width="200px" max-width:"100%">
 
 .. |res_seq| raw:: html
 
     <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/wave_mvgd.gif" width="200px" max-width:"100%">
+
+.. |src_lfp| raw:: html
+
+    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/view_animation_7px.gif" width="200px" max-width:"100%">
+
+.. |ref_lfp| raw:: html
+
+    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/bee_2.png" width="200px" max-width:"100%">
+
+.. |res_lfp| raw:: html
+
+    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/view_animation_hm-mkl-hm.gif" width="200px" max-width:"100%">
