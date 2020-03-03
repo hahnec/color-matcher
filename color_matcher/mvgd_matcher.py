@@ -33,6 +33,23 @@ class TransferMVGD(MatcherBaseclass):
         self._fun = kwargs['fun'] if 'fun' in kwargs else self.mkl_solver
 
     def transfer(self, src=None, ref=None, fun=None):
+        '''
+
+        Transfer function to map colors based on for Multi-Variate Gaussian Distributions (MVGDs).
+
+        :param src: Source image that requires transfer
+        :param ref: Palette image which serves as reference
+        :param fun: optional argument to pass a transfer function to solve for covariance matrices
+        :param t_r: Resulting image after the mapping
+
+        :type src: :class:`~numpy:numpy.ndarray`
+        :type ref: :class:`~numpy:numpy.ndarray`
+        :type t_r: :class:`~numpy:numpy.ndarray`
+
+        :return: **t_r**
+        :rtype: np.ndarray
+
+        '''
 
         # check if three color channels are provided
         self.validate_color_chs()
@@ -58,6 +75,22 @@ class TransferMVGD(MatcherBaseclass):
 
     @staticmethod
     def mkl_solver(cov_r, cov_z):
+        '''
+
+        This function computes the transfer matrix based on the Monge-Kantorovich linearization.
+
+        :param cov_r: Covariance matrix of source image
+        :param cov_z: Covariance matrix of reference image
+        :param T: Transfer matrix
+
+        :type cov_r: :class:`~numpy:numpy.ndarray`
+        :type cov_z: :class:`~numpy:numpy.ndarray`
+        :type T: :class:`~numpy:numpy.ndarray`
+
+        :return: **T**
+        :rtype: np.ndarray
+
+        '''
 
         [Da2, Ua] = np.linalg.eig(cov_r)
         Ua = np.array([Ua[:, 2] * -1, Ua[:, 1], Ua[:, 0] * -1]).T

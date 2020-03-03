@@ -37,6 +37,9 @@ class MatcherBaseclass(object):
         self.validate_img_dims()
 
     def validate_img_dims(self):
+        '''
+        This function validates the image dimensions. It throws an exception if the dimension are unequal to 2 or 3.
+        '''
 
         # add third image dimension for monochromatic images
         self._src = self._src[..., np.newaxis] if len(self._src.shape) == 2 else self._src
@@ -46,6 +49,9 @@ class MatcherBaseclass(object):
             raise BaseException('Wrong image dimensions')
 
     def validate_color_chs(self):
+        '''
+        This function checks whether provided images consist of 3 color channels. An exception is thrown otherwise.
+        '''
 
         if self._src.shape[2] != 3 or self._ref.shape[2] != 3:
             raise BaseException('Each image must have 3 color channels')
