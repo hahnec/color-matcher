@@ -155,4 +155,3 @@ Author
 .. |res_lfp| raw:: html
 
     <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/view_animation_7px_hm-mkl-hm.gif" width="200px" max-width:"100%">
-..    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/view_animation_hm-mkl-hm.gif" width="200px" max-width:"100%">
