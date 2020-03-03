@@ -47,25 +47,8 @@ Light-field corrections
    * - |src_lfp|
      - |ref_lfp|
      - |res_lfp|
-<<<<<<< HEAD
    * - Raw light-field
      - Central view
-     - Result
-
-Paintings
-=========
-
-.. list-table::
-   :widths: 8 8 8
-
-   * - |src_paint|
-     - |ref_paint|
-     - |res_paint|
-   * - Source image
-=======
-   * - Source sequence
->>>>>>> remotes/origin/master
-     - Target colors
      - Result
 
 Paintings
@@ -171,8 +154,5 @@ Author
 
 .. |res_lfp| raw:: html
 
-<<<<<<< HEAD
     <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/view_animation_7px_hm-mkl-hm.gif" width="200px" max-width:"100%">
-=======
-    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/view_animation_hm-mkl-hm.gif" width="200px" max-width:"100%">
->>>>>>> remotes/origin/master
+..    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/view_animation_hm-mkl-hm.gif" width="200px" max-width:"100%">
