@@ -5,9 +5,9 @@ color-matcher
 Description
 -----------
 
-*color-matcher* is a Python package enabling color transfer across images which comes handy for automatic color-grading
-of photographs, paintings, film sequences or light-fields. As of now, the methods behind the mapping are based on the
-Monge-Kantorovich solution as proposed by `Pitie <http://francois.pitie.net/>`__ and histogram matching.
+*color-matcher* enables color transfer across images which comes in handy for automatic color-grading
+of photographs, paintings, film sequences or light-fields. As of now, the methods behind the mapping are based on
+histogram matching and the Monge-Kantorovich solution as proposed by `Pitie <http://francois.pitie.net/>`__.
 
 Results
 -------
