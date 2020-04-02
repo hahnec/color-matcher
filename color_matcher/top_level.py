@@ -22,12 +22,13 @@ __license__ = """
 
 from color_matcher.hist_matcher import HistogramMatcher
 from color_matcher.mvgd_matcher import TransferMVGD
+from color_matcher.reinhard_matcher import ReinhardMatcher
 import numpy as np
 
-METHODS = ('default', 'mvgd', 'hm', 'hm-mkl-hm')
+METHODS = ('default', 'mvgd', 'hm', 'hm-mkl-hm', 'reinhard')
 
 
-class ColorMatcher(HistogramMatcher, TransferMVGD):
+class ColorMatcher(HistogramMatcher, TransferMVGD, ReinhardMatcher):
 
     def __init__(self, *args, **kwargs):
         super(ColorMatcher, self).__init__(*args, **kwargs)
@@ -56,6 +57,8 @@ class ColorMatcher(HistogramMatcher, TransferMVGD):
             funs = [self.hist_match]
         elif self._method == METHODS[3]:
             funs = [self.hist_match, self.transfer, self.hist_match]
+        elif self._method == METHODS[4]:
+            funs = [self.reinhard]
         else:
             raise BaseException('Method type not recognized')
 

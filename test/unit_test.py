@@ -46,11 +46,10 @@ class ColorMatchTester(unittest.TestCase):
         # test command line interface
         #self.test_cli()
 
-        # validate performance using Pities images
-        self.test_mvgd_matcher()
-
-        # validation histogram matcher
-        self.test_hist_matcher()
+        # validate match methods based on Pities images
+        methods = ['mvgd', 'hm', 'reinhard']
+        for method in methods:
+            self.test_match_method(method)
 
         # iterate through Kodak data set
         #self.test_kodak_images()
@@ -63,7 +62,7 @@ class ColorMatchTester(unittest.TestCase):
 
         return np.sqrt(np.sum(np.square(hist_a - hist_b)))
 
-    def test_mvgd_matcher(self):
+    def test_match_method(self, method=None):
 
         # load images
         plain = load_img_file(os.path.join(self.dat_path, 'scotland_house.png'))
@@ -71,7 +70,7 @@ class ColorMatchTester(unittest.TestCase):
         refer = load_img_file(os.path.join(self.dat_path, 'scotland_pitie.png'))
 
         # create color match object
-        match = ColorMatcher(plain, house, method='mvgd').main()
+        match = ColorMatcher(plain, house, method=method).main()
 
         # assess quality
         refer_val = self.avg_hist_dist(refer, house)
@@ -81,7 +80,7 @@ class ColorMatchTester(unittest.TestCase):
         # assertion
         self.assertEqual(True, refer_val > match_val)
 
-    def test_hist_matcher(self):
+    def test_match_method_imageio(self, method=None):
 
         # get test data from imageio lib
         import imageio
@@ -91,7 +90,7 @@ class ColorMatchTester(unittest.TestCase):
         img2 = imageio.imread('imageio:'+fn_img2+'.png')
 
         # create color match object
-        match = ColorMatcher(img1, img2, method='hm').main()
+        match = ColorMatcher(img1, img2, method=method).main()
 
         # assess quality
         match_val = self.avg_hist_dist(match, img2)
