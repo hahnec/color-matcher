@@ -22,7 +22,7 @@ __license__ = """
 
 from color_matcher.top_level import ColorMatcher
 from color_matcher.io_handler import *
-from .img_downloader import main
+from test.img_downloader import main
 
 import unittest
 import os
