@@ -2,3 +2,4 @@ numpy
 imageio
 docutils
 requests
+tqdm
