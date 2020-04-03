@@ -43,7 +43,7 @@ script:
 
 deploy:
   provider: pypi
-  user: "__token__"
+  user: "hahnec"
   skip_existing: true
   server: https://test.pypi.org/index
   password:
