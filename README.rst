@@ -162,9 +162,9 @@ Author
 
 .. Image substitutions
 
-.. |release| image:: https://img.shields.io/github/release/hahnec/color-matcher.svg?style=flat-square
+.. |release| image:: https://img.shields.io/github/v/release/hahnec/color-matcher?style=flat-square
     :target: https://github.com/hahnec/color-matcher/releases/
     :alt: release
 
-.. |build| image:: https://img.shields.io/travis/hahnec/color-matcher?style=flat-square
+.. |build| image:: https://img.shields.io/travis/com/hahnec/color-matcher?style=flat-square
     :target: https://travis-ci.com/github/hahnec/color-matcher
