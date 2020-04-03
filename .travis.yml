@@ -42,9 +42,11 @@ script:
 #    fi
 
 deploy:
-  provider: pypi
-  user: hahnec
-  skip_existing: true
-  server: https://test.pypi.org/legacy/
-  password:
-    secure: vpZFMjF6aNLXipbKvCsY0wL7Cc6Cz3WvBT6U/UPhjhvPSVJylk4krPjYrWksPTeV5MRPGWrozYb1F0+aKufn8zKM6rfuiYEtZk+rjNt2QgQc2M3MVC7RzpUkEruVJQAegCGW+PYg5ONMzTLrBXpCJDe+ZigM4yPh/TjD9CGUeDhkw78x2lyPCFfqvlZmpuUtBtk8cNSZnQRRo59+6P7+XP1q4MnMghYi0idcs4yFmrIDOJfg3BBen8uM60vVFOq55hOvq6bgKAxd099LRVTtXmDuted/22IaKVBdg5epUjd1exXjAsAnVK6IAUtapDTJaZA7YZuKwHHafoDZixWiyuRXowe4W4QdNS863Ty5U8fxZj9HLMFnaBqgQhHzBM7ZuJ8GMJDx9KiMVJmiBP1R7DpC4zMgTIVYew6yGxdy5B6io9rVPvQtP7VAwNCpAsBz1WbVqzcLyewqjokGvNtAbpWtpU1H7OGqfRR8aJwLVQ3U5VN9rJMi8k7vHg7g5Z7/RiRFo6tjmZpWBt9MRdmAl5xgTDUh7OBVrRrRBg4AKOxRuKGU+ekylv2i0qJt06yCT6oEtbxIodliu5xgkHC3Z9mpTXydnV0dN3wLb/PdtMXek5jpaFAg6zSbH6nT70HYpn6L/Gc4WXcNH+lTDPpQpttW88HB46VMja8miinWdJA=
+  - provider: pypi
+    user: hahnec
+    skip_cleanup: true
+    skip_existing: true
+    distributions: sdist bdist_wheel
+    server: https://test.pypi.org/legacy/
+    password:
+      secure: FMqsSA6Pauzq2AJnWAdWfyYMENKFe/socNVwgdx9df7XNl27ykvzDMH2DoRJp2Jw3SDwriS0l0wig/MXmQvTh8PZ7tfwl4obqjEGZq/P3vDoSPvU4RQhlghHN2NrJijJxmp2x5p3k0E7Md57kqepkLOZi9Tx9tVYF5OIQ/vfvOaEXpguxf1jnPMVY3VhzYKbGvx31d2yKoGWm/wtzxAqjORUfs5iFObU/EumlPVCBxJynpRFDKozvHcIahwo/8RtdPap/whDZVYr8RcNC//Lub35yXObuPabbg8+T2ofd/4I3c4TpHuwcURMvGMS7W2y9Tcre/dcz+XP2WlOothGQZk3gQMLPI5RRL2UXYDi/GiwCYZi5iXl/ewgTh7CFSnvY+y0ojbU+dpDTjCJJda+W9uzzlb+BrgTSFi4WU0vjjACYTTxgSeM1Q7qhUdZqi0osoAz3yyKBVu4oVH6qG01jqGi9qwzitSsFD00J/LgATLEAqVlm7K6mkn9Zl09b0bDM4WlZ+Ova1c8wg8Al9r+VjM/x5XtlEUTymObDXVaxySqxkYPt5iUOLALz6AUPYJKIM+Na59vKAxQ0hyKzbIZHB1DPIN/yDNxaj/k53TWzlVwvLtiniSwRnyAsfMiGqaphs7F/UYL/fHysJjW8L9HNhDQZJe/gAXcctgnl9CpoHA=
