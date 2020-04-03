@@ -1,7 +1,6 @@
 import numpy as np
 
 from .baseclass import MatcherBaseclass
-from color_matcher.io_handler import load_img_file, save_img_file
 from color_matcher.normalizer import Normalizer
 
 # Observer. = 2°, Illuminant = D65
@@ -12,8 +11,27 @@ REF_Z = 108.883
 
 class ReinhardMatcher(MatcherBaseclass):
 
+    def __init__(self, *args, **kwargs):
+        super(ReinhardMatcher, self).__init__(*args, **kwargs)
+
     def reinhard(self, src: np.ndarray=None, ref: np.ndarray=None) -> np.ndarray:
-        ''' https://www.cs.tau.ac.il/~turkel/imagepapers/ColorTransfer.pdf '''
+        '''
+
+        This function conducts color matching in Lab color space based on the principles proposed by Reinhard et al.
+        The paper of the original work can be found at https://www.cs.tau.ac.il/~turkel/imagepapers/ColorTransfer.pdf
+
+        :param src: Source image that requires transfer
+        :param ref: Palette image which serves as reference
+        :param ref: Resulting image after the mapping
+
+        :type src: :class:`~numpy:numpy.ndarray`
+        :type ref: :class:`~numpy:numpy.ndarray`
+        :type res: :class:`~numpy:numpy.ndarray`
+
+        :return: **result**
+        :rtype: np.ndarray
+
+        '''
 
         # convert to Lab color space
         src_lab = self.rgb2lab(src)
@@ -129,13 +147,3 @@ class ReinhardMatcher(MatcherBaseclass):
         rgb = self.xyz2rgb(xyz)
 
         return rgb
-
-
-#if __name__ == "__main__":
-#
-#    src = load_img_file('../test/data/scotland_house.png')
-#    ref = load_img_file('../test/data/scotland_plain.png')
-#
-#    obj = ReinhardMatcher()
-#    img = obj.reinhard(src=src, ref=ref)
-#    save_img_file(img, '../test/data/scotland_reinhard.png')

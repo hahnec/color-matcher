@@ -80,7 +80,7 @@ Installation
     1. install Python from https://www.python.org/
     2. download the source_ using ``git clone https://github.com/hahnec/color-matcher.git``
     3. go to the root directory ``cd color-matcher``
-    4. load other packages ``$ pip3 install -r requirements.txt``
+    4. load dependencies ``$ pip3 install -r requirements.txt``
     5. install with ``python3 setup.py install``
     6. if installation ran smoothly, enter ``color-matcher -h`` to the command line
 
