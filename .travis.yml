@@ -63,8 +63,12 @@ deploy:
       secure: HpkQsqXHzAd62Hc1f/eMdcRzluQo4cS44q8WbMrUTxMFjGQ822JPsO/s7uTZAs5FZZzE/cPUTyYU2c8Rmn9tg547v3D5Dy16eG5jr8dJqGKkwN3vggv4x7U8PiajAIhbmWRqde7ywduqq98kcipTXaATrCtYvCIfRb7H08qmozV5L30DYdICvTlgFVXu6wq/TzQsCqG2XzXiVyvlTq/JVnC+Tl2Kl/33sDa9kJoaQbib4yNZlx5zWTOydkQQvTvK3O9HvHF5ZpWiSxbrg70C6zFQKscpmcpGth/FJEWoQxZvO91jUWBU1Thl5RgrQIZlSQFGfoVioTamCKy219ytlbgpmxvyZzeO4FirNoJ5xDKWy2HfY9JQJVt2cMi1kbniRfw3nSZRig7pGjg07eamvb38a5FWWyQe7gt/Obcbf0lyAQQVeo9HiktETRX8tAnfJjxv2qrLoYUuH0n27XZP+CJfLK35j6ptoYeesmyiZgYSYt2M7exhMP1UX+ts977nnmf7/JZIOg/Ytm4+Ba4FzIyvGPizKTSYyGmcLYYoW0LIdYkAO/mr/PSvrjdt6p9dZcNAKBMufrgwAuH3tyQgS+pAO8h4GFwfG8OrBR/eoBBJf5QaZj/YvZwWLj55bGr6+g4KSS3JVeFvx2xCLKs640gVtoQQF/682IYuGGU3J2g=
     file_glob: true
     file:
-      -*.whl
-      -*.tar.gz
+      - /dist/*.whl
+      - /dist/*.tar.gz
     draft: true
     on:
       repo: hahnec/color-matcher
+      condition: $TRAVIS_OS_NAME = linux
+      branches:
+        only:
+          - master
