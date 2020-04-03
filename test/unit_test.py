@@ -22,17 +22,17 @@ __license__ = """
 
 from color_matcher.top_level import ColorMatcher
 from color_matcher.io_handler import *
-from test.img_downloader import main
+from .img_downloader import download_stack
 
 import unittest
 import os
 import numpy as np
 
 
-class ColorMatchTester(unittest.TestCase):
+class MatchMethodTester(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
-        super(ColorMatchTester, self).__init__(*args, **kwargs)
+        super(MatchMethodTester, self).__init__(*args, **kwargs)
 
     def setUp(self):
 
@@ -47,9 +47,11 @@ class ColorMatchTester(unittest.TestCase):
         #self.test_cli()
 
         # validate match methods based on Pities images
-        methods = ['mvgd', 'hm', 'reinhard']
+        methods = ['default', 'mvgd', 'hm', 'hm-mkl-hm', 'reinhard']
         for method in methods:
+            print(method)
             self.test_match_method(method)
+            print('done')
 
         # iterate through Kodak data set
         #self.test_kodak_images()
@@ -63,6 +65,10 @@ class ColorMatchTester(unittest.TestCase):
         return np.sqrt(np.sum(np.square(hist_a - hist_b)))
 
     def test_match_method(self, method=None):
+
+        # skip
+        if method is None:
+            self.skipTest('')
 
         # load images
         plain = load_img_file(os.path.join(self.dat_path, 'scotland_house.png'))
@@ -80,6 +86,19 @@ class ColorMatchTester(unittest.TestCase):
         # assertion
         self.assertEqual(True, refer_val > match_val)
 
+    @unittest.skipUnless(False, "n.a.")
+    def test_cli(self):
+
+        from color_matcher.bin.cli import main
+        import sys
+
+        sys.args = ''
+        ret = main()
+
+        # assertion
+        self.assertEqual(True, ret)
+
+    @unittest.skipUnless(False, "n.a.")
     def test_match_method_imageio(self, method=None):
 
         # get test data from imageio lib
@@ -106,6 +125,7 @@ class ColorMatchTester(unittest.TestCase):
         # assertion
         self.assertEqual(True, float('inf') > match_val)
 
+    @unittest.skipUnless(False, "n.a.")
     def test_kodak_images(self):
 
         # prepare data
@@ -120,7 +140,7 @@ class ColorMatchTester(unittest.TestCase):
             pass
 
         if not os.path.exists(loc_path):
-            main(url, loc_path)
+            download_stack(url, loc_path)
 
         for fn_img1 in self.fnames:
             for fn_img2 in self.fnames:
@@ -141,15 +161,7 @@ class ColorMatchTester(unittest.TestCase):
                 save_img_file(res, file_path=output_filename)
 
                 # assertion
-                self.assertEqual(True, val!=0)
-
-    def test_cli(self):
-
-        from color_matcher.bin.cli import main
-        import sys
-
-        sys.args = ''
-        main()
+                self.assertEqual(True, val != 0)
 
 
 if __name__ == '__main__':
