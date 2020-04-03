@@ -90,7 +90,7 @@ setup(
       scripts=['color_matcher/bin/cli.py'],
       entry_points={'console_scripts': ['color-matcher=color_matcher.bin.cli:main'], },
       packages=find_packages(),
-      install_requires=['numpy', 'imageio', 'docutils', 'requests', 'tqdm'],
+      install_requires=['numpy', 'imageio', 'docutils'],
       include_package_data=True,
       python_requires='>=3',
       zip_safe=False,

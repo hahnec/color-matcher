@@ -22,7 +22,6 @@ __license__ = """
 
 from color_matcher.top_level import ColorMatcher
 from color_matcher.io_handler import *
-from .img_downloader import download_stack
 
 import unittest
 import os
@@ -49,12 +48,8 @@ class MatchMethodTester(unittest.TestCase):
         # validate match methods based on Pities images
         methods = ['default', 'mvgd', 'hm', 'hm-mkl-hm', 'reinhard']
         for method in methods:
-            print(method)
+            print(method+'\n')
             self.test_match_method(method)
-            print('done')
-
-        # iterate through Kodak data set
-        #self.test_kodak_images()
 
     @staticmethod
     def avg_hist_dist(img1, img2, bins=2**8-1):
@@ -124,45 +119,6 @@ class MatchMethodTester(unittest.TestCase):
 
         # assertion
         self.assertEqual(True, float('inf') > match_val)
-
-    @unittest.skipUnless(False, "n.a.")
-    def test_kodak_images(self):
-
-        # prepare data
-        url = 'https://www.math.purdue.edu/~lucier/PHOTO_CD/BMP_IMAGES/'
-        self.fnames = ['IMG'+str(i+1).zfill(4)+'.bmp' for i in range(24)]
-        loc_path = os.path.join(self.dat_path, 'kodak')
-
-        try:
-            os.makedirs(loc_path, 0o755)
-            os.makedirs(os.path.join(loc_path, 'results'), 0o755)
-        except:
-            pass
-
-        if not os.path.exists(loc_path):
-            download_stack(url, loc_path)
-
-        for fn_img1 in self.fnames:
-            for fn_img2 in self.fnames:
-
-                # load images
-                img1 = load_img_file(os.path.join(loc_path, fn_img1))
-                img2 = load_img_file(os.path.join(loc_path, fn_img2))
-
-                # create color match object
-                res = ColorMatcher(img1, img2, method='hm-mkl-hm').main()
-
-                # assess quality
-                val = self.avg_hist_dist(res, img2)
-                print('Avg. histogram distance %s' % val)
-
-                # save result
-                output_filename = os.path.join(loc_path, 'results', fn_img1.split('.')[0] + '_from_' + fn_img2)
-                save_img_file(res, file_path=output_filename)
-
-                # assertion
-                self.assertEqual(True, val != 0)
-
 
 if __name__ == '__main__':
     unittest.main()
