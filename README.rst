@@ -6,8 +6,11 @@ Description
 -----------
 
 *color-matcher* enables color transfer across images which comes in handy for automatic color-grading
-of photographs, paintings, film sequences or light-fields. As of now, the methods behind the mapping are based on
-histogram matching and the Monge-Kantorovich solution as proposed by `Pitie <http://francois.pitie.net/>`__.
+of photographs, paintings, film sequences or light-fields. The methods behind the mappings are based on
+histogram matching, the Monge-Kantorovich solution as proposed by Pitie *et al.* and
+that of Reinhard.
+
+|release| |build|
 
 Results
 -------
@@ -77,8 +80,9 @@ Installation
     1. install Python from https://www.python.org/
     2. download the source_ using ``git clone https://github.com/hahnec/color-matcher.git``
     3. go to the root directory ``cd color-matcher``
-    4. install with ``python3 setup.py install``
-    5. if installation ran smoothly, enter ``color-matcher -h`` to the command line
+    4. load other packages ``$ pip3 install -r requirements.txt``
+    5. install with ``python3 setup.py install``
+    6. if installation ran smoothly, enter ``color-matcher -h`` to the command line
 
 Command Line Usage
 ==================
@@ -155,3 +159,12 @@ Author
 .. |res_lfp| raw:: html
 
     <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/view_animation_7px_hm-mkl-hm.gif" width="200px" max-width:"100%">
+
+.. Image substitutions
+
+.. |release| image:: https://img.shields.io/github/release/hahnec/color-matcher.svg?style=flat-square
+    :target: https://github.com/hahnec/color-matcher/releases/
+    :alt: release
+
+.. |build| image:: https://img.shields.io/travis/hahnec/color-matcher?style=flat-square
+    :target: https://travis-ci.com/github/hahnec/color-matcher

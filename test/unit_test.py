@@ -22,17 +22,16 @@ __license__ = """
 
 from color_matcher.top_level import ColorMatcher
 from color_matcher.io_handler import *
-from .img_downloader import main
 
 import unittest
 import os
 import numpy as np
 
 
-class ColorMatchTester(unittest.TestCase):
+class MatchMethodTester(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
-        super(ColorMatchTester, self).__init__(*args, **kwargs)
+        super(MatchMethodTester, self).__init__(*args, **kwargs)
 
     def setUp(self):
 
@@ -46,14 +45,12 @@ class ColorMatchTester(unittest.TestCase):
         # test command line interface
         #self.test_cli()
 
-        # validate performance using Pities images
-        self.test_mvgd_matcher()
-
-        # validation histogram matcher
-        self.test_hist_matcher()
-
-        # iterate through Kodak data set
-        #self.test_kodak_images()
+        # validate match methods based on Pities images
+        methods = ['default', 'mvgd', 'hm', 'hm-mkl-hm', 'reinhard']
+        for method in methods:
+            print('Use method "'+method+'":')
+            self.test_match_method(method)
+            print('')
 
     @staticmethod
     def avg_hist_dist(img1, img2, bins=2**8-1):
@@ -63,7 +60,11 @@ class ColorMatchTester(unittest.TestCase):
 
         return np.sqrt(np.sum(np.square(hist_a - hist_b)))
 
-    def test_mvgd_matcher(self):
+    def test_match_method(self, method=None):
+
+        # skip
+        if method is None:
+            self.skipTest('')
 
         # load images
         plain = load_img_file(os.path.join(self.dat_path, 'scotland_house.png'))
@@ -71,17 +72,30 @@ class ColorMatchTester(unittest.TestCase):
         refer = load_img_file(os.path.join(self.dat_path, 'scotland_pitie.png'))
 
         # create color match object
-        match = ColorMatcher(plain, house, method='mvgd').main()
+        match = ColorMatcher(plain, house, method=method).main()
 
         # assess quality
         refer_val = self.avg_hist_dist(refer, house)
         match_val = self.avg_hist_dist(match, house)
-        print('Avg. histogram distances %s vs %s' % (refer_val, match_val))
+        print('Avg. histogram distances from original %s vs. method %s' % (round(refer_val, 3), round(match_val, 3)))
 
         # assertion
         self.assertEqual(True, refer_val > match_val)
 
-    def test_hist_matcher(self):
+    @unittest.skipUnless(False, "n.a.")
+    def test_cli(self):
+
+        from color_matcher.bin.cli import main
+        import sys
+
+        sys.args = ''
+        ret = main()
+
+        # assertion
+        self.assertEqual(True, ret)
+
+    @unittest.skipUnless(False, "n.a.")
+    def test_match_method_imageio(self, method=None):
 
         # get test data from imageio lib
         import imageio
@@ -91,7 +105,7 @@ class ColorMatchTester(unittest.TestCase):
         img2 = imageio.imread('imageio:'+fn_img2+'.png')
 
         # create color match object
-        match = ColorMatcher(img1, img2, method='hm').main()
+        match = ColorMatcher(img1, img2, method=method).main()
 
         # assess quality
         match_val = self.avg_hist_dist(match, img2)
@@ -106,52 +120,6 @@ class ColorMatchTester(unittest.TestCase):
 
         # assertion
         self.assertEqual(True, float('inf') > match_val)
-
-    def test_kodak_images(self):
-
-        # prepare data
-        url = 'https://www.math.purdue.edu/~lucier/PHOTO_CD/BMP_IMAGES/'
-        self.fnames = ['IMG'+str(i+1).zfill(4)+'.bmp' for i in range(24)]
-        loc_path = os.path.join(self.dat_path, 'kodak')
-
-        try:
-            os.makedirs(loc_path, 0o755)
-            os.makedirs(os.path.join(loc_path, 'results'), 0o755)
-        except:
-            pass
-
-        if not os.path.exists(loc_path):
-            main(url, loc_path)
-
-        for fn_img1 in self.fnames:
-            for fn_img2 in self.fnames:
-
-                # load images
-                img1 = load_img_file(os.path.join(loc_path, fn_img1))
-                img2 = load_img_file(os.path.join(loc_path, fn_img2))
-
-                # create color match object
-                res = ColorMatcher(img1, img2, method='hm-mkl-hm').main()
-
-                # assess quality
-                val = self.avg_hist_dist(res, img2)
-                print('Avg. histogram distance %s' % val)
-
-                # save result
-                output_filename = os.path.join(loc_path, 'results', fn_img1.split('.')[0] + '_from_' + fn_img2)
-                save_img_file(res, file_path=output_filename)
-
-                # assertion
-                self.assertEqual(True, val!=0)
-
-    def test_cli(self):
-
-        from color_matcher.bin.cli import main
-        import sys
-
-        sys.args = ''
-        main()
-
 
 if __name__ == '__main__':
     unittest.main()

@@ -22,18 +22,31 @@ __license__ = """
 
 from color_matcher.hist_matcher import HistogramMatcher
 from color_matcher.mvgd_matcher import TransferMVGD
+from color_matcher.reinhard_matcher import ReinhardMatcher
+import numpy as np
 
-METHODS = ('default', 'mvgd', 'hm', 'hm-mkl-hm')
+METHODS = ('default', 'mvgd', 'hm', 'hm-mkl-hm', 'reinhard')
 
 
-class ColorMatcher(HistogramMatcher, TransferMVGD):
+class ColorMatcher(HistogramMatcher, TransferMVGD, ReinhardMatcher):
 
     def __init__(self, *args, **kwargs):
         super(ColorMatcher, self).__init__(*args, **kwargs)
 
         self._method = kwargs['method'] if 'method' in kwargs else 'default'
 
-    def main(self):
+    def main(self, method: str=None) -> np.ndarray:
+        '''
+        The main function and high-level entry point performing the mapping. Valid methods are
+
+        :param method: ('default', 'mvgd', 'hm', 'hm-mkl-hm') describing how to conduct color mapping
+        :type method: :class:`str`
+
+        :return: Resulting image after color mapping
+        :rtype: np.ndarray
+        '''
+
+        self._method = self._method if method is None else method
 
         # color transfer methods (to be iterated through)
         if self._method == METHODS[0]:
@@ -44,6 +57,8 @@ class ColorMatcher(HistogramMatcher, TransferMVGD):
             funs = [self.hist_match]
         elif self._method == METHODS[3]:
             funs = [self.hist_match, self.transfer, self.hist_match]
+        elif self._method == METHODS[4]:
+            funs = [self.reinhard]
         else:
             raise BaseException('Method type not recognized')
 

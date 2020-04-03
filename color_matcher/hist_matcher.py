@@ -30,8 +30,24 @@ class HistogramMatcher(MatcherBaseclass):
     def __init__(self, *args, **kwargs):
         super(HistogramMatcher, self).__init__(*args, **kwargs)
 
-    def hist_match(self, src=None, ref=None):
-        ''' channel-wise histogram matching '''
+    def hist_match(self, src: np.ndarray=None, ref: np.ndarray=None) -> np.ndarray:
+        '''
+
+        This function conducts channel-wise histogram matching which is invariant of image resolutions,
+        but requires the same number of color channels in both images.
+
+        :param src: Source image that requires transfer
+        :param ref: Palette image which serves as reference
+        :param ref: Resulting image after the mapping
+
+        :type src: :class:`~numpy:numpy.ndarray`
+        :type ref: :class:`~numpy:numpy.ndarray`
+        :type result: :class:`~numpy:numpy.ndarray`
+
+        :return: **result**
+        :rtype: np.ndarray
+
+        '''
 
         # override source and reference image with arguments (if provided)
         self._src = src if src is not None else self._src

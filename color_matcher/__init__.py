@@ -16,8 +16,9 @@ Copyright (c) 2020 Christopher Hahne <inbox@christopherhahne.de>
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-__version__ = '0.1.0'
+__version__ = '0.1.2'
 
 from .top_level import ColorMatcher
 from .hist_matcher import HistogramMatcher
 from .mvgd_matcher import TransferMVGD
+from .baseclass import MatcherBaseclass

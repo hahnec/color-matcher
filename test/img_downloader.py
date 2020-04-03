@@ -30,7 +30,7 @@ def get_all_images(url):
     return urls
 
 
-def download(url, pathname):
+def download_file(url, pathname):
     """
     Downloads a file given an URL and puts it in the folder `pathname`
     """
@@ -53,13 +53,13 @@ def download(url, pathname):
             progress.update(len(data))
 
 
-def main(url, path):
+def download_stack(url, path):
     # get all images
     imgs = get_all_images(url)
     for img in imgs:
         # for each image, download it
-        download(img, path)
+        download_file(img, path)
 
 
 if __name__ == '__main__':
-    main('https://www.math.purdue.edu/~lucier/PHOTO_CD/BMP_IMAGES/', os.path.join(os.getcwd(), 'data'))
+    download_stack('https://www.math.purdue.edu/~lucier/PHOTO_CD/BMP_IMAGES/', os.path.join(os.getcwd(), 'data'))
