@@ -48,8 +48,9 @@ class MatchMethodTester(unittest.TestCase):
         # validate match methods based on Pities images
         methods = ['default', 'mvgd', 'hm', 'hm-mkl-hm', 'reinhard']
         for method in methods:
-            print(method+'\n')
+            print('Use method "'+method+'":')
             self.test_match_method(method)
+            print('')
 
     @staticmethod
     def avg_hist_dist(img1, img2, bins=2**8-1):
@@ -76,7 +77,7 @@ class MatchMethodTester(unittest.TestCase):
         # assess quality
         refer_val = self.avg_hist_dist(refer, house)
         match_val = self.avg_hist_dist(match, house)
-        print('Avg. histogram distances %s vs %s' % (refer_val, match_val))
+        print('Avg. histogram distances from original %s vs. method  %s' % (round(refer_val, 3), round(match_val, 3)))
 
         # assertion
         self.assertEqual(True, refer_val > match_val)
