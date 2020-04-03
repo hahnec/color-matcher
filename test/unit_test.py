@@ -77,7 +77,7 @@ class MatchMethodTester(unittest.TestCase):
         # assess quality
         refer_val = self.avg_hist_dist(refer, house)
         match_val = self.avg_hist_dist(match, house)
-        print('Avg. histogram distances from original %s vs. method  %s' % (round(refer_val, 3), round(match_val, 3)))
+        print('Avg. histogram distances from original %s vs. method %s' % (round(refer_val, 3), round(match_val, 3)))
 
         # assertion
         self.assertEqual(True, refer_val > match_val)
