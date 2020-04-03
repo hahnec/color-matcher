@@ -31,7 +31,7 @@ script:
   # open app from CLI
   - color-matcher -h
   # trigger unit tests
-  - python3 test/unit_test.py || python test/unit_test.py
+  - python3 -m test.unit_test || python -m test.unit_test
 
 #after_deploy:
 #  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then
