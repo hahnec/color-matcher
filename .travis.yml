@@ -63,8 +63,9 @@ deploy:
       secure: I5XrRaUVWRqz6rPxSuO91pv7KZ18vSK9177fwgqPFLjvy/JCMdsU36cH3VOFNaGxdjNYWXadFpK5NJ6PPrOZE77y2LuO1Jzmubt7/kZsYWH8QEIZN53KVDThQx3apKF34f2CuvW19eCv09MtTudeu9nXMD8rTcidfbJZzNcfdFRT05SYXUlB2H1UwzBf12Ki8PDS7e1SfWnXRkMKjFpGx1h6jDaCQlALWxP50r0cObE7xyeCY7aHori+BFt+Y2L+SjyAKFjDq10Ni66jMYxlQz1S3yRIr+xlxqJqkma+Wt37pD8Op6Nzrv/I2+XOg4TX5PxwTUhE0/A6S3Vpkm5F8kneCGX7DyAXcqs5PV6CYFP6vhUxIf9vP9BetdXMiyhvXRXCQFGmPNDrh2MoKXinQfq0P7VuDFMuV85viTMu0D8Xb2cT/INixywLuP2F4nWXfFqSUC0QgqcTXeXZ491mL/cGIJeOWKie5erTlcQ8YfHACSatNOcqZCQZApj0ACzhaJbouQtsaLeSCyVa1Xk90FgiK8aw/pcbcECbh3iHsVLrKv8W8ZD27etzlQe5XtRS/w9kAwzqlmZliFVxHuZ2bEWmfpuiTP6LToXNV/HYE3nUfuRreWHoBvjPtRf5MNsAL7OKvAvpMHyjILclw4+8AHdVrhenKRDM2IO/0D8C4eM=
     file_glob: true
     file:
-      - /dist/*.whl
-      - /dist/*.tar.gz
+      - dist/*.whl
+      - dist/*.tar.gz
+      - dist/*.egg
     draft: true
     on:
       repo: hahnec/color-matcher
