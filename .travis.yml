@@ -33,13 +33,13 @@ script:
   # trigger unit tests
   - python3 -m test.unit_test || python -m test.unit_test
 
-#after_deploy:
-#  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then
-#      pip3 install --upgrade twine;
-#      python3 setup.py sdist bdist_wheel;
-#      python3 -m twine upload --repository testpypi dist/* -u hahnec -p $TEST_PYPI --verbose;
-#      python3 -m pip install --index-url https://test.pypi.org/simple/ color-matcher;
-#    fi
+before_deploy:
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then
+      pip3 install --upgrade twine;
+      python3 setup.py sdist bdist_wheel;
+      python3 -m twine upload --repository https://test.pypi.org/legacy/ dist/* -u __token__ -p $TEST_PYPI;
+      python3 -m pip install --index-url https://test.pypi.org/simple/ color-matcher;
+    fi
 
 deploy:
   - provider: pypi
@@ -50,3 +50,5 @@ deploy:
     server: https://test.pypi.org/legacy/
     password:
       secure: csY3fCI4/ziNqGExXSP5yJDDnHyCEX+kYiUpEvApEvvVCWeQGdxfUnmTXqSgalSo2nWBJMiIM+tTgQf8eOBAJzGsyjWYWqje3FjxVbDKH1UTWZ8q2dgDO7ew+2zk4oeHZQtL2zqcDh+6WWo1OiCcQdFIloHBWOLdQ+nxm96rr933MsVfMNCHIwBRJ7cwW0HD6ePKo4kMleA6Ie5/uqu73brjIxXrEL4Ep02Wu+Qj50v2pJ2DXQpLroar3V5MHnbyMJeOtOnWlm7x8LQ52TOUCejHhAVIwxEroxblfC0yNQWmeTSp/Vr2qBR1V7XaCT1I/xbVhnPTAb3I9WgT22tkApxQJ7AQ+PXrhD8n1RPPBwIFxYVcxqkAX7aOOYfQhNHOVNd+Xrq4/ZWPvWhq8ZE38wHjn2viycQ/TiTReIg/1GIcUUcG8/2QXIt49XjCtM5CNRbxG7QYuGUwB5UKQzCKRLg9DRBojLz98BoubxCx8Rv6eh/oEnBZ6cX/OeMvKDoPrO/HR8P7zZdWDr4TKBjNhJjkH8zLNx3BFeROuwk0BXXWvQuvZMlt++lhMR4eUDIhfQmwAPUdjy5SUKMVrW3HPzB7x/mDMAtRXYWM5U1IDGNuOPo5+ZICIJb4QwVFcuYIM9ZycinHqt+8BCArmMzQQwSCMY5lYM+cdmVB0OJzOJE=
+    on:
+      condition: $TRAVIS_OS_NAME = linux
