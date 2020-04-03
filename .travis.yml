@@ -52,3 +52,6 @@ deploy:
       secure: qDQL2/aCZWEfrrMxJFrSj36Qwr5IUOyrbNpknguo3GUe2N9w68cMXo8pOTFEf/59tkBlG8B3ZiBz05tr/LpuHaEq6mCICQ/9gsbBpllCHaZWM201n46oE/PZrNvBw4X+MDdMUCgfDcoJoQXTaQo97128Qihli4tYbjkrLvlTD21FgqGyFfVLQsdelXPpJd+mX8tTA6nMeqYMLjiPv8vdgcA5GLp35rsoWTJwKKrGeHcwFnrCfUQHXvBg2hrfTB9kXoLlBd9NGbjQaVFo5L8OXrp5lw91qo1HBnSht7gAaAMr3MSOimWjJMH8ItcY3C+Zzpmv/uY7Y4clmKBaNcN2X3bnLdm8N9SVb5N4K29pWY/yTxZkGXclSJIeu1FrRQG6o9dKoc8MywG+NnuVl03GMkhSROeMzw5nPgYkZwbDUQI7Cw4xXNCOLQML7a0QE1VcwCtO+xNiMmM2q7nwoZeYUcQvcyY4TMKrh/ZROfTnyAeKmvmq6TF4T1sWJFGPxtehm1XZ+Wosb8rP61ijPw+iRE7uWQaVjP+9eBwuzeNEGCA/nOP/F+945vnQKHC2W1Vj/YPdHyb+/2kf/kLV3PjcowyMO0Bm9H8eys/bhICRs/aWMl8XXJyv1mx2Ei4otEE0z0AttmkwVkBc7u5D3Y732aLWGPa4IivWG0p2DFNBhkk=
     on:
       condition: $TRAVIS_OS_NAME = linux
+      branches:
+        only:
+          - master
