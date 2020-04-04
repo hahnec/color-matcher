@@ -60,7 +60,7 @@ class ColorMatcher(HistogramMatcher, TransferMVGD, ReinhardMatcher):
         elif self._method == METHODS[4]:
             funs = [self.reinhard]
         else:
-            raise BaseException('Method type not recognized')
+            raise BaseException('Method type \'%s\' not recognized' % method)
 
         # proceed with the color match
         for fun in funs:

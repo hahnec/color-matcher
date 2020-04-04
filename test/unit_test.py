@@ -20,14 +20,15 @@ __license__ = """
 
 """
 
-from color_matcher.top_level import ColorMatcher
+from color_matcher.top_level import ColorMatcher, METHODS
 from color_matcher.io_handler import *
 
 import unittest
 import os
 import numpy as np
+from ddt import ddt, idata, unpack
 
-
+@ddt
 class MatchMethodTester(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
@@ -38,20 +39,6 @@ class MatchMethodTester(unittest.TestCase):
         self.dir_path = os.path.dirname(os.path.realpath(__file__))
         self.dat_path = os.path.join(self.dir_path, 'data')
 
-        self.test_run()
-
-    def test_run(self):
-
-        # test command line interface
-        #self.test_cli()
-
-        # validate match methods based on Pities images
-        methods = ['default', 'mvgd', 'hm', 'hm-mkl-hm', 'reinhard']
-        for method in methods:
-            print('Use method "'+method+'":')
-            self.test_match_method(method)
-            print('')
-
     @staticmethod
     def avg_hist_dist(img1, img2, bins=2**8-1):
 
@@ -60,35 +47,40 @@ class MatchMethodTester(unittest.TestCase):
 
         return np.sqrt(np.sum(np.square(hist_a - hist_b)))
 
+    @idata(([m] for m in METHODS))
+    @unpack
     def test_match_method(self, method=None):
 
-        # skip
+        # skip if no method present
         if method is None:
-            self.skipTest('')
+            self.skipTest('Type \'None\' was passed and skipped')
 
         # load images
-        plain = load_img_file(os.path.join(self.dat_path, 'scotland_house.png'))
-        house = load_img_file(os.path.join(self.dat_path, 'scotland_plain.png'))
+        plain = load_img_file(os.path.join(self.dat_path, 'scotland_plain.png'))
+        house = load_img_file(os.path.join(self.dat_path, 'scotland_house.png'))
         refer = load_img_file(os.path.join(self.dat_path, 'scotland_pitie.png'))
 
         # create color match object
-        match = ColorMatcher(plain, house, method=method).main()
+        match = ColorMatcher(src=house, ref=plain, method=method).main()
 
         # assess quality
-        refer_val = self.avg_hist_dist(refer, house)
-        match_val = self.avg_hist_dist(match, house)
-        print('Avg. histogram distances from original %s vs. method %s' % (round(refer_val, 3), round(match_val, 3)))
+        refer_val = self.avg_hist_dist(plain, refer)
+        match_val = self.avg_hist_dist(plain, match)
+        print('\nAvg. histogram distance of original %s vs. %s %s' % (round(refer_val, 3), method, round(match_val, 3)))
 
         # assertion
         self.assertEqual(True, refer_val > match_val)
 
-    @unittest.skipUnless(False, "n.a.")
     def test_cli(self):
 
         from color_matcher.bin.cli import main
         import sys
 
-        sys.args = ''
+        # compose cli arguments
+        sys.argv.append('--src='+os.path.join(self.dat_path, 'scotland_house.png'))
+        sys.argv.append('--ref='+os.path.join(self.dat_path, 'scotland_plain.png'))
+
+        # run cli command
         ret = main()
 
         # assertion
@@ -120,6 +112,7 @@ class MatchMethodTester(unittest.TestCase):
 
         # assertion
         self.assertEqual(True, float('inf') > match_val)
+
 
 if __name__ == '__main__':
     unittest.main()

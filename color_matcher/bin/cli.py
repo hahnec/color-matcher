@@ -119,6 +119,8 @@ def main():
         file_ext = os.path.splitext(cfg['src_path'])[-1]
         save_img_file(res, file_path=os.path.join(output_path, filename), file_type=file_ext[1:])
 
+    return True
+
 
 if __name__ == "__main__":
 
