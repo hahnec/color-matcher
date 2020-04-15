@@ -41,17 +41,17 @@ class Normalizer(object):
         self._max = self._data.max() if not any([self._max, max]) and isinstance(self._data, np.ndarray) else self._max
 
     def uint16_norm(self):
-        ''' normalize image array to 16-bit unsigned integer '''
+        """ normalize image array to 16-bit unsigned integer """
 
         return np.asarray(np.round(self.norm_fun()*(2**16-1)), dtype=np.uint16)
 
     def uint8_norm(self):
-        ''' normalize image array to 8-bit unsigned integer '''
+        """ normalize image array to 8-bit unsigned integer """
 
         return np.asarray(np.round(self.norm_fun()*(2**8-1)), dtype=np.uint8)
 
     def type_norm(self, data=None, min=None, max=None, new_min=None, new_max=None):
-        ''' normalize numpy image array for provided data type '''
+        """ normalize numpy image array for provided data type """
 
         self._var_init(data, min, max)
 
@@ -67,7 +67,7 @@ class Normalizer(object):
         return np.asarray(img_norm, dtype=self._dtype)
 
     def norm_fun(self):
-        ''' normalize image to values between 1 and 0 '''
+        """ normalize image to values between 1 and 0 """
 
         norm = (self._data - self._min) / (self._max - self._min) if self._max != (self._min and 0) else self._data
 

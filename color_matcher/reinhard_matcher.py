@@ -15,7 +15,7 @@ class ReinhardMatcher(MatcherBaseclass):
         super(ReinhardMatcher, self).__init__(*args, **kwargs)
 
     def reinhard(self, src: np.ndarray=None, ref: np.ndarray=None) -> np.ndarray:
-        '''
+        """
 
         This function conducts color matching in Lab color space based on the principles proposed by Reinhard et al.
         The paper of the original work can be found at https://www.cs.tau.ac.il/~turkel/imagepapers/ColorTransfer.pdf
@@ -31,7 +31,7 @@ class ReinhardMatcher(MatcherBaseclass):
         :return: **result**
         :rtype: np.ndarray
 
-        '''
+        """
 
         # convert to Lab color space
         src_lab = self.rgb2lab(src)
@@ -49,7 +49,8 @@ class ReinhardMatcher(MatcherBaseclass):
         # return the color transferred image
         return res
 
-    def gauss_analysis(self, img):
+    def gauss_analysis(self, img: np.ndarray=None) -> [np.ndarray, np.ndarray]:
+        """ compute the mean and standard deviation of an image """
 
         # compute the mean and standard deviation of each channel
         l, a, b = np.dsplit(img, 3)
@@ -61,9 +62,9 @@ class ReinhardMatcher(MatcherBaseclass):
         return np.array([l_mean, a_mean, b_mean]), np.array([l_std, a_std, b_std])
 
     def rgb2xyz(self, rgb):
-        '''
+        """
         https://web.archive.org/web/20120502065620/http://cookbooks.adobe.com/post_Useful_color_equations__RGB_to_LAB_converter-14227.html
-        '''
+        """
 
         rgb = rgb / np.max(rgb)
 

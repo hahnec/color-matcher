@@ -105,7 +105,7 @@ def suppress_user_warning(switch=None, category=None):
 
 
 def select_file(init_dir=None, title=''):
-    ''' get filepath from tkinter dialog '''
+    """ get filepath from tkinter dialog """
 
     # consider initial directory if provided
     init_dir = os.path.expanduser('~/') if not init_dir else init_dir

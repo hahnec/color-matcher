@@ -31,7 +31,7 @@ class HistogramMatcher(MatcherBaseclass):
         super(HistogramMatcher, self).__init__(*args, **kwargs)
 
     def hist_match(self, src: np.ndarray=None, ref: np.ndarray=None) -> np.ndarray:
-        '''
+        """
 
         This function conducts channel-wise histogram matching which is invariant of image resolutions,
         but requires the same number of color channels in both images.
@@ -47,7 +47,7 @@ class HistogramMatcher(MatcherBaseclass):
         :return: **result**
         :rtype: np.ndarray
 
-        '''
+        """
 
         # override source and reference image with arguments (if provided)
         self._src = src if src is not None else self._src
