@@ -6,17 +6,18 @@ Description
 -----------
 
 *color-matcher* enables color transfer across images which comes in handy for automatic color-grading
-of photographs, paintings, film sequences or light-fields. The methods behind the mappings are based on
-histogram matching, the Monge-Kantorovich solution as proposed by Pitie *et al.* and
-that of Reinhard.
+of photographs, paintings, film sequences or light-fields. The methods behind the mappings are based on the
+Monge-Kantorovich solution as proposed by Pitie *et al.*, the approach by Reinhard *et al.* and histogram matching.
 
-|release| |build|
+|release| |build| |pypi|
 
 Results
 -------
 
 Photography
 ===========
+
+|vspace|
 
 .. list-table::
    :widths: 8 8 8
@@ -31,6 +32,8 @@ Photography
 Film sequences
 ==============
 
+|vspace|
+
 .. list-table::
    :widths: 8 8 8
 
@@ -44,6 +47,8 @@ Film sequences
 Light-field corrections
 =======================
 
+|vspace|
+
 .. list-table::
    :widths: 8 8 8
 
@@ -51,11 +56,13 @@ Light-field corrections
      - |ref_lfp|
      - |res_lfp|
    * - Raw light-field
-     - Central view
+     - Target colors
      - Result
 
 Paintings
 =========
+
+|vspace|
 
 .. list-table::
    :widths: 8 8 8
@@ -160,6 +167,10 @@ Author
 
     <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/view_animation_7px_hm-mkl-hm.gif" width="200px" max-width:"100%">
 
+.. |vspace| raw:: latex
+
+   \vspace{1mm}
+
 .. Image substitutions
 
 .. |release| image:: https://img.shields.io/github/v/release/hahnec/color-matcher?style=flat-square
@@ -168,3 +179,7 @@ Author
 
 .. |build| image:: https://img.shields.io/travis/com/hahnec/color-matcher?style=flat-square
     :target: https://travis-ci.com/github/hahnec/color-matcher
+
+.. |pypi| image:: https://img.shields.io/pypi/dm/color-matcher?label=PyPI%20downloads&style=flat-square
+    :target: https://pypi.org/project/color-matcher/
+    :alt: PyPI Downloads
