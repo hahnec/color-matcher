@@ -49,7 +49,7 @@ class MatchMethodTester(unittest.TestCase):
 
     @idata(([m] for m in METHODS))
     @unpack
-    def test_match_method(self, method=None):
+    def test_match_method(self, method=None, save=False):
 
         # skip if no method present
         if method is None:
@@ -70,6 +70,10 @@ class MatchMethodTester(unittest.TestCase):
 
         # assertion
         self.assertEqual(True, refer_val > match_val)
+
+        # write images to test data directory (if option set)
+        if save:
+            save_img_file(match, file_path=os.path.join(self.dat_path,'scotland_'+method), file_type='png')
 
     def test_cli(self):
 
