@@ -52,6 +52,10 @@ class TransferMVGD(MatcherBaseclass):
 
         """
 
+        # override source and reference image with arguments (if provided)
+        self._src = src if src is not None else self._src
+        self._ref = ref if ref is not None else self._ref
+
         # check if three color channels are provided
         self.validate_color_chs()
 
