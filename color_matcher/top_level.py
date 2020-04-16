@@ -39,7 +39,7 @@ class ColorMatcher(HistogramMatcher, TransferMVGD, ReinhardMatcher):
         """
         The main function and high-level entry point performing the mapping. Valid methods are
 
-        :param method: ('default', 'mvgd', 'hm', 'hm-mkl-hm') describing how to conduct color mapping
+        :param method: ('default', 'mvgd', 'hm', 'hm-mkl-hm', 'reinhard') describing how to conduct color mapping
         :type method: :class:`str`
 
         :return: Resulting image after color mapping

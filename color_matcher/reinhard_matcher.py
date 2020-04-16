@@ -1,12 +1,9 @@
 import numpy as np
 
 from .baseclass import MatcherBaseclass
-from color_matcher.normalizer import Normalizer
 
-# Observer. = 2°, Illuminant = D65
-REF_X = 95.047
-REF_Y = 100.000
-REF_Z = 108.883
+LMS_MAT = np.array([[0.3811, 0.5783, 0.0402], [0.1967, 0.7244, 0.0782], [0.0241, 0.1288, 0.8444]])
+LMS_MAT_INV = np.array([[4.4679, -3.5873, 0.1193], [-1.2186, 2.3809, -0.1624], [0.0497, -0.2439, 1.2045]])
 
 
 class ReinhardMatcher(MatcherBaseclass):
@@ -14,10 +11,10 @@ class ReinhardMatcher(MatcherBaseclass):
     def __init__(self, *args, **kwargs):
         super(ReinhardMatcher, self).__init__(*args, **kwargs)
 
-    def reinhard(self, src: np.ndarray=None, ref: np.ndarray=None) -> np.ndarray:
+    def reinhard(self, src: np.ndarray = None, ref: np.ndarray = None) -> np.ndarray:
         """
 
-        This function conducts color matching in Lab color space based on the principles proposed by Reinhard et al.
+        This function conducts color matching based on the principles proposed by Reinhard et al.
         The paper of the original work can be found at https://www.cs.tau.ac.il/~turkel/imagepapers/ColorTransfer.pdf
 
         :param src: Source image that requires transfer
@@ -33,118 +30,55 @@ class ReinhardMatcher(MatcherBaseclass):
 
         """
 
-        # convert to Lab color space
-        src_lab = self.rgb2lab(src)
-        ref_lab = self.rgb2lab(ref)
+        # override source and reference image with arguments (if provided)
+        self._src = src if src is not None else self._src
+        self._ref = ref if ref is not None else self._ref
 
-        # compute color statistics for the source and reference images
-        src_means, src_stds = self.gauss_analysis(src_lab)
-        ref_means, ref_stds = self.gauss_analysis(ref_lab)
-        res = (src_stds/ref_stds) * (src_lab-src_means) + ref_means
+        # get image dimensions after validating that 3 color channels are present
+        m, n, p = self._src.shape if self.validate_color_chs() else self._src.shape + (1,)
 
-        # convert to RGB space
-        res = self.lab2rgb(res)
-        res = Normalizer(res).uint8_norm()
+        # flatten images along spatial dimensions
+        src = self._src.reshape((-1, p)).transpose()
+        ref = self._ref.reshape((-1, p)).transpose()
 
-        # return the color transferred image
-        return res
+        # replace zeros with small value for numerical stability
+        src[src == 0] = 1/(2**8-1)
+        ref[ref == 0] = 1/(2**8-1)
 
-    def gauss_analysis(self, img: np.ndarray=None) -> [np.ndarray, np.ndarray]:
-        """ compute the mean and standard deviation of an image """
+        # convert to LMS color space
+        lms_src = np.dot(LMS_MAT, src)
+        lms_ref = np.dot(LMS_MAT, ref)
 
-        # compute the mean and standard deviation of each channel
-        l, a, b = np.dsplit(img, 3)
-        l_mean, l_std = l.mean(), l.std()
-        a_mean, a_std = a.mean(), a.std()
-        b_mean, b_std = b.mean(), b.std()
+        # convert data to logarithmic LMS color space to eliminate skew
+        lms_src = np.log10(lms_src)
+        lms_ref = np.log10(lms_ref)
 
-        # return the color statistics
-        return np.array([l_mean, a_mean, b_mean]), np.array([l_std, a_std, b_std])
+        # PCA transform matrices according to Rudermann et al.
+        b = np.array([[1/np.sqrt(3), 0, 0], [0, 1/np.sqrt(6), 0], [0, 0, 1/np.sqrt(2)]])
+        c = np.array([[1, 1, 1], [1, 1, -2], [1, -1, 0]])
 
-    def rgb2xyz(self, rgb):
-        """
-        https://web.archive.org/web/20120502065620/http://cookbooks.adobe.com/post_Useful_color_equations__RGB_to_LAB_converter-14227.html
-        """
+        # convert to Lab space
+        lab_src = np.dot(np.dot(b, c), lms_src)
+        lab_ref = np.dot(np.dot(b, c), lms_ref)
 
-        rgb = rgb / np.max(rgb)
+        # compute statistical measures
+        mean_src, std_src = np.mean(lab_src, axis=1), np.std(lab_src, axis=1)
+        mean_ref, std_ref = np.mean(lab_ref, axis=1), np.std(lab_ref, axis=1)
 
-        for ch in range(rgb.shape[2]):
-            mask = rgb[..., ch] > 0.04045
-            rgb[..., ch][mask] = np.power((rgb[..., ch] + 0.055) / 1.055, 2.4)[mask]
-            rgb[..., ch][~mask] /= 12.92
+        # compute ratios of standard deviations channel-wise
+        std_ratios = std_ref / std_src
 
-        rgb *= 100
+        # apply statistical alignment channel-wise
+        res_lab = ((lab_src.T - mean_src) * std_ratios + mean_ref).T
 
-        # Observer. = 2°, Illuminant = D65 (from Adobe)
-        mat_adb = np.array([[0.4124, 0.2126, 0.0193], [0.3576, 0.7152, 0.1192], [0.1805, 0.0722, 0.9505]])
+        # convert back to LMS
+        lms_res = np.dot(np.dot(c.T, b), res_lab)
+        lms_res = 10**lms_res
 
-        # from Reinhard et al. paper (2001)
-        mat_itu = np.array([[0.4306, 0.2220, 0.0202], [0.3415, 0.7067, 0.1295], [0.1784, 0.0713, 0.9394]])
+        # convert back to RGB
+        res_img = np.dot(LMS_MAT_INV, lms_res).transpose()
 
-        xyz = np.dot(rgb, mat_adb)
+        # reshape to 2-D image
+        res_img = res_img.reshape((m, n, p))
 
-        return xyz
-
-    def xyz2lab(self, xyz):
-
-        xyz[..., 0] /= REF_X
-        xyz[..., 1] /= REF_Y
-        xyz[..., 2] /= REF_Z
-
-        for ch in range(xyz.shape[2]):
-            mask = xyz[..., ch]>0.008856
-            xyz[..., ch][mask] = np.power(xyz[..., ch], 1/3.)[mask]
-            xyz[..., ch][~mask] = (7.787*xyz[..., ch] + 16/116.)[~mask]
-
-        lab = np.zeros(xyz.shape)
-        lab[..., 0] = (116 * xyz[..., 1]) - 16
-        lab[..., 1] = 500 * (xyz[..., 0]-xyz[..., 1])
-        lab[..., 2] = 200 * (xyz[..., 1]-xyz[..., 2])
-
-        return lab
-
-    def lab2xyz(self, lab):
-
-        xyz = np.zeros(lab.shape)
-        xyz[..., 1] = (lab[..., 0] + 16) / 116.
-        xyz[..., 0] = lab[..., 1] / 500. + xyz[..., 1]
-        xyz[..., 2] = xyz[..., 1] - lab[..., 2] / 200.
-
-        for ch in range(xyz.shape[2]):
-            mask = np.power(xyz[..., ch], 3) > 0.008856
-            xyz[..., ch][mask] = np.power(xyz[..., ch], 3)[mask]
-            xyz[..., ch][~mask] = (xyz[..., ch] - 16/116.)[~mask] / 7.787
-
-        xyz[..., 0] *= REF_X
-        xyz[..., 1] *= REF_Y
-        xyz[..., 2] *= REF_Z
-
-        return xyz
-
-    def xyz2rgb(self, xyz):
-
-        xyz /= 100.
-
-        # Observer. = 2°, Illuminant = D65
-        mat = np.array([[3.2406, -0.9689, -0.0557], [-1.5372,  1.8758, -0.204], [-0.4986, -0.0415,  1.057]])
-        rgb = np.dot(xyz, mat)
-
-        for ch in range(rgb.shape[2]):
-            mask = rgb[..., ch] > 0.0031308
-            rgb[..., ch][mask] = 1.055 * np.power(rgb[..., ch][mask], 1/2.4) - 0.055
-            rgb[..., ch][~mask] *= 12.92
-
-        return rgb
-
-    def rgb2lab(self, rgb):
-
-        xyz = self.rgb2xyz(rgb)
-        lab = self.xyz2lab(xyz)
-
-        return lab
-
-    def lab2rgb(self, lab):
-        xyz = self.lab2xyz(lab)
-        rgb = self.xyz2rgb(xyz)
-
-        return rgb
+        return res_img
