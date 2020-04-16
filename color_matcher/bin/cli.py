@@ -103,7 +103,6 @@ def main():
     else:
         filenames = [cfg['src_path']]
 
-
     # method handling
     cfg['method'] = cfg['method'] if cfg['method'] in METHODS else 'mvgd'
 
