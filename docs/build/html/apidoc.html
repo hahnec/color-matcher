@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>API documentation &#8212; color-matcher 0.2.0 documentation</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="color-matcher" href="readme.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="readme.html" title="color-matcher"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">color-matcher 0.2.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">API documentation</a><ul>
+<li><a class="reference internal" href="#class-hierarchy">Class hierarchy</a></li>
+<li><a class="reference internal" href="#module-color_matcher">API</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="readme.html"
+                        title="previous chapter">color-matcher</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/apidoc.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="api-documentation">
+<h1>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="class-hierarchy">
+<h2>Class hierarchy<a class="headerlink" href="#class-hierarchy" title="Permalink to this headline">¶</a></h2>
+<p>A schematic overview of the class hierarchy is seen in the diagram below:</p>
+<img alt="_images/arch.png" src="_images/arch.png" />
+<p>As the classes will be of primary interest for future extensions, all are documented hereafter.</p>
+</div>
+<div class="section" id="module-color_matcher">
+<span id="api"></span><h2>API<a class="headerlink" href="#module-color_matcher" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="color_matcher.ColorMatcher">
+<em class="property">class </em><code class="sig-prename descclassname">color_matcher.</code><code class="sig-name descname">ColorMatcher</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#color_matcher.ColorMatcher" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="color_matcher.ColorMatcher.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#color_matcher.ColorMatcher.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="color_matcher.ColorMatcher.main">
+<code class="sig-name descname">main</code><span class="sig-paren">(</span><em class="sig-param">method: str = None</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#color_matcher.ColorMatcher.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main function and high-level entry point performing the mapping. Valid methods are</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – (‘default’, ‘mvgd’, ‘hm’, ‘hm-mkl-hm’, ‘reinhard’) describing how to conduct color mapping</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Resulting image after color mapping</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="color_matcher.HistogramMatcher">
+<em class="property">class </em><code class="sig-prename descclassname">color_matcher.</code><code class="sig-name descname">HistogramMatcher</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#color_matcher.HistogramMatcher" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="color_matcher.HistogramMatcher.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#color_matcher.HistogramMatcher.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="color_matcher.HistogramMatcher.hist_match">
+<code class="sig-name descname">hist_match</code><span class="sig-paren">(</span><em class="sig-param">src: numpy.ndarray = None</em>, <em class="sig-param">ref: numpy.ndarray = None</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#color_matcher.HistogramMatcher.hist_match" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function conducts channel-wise histogram matching which is invariant of image resolutions,
+but requires the same number of color channels in both images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Source image that requires transfer</p></li>
+<li><p><strong>ref</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Palette image which serves as reference</p></li>
+<li><p><strong>ref</strong> – Resulting image after the mapping</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>result</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="color_matcher.TransferMVGD">
+<em class="property">class </em><code class="sig-prename descclassname">color_matcher.</code><code class="sig-name descname">TransferMVGD</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#color_matcher.TransferMVGD" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="color_matcher.TransferMVGD.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#color_matcher.TransferMVGD.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="color_matcher.TransferMVGD.mkl_solver">
+<em class="property">static </em><code class="sig-name descname">mkl_solver</code><span class="sig-paren">(</span><em class="sig-param">cov_r: numpy.ndarray</em>, <em class="sig-param">cov_z: numpy.ndarray</em><span class="sig-paren">)</span><a class="headerlink" href="#color_matcher.TransferMVGD.mkl_solver" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function computes the transfer matrix based on the Monge-Kantorovich linearization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cov_r</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Covariance matrix of source image</p></li>
+<li><p><strong>cov_z</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Covariance matrix of reference image</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Transfer matrix</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>T</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="color_matcher.TransferMVGD.transfer">
+<code class="sig-name descname">transfer</code><span class="sig-paren">(</span><em class="sig-param">src: numpy.ndarray = None</em>, <em class="sig-param">ref: numpy.ndarray = None</em>, <em class="sig-param">fun: function = None</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#color_matcher.TransferMVGD.transfer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transfer function to map colors based on for Multi-Variate Gaussian Distributions (MVGDs).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Source image that requires transfer</p></li>
+<li><p><strong>ref</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Palette image which serves as reference</p></li>
+<li><p><strong>fun</strong> – optional argument to pass a transfer function to solve for covariance matrices</p></li>
+<li><p><strong>t_r</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Resulting image after the mapping</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>t_r</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="color_matcher.MatcherBaseclass">
+<em class="property">class </em><code class="sig-prename descclassname">color_matcher.</code><code class="sig-name descname">MatcherBaseclass</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#color_matcher.MatcherBaseclass" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="color_matcher.MatcherBaseclass.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#color_matcher.MatcherBaseclass.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="color_matcher.MatcherBaseclass.validate_color_chs">
+<code class="sig-name descname">validate_color_chs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#color_matcher.MatcherBaseclass.validate_color_chs" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function checks whether provided images consist of 3 color channels. An exception is thrown otherwise.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="color_matcher.MatcherBaseclass.validate_img_dims">
+<code class="sig-name descname">validate_img_dims</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#color_matcher.MatcherBaseclass.validate_img_dims" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function validates the image dimensions. It throws an exception if the dimension are unequal to 2 or 3.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="readme.html" title="color-matcher"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">color-matcher 0.2.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Christopher Hahne.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.3.
+    </div>
+  </body>
+</html>
