@@ -48,6 +48,8 @@ class MatcherBaseclass(object):
         if len(self._src.shape) != 3 or len(self._ref.shape) != 3:
             raise BaseException('Wrong image dimensions')
 
+        return True
+
     def validate_color_chs(self):
         """
         This function checks whether provided images consist of 3 color channels. An exception is thrown otherwise.
@@ -55,3 +57,5 @@ class MatcherBaseclass(object):
 
         if self._src.shape[2] != 3 or self._ref.shape[2] != 3:
             raise BaseException('Each image must have 3 color channels')
+
+        return True
