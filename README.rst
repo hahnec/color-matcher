@@ -9,7 +9,7 @@ Description
 of photographs, paintings, film sequences or light-fields. The methods behind the mappings are based on the
 Monge-Kantorovich solution as proposed by Pitie *et al.*, the approach by Reinhard *et al.* and histogram matching.
 
-|release| |build| |pypi|
+|release| |build| |pypi_total|
 
 Results
 -------
@@ -173,13 +173,17 @@ Author
 
 .. Image substitutions
 
-.. |release| image:: https://img.shields.io/github/v/release/hahnec/color-matcher?style=flat-square
+.. |release| image:: https://img.shields.io/github/v/release/hahnec/color-matcher?style=square
     :target: https://github.com/hahnec/color-matcher/releases/
     :alt: release
 
-.. |build| image:: https://img.shields.io/travis/com/hahnec/color-matcher?style=flat-square
+.. |build| image:: https://img.shields.io/travis/com/hahnec/color-matcher?style=square
     :target: https://travis-ci.com/github/hahnec/color-matcher
 
-.. |pypi| image:: https://img.shields.io/pypi/dm/color-matcher?label=PyPI%20downloads&style=flat-square
+.. |pypi| image:: https://img.shields.io/pypi/dm/color-matcher?label=PyPI%20downloads&style=square
     :target: https://pypi.org/project/color-matcher/
     :alt: PyPI Downloads
+
+.. |pypi_total| image:: https://pepy.tech/badge/color-matcher?style=flat-square
+    :target: https://pepy.tech/project/color-matcher
+    :alt: PyPi Dl2
