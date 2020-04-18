@@ -63,11 +63,11 @@ def parse_options(argv):
                 usage()
                 sys.exit()
             if opt in ("-s", "--src"):
-                cfg['src_path'] = arg
+                cfg['src_path'] = arg.lstrip()
             if opt in ("-r", "--ref"):
-                cfg['ref_path'] = arg
+                cfg['ref_path'] = arg.lstrip()
             if opt in ("-m", "--method"):
-                cfg['method'] = arg
+                cfg['method'] = arg.lstrip()
             if opt in ("-w", "--win"):
                 cfg['win'] = True
 

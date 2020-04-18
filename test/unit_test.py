@@ -75,14 +75,16 @@ class MatchMethodTester(unittest.TestCase):
         if save:
             save_img_file(match, file_path=os.path.join(self.dat_path,'scotland_'+method), file_type='png')
 
-    def test_cli(self):
+    @idata(([kw] for kw in [['-s ', '-r '], ['--src=', '--ref=']]))
+    @unpack
+    def test_cli(self, kw):
 
         from color_matcher.bin.cli import main
         import sys
 
         # compose cli arguments
-        sys.argv.append('--src='+os.path.join(self.dat_path, 'scotland_house.png'))
-        sys.argv.append('--ref='+os.path.join(self.dat_path, 'scotland_plain.png'))
+        sys.argv.append(kw[0]+os.path.join(self.dat_path, 'scotland_house.png'))
+        sys.argv.append(kw[1]+os.path.join(self.dat_path, 'scotland_plain.png'))
 
         # run cli command
         ret = main()
