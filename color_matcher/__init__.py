@@ -16,7 +16,7 @@ Copyright (c) 2020 Christopher Hahne <inbox@christopherhahne.de>
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-__version__ = '0.2.1'
+__version__ = '0.2.2'
 
 from .top_level import ColorMatcher
 from .hist_matcher import HistogramMatcher
