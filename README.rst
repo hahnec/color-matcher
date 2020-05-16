@@ -6,10 +6,11 @@ Description
 -----------
 
 *color-matcher* enables color transfer across images which comes in handy for automatic color-grading
-of photographs, paintings, film sequences or light-fields. The methods behind the mappings are based on the
-Monge-Kantorovich solution as proposed by Pitie *et al.*, the approach by Reinhard *et al.* and histogram matching.
+of photographs, paintings and film sequences as well as light-field and stopmotion corrections. The methods behind
+the mappings are based on the approach from Reinhard *et al.*, the Monge-Kantorovich solution as proposed by
+Pitie *et al.* and classical histogram matching.
 
-|release| |build| |pypi_total|
+|release| |build| |pypi_total| |pypi|
 
 Results
 -------
