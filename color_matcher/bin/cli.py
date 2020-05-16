@@ -34,7 +34,7 @@ def usage():
     print("Options:")
     print("-s <path>,     --src=<path>       Specify source image file or folder to process")
     print("-r <filepath>, --ref=<filepath>   Specify target image file")
-    print("-m <method>,   --method=<method>  Provide color transfer method. Available methods are:")
+    print("-m <method>,   --method=<method>  Provide color transfer method such as:")
     print("                                  "+', '.join(['"'+m+'"' for m in METHODS]))
     print("-w ,           --win              Select files from window")
     print("-h,            --help             Print this help message")
