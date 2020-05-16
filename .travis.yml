@@ -25,13 +25,16 @@ install:
   - pip3 install --upgrade pip  # all three OSes agree about 'pip3'
   - sudo pip3 install -r requirements.txt || pip3 install -r requirements.txt
   - python3 setup.py install || python setup.py install
+  - pip3 install codecov
+  - pip3 install coveralls
 
 # commands to run tests
 script:
   # open app from CLI
   - color-matcher -h
-  # trigger unit tests
-  - python3 -m test.unit_test || python -m test.unit_test
+  # trigger unit tests and code coverage
+  - python3 -m coverage run test/unit_test.py || python -m coverage run test/unit_test.py
+  - coveralls
 
 before_deploy:
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then
