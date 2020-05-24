@@ -24,9 +24,14 @@ from color_matcher.top_level import ColorMatcher, METHODS
 from color_matcher.io_handler import *
 
 import unittest
-import os
+import os, sys
 import numpy as np
 from ddt import ddt, idata, unpack
+try:
+    import imageio
+except ImportError:
+    pass
+
 
 @ddt
 class MatchMethodTester(unittest.TestCase):
@@ -73,7 +78,7 @@ class MatchMethodTester(unittest.TestCase):
 
         # write images to test data directory (if option set)
         if save:
-            save_img_file(match, file_path=os.path.join(self.dat_path,'scotland_'+method), file_type='png')
+            save_img_file(match, file_path=os.path.join(self.dat_path, 'scotland_'+method), file_type='png')
 
     @idata(([kw] for kw in [['-s ', '-r '], ['--src=', '--ref=']]))
     @unpack
@@ -92,22 +97,22 @@ class MatchMethodTester(unittest.TestCase):
         # assertion
         self.assertEqual(True, ret)
 
-    @unittest.skipUnless(False, "n.a.")
-    def test_match_method_imageio(self, method=None):
+    @unittest.skipUnless('imageio' in sys.modules, "requires imageio")
+    def test_match_method_imageio(self):
 
         # get test data from imageio lib
-        import imageio
         fn_img1 = 'chelsea'
-        fn_img2 = 'coffee'
+        fn_img2 = 'astronaut'
         img1 = imageio.imread('imageio:'+fn_img1+'.png')
         img2 = imageio.imread('imageio:'+fn_img2+'.png')
 
-        # create color match object
-        match = ColorMatcher(img1, img2, method=method).main()
+        # create color match object (without using keyword arguments)
+        match = ColorMatcher(img1, img2).main()
 
         # assess quality
-        match_val = self.avg_hist_dist(match, img2)
-        print('Avg. histogram distances %s vs %s' % (float('inf'), match_val))
+        refer_val = self.avg_hist_dist(img1, img2)
+        match_val = self.avg_hist_dist(img1, match)
+        print('\nAvg. histogram distance of original %s vs. %s' % (round(refer_val, 3), round(match_val, 3)))
 
         # save result
         loc_path = './test/data'
@@ -117,7 +122,7 @@ class MatchMethodTester(unittest.TestCase):
         save_img_file(match, file_path=output_filename)
 
         # assertion
-        self.assertEqual(True, float('inf') > match_val)
+        self.assertEqual(True, refer_val > match_val)
 
 
 if __name__ == '__main__':
