@@ -10,7 +10,7 @@ of photographs, paintings and film sequences as well as light-field and stopmoti
 the mappings are based on the approach from Reinhard *et al.*, the Monge-Kantorovich solution as proposed by
 Pitie *et al.* and classical histogram matching.
 
-|release| |build| |pypi_total| |pypi|
+|release| |build| |coverage| |pypi_total| |pypi|
 
 Results
 -------
@@ -180,6 +180,9 @@ Author
 
 .. |build| image:: https://img.shields.io/travis/com/hahnec/color-matcher?style=square
     :target: https://travis-ci.com/github/hahnec/color-matcher
+
+.. |coverage| image:: https://img.shields.io/coveralls/github/hahnec/color-matcher?style=square
+    :target: https://coveralls.io/github/hahnec/color-matcher
 
 .. |pypi| image:: https://img.shields.io/pypi/dm/color-matcher?label=PyPI%20downloads&style=square
     :target: https://pypi.org/project/color-matcher/
