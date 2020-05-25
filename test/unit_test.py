@@ -22,6 +22,7 @@ __license__ = """
 
 from color_matcher.top_level import ColorMatcher, METHODS
 from color_matcher.io_handler import *
+from color_matcher.bin.cli import main
 
 import unittest
 import os, sys
@@ -80,12 +81,22 @@ class MatchMethodTester(unittest.TestCase):
         if save:
             save_img_file(match, file_path=os.path.join(self.dat_path, 'scotland_'+method), file_type='png')
 
+    @idata(([kw] for kw in ['-h', '--help']))
+    @unpack
+    def test_cli_help(self, kw):
+
+        # print help message
+        sys.argv.append(kw)
+        try:
+            ret = main()
+        except SystemExit:
+            ret = True
+
+        self.assertEqual(True, ret)
+
     @idata(([kw] for kw in [['-s ', '-r '], ['--src=', '--ref=']]))
     @unpack
-    def test_cli(self, kw):
-
-        from color_matcher.bin.cli import main
-        import sys
+    def test_cli_args(self, kw):
 
         # compose cli arguments
         sys.argv.append(kw[0]+os.path.join(self.dat_path, 'scotland_house.png'))
