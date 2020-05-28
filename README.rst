@@ -15,65 +15,33 @@ Pitie *et al.* and classical histogram matching.
 Results
 -------
 
-Photography
-===========
-
 |vspace|
 
 .. list-table::
-   :widths: 8 8 8
+   :widths: 8 8 8 8
+   :header-rows: 1
+   :stub-columns: 1
 
-   * - |src_photo|
+   * -
+     - Source
+     - Target
+     - Result
+   * - Photograph
+     - |src_photo|
      - |ref_photo|
      - |res_photo|
-   * - Source image
-     - Target colors
-     - Result
-
-Film sequences
-==============
-
-|vspace|
-
-.. list-table::
-   :widths: 8 8 8
-
-   * - |src_seq|
+   * - Film sequence
+     - |src_seq|
      - |ref_seq|
      - |res_seq|
-   * - Source sequence
-     - Target colors
-     - Result
-
-Light-field corrections
-=======================
-
-|vspace|
-
-.. list-table::
-   :widths: 8 8 8
-
-   * - |src_lfp|
+   * - Light-field correction
+     - |src_lfp|
      - |ref_lfp|
      - |res_lfp|
-   * - Raw light-field
-     - Target colors
-     - Result
-
-Paintings
-=========
-
-|vspace|
-
-.. list-table::
-   :widths: 8 8 8
-
-   * - |src_paint|
+   * - Paintings
+     - |src_paint|
      - |ref_paint|
      - |res_paint|
-   * - Source image
-     - Target colors
-     - Result
 
 |
 
