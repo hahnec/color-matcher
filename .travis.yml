@@ -30,10 +30,10 @@ install:
 
 # commands to run tests
 script:
-  # open app from CLI
-  - color-matcher -h
   # trigger unit tests and code coverage
   - python3 -m coverage run test/unit_test.py || python -m coverage run test/unit_test.py
+
+after_success:
   - coveralls
 
 before_deploy:
