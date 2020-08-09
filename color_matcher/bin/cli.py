@@ -49,6 +49,7 @@ def parse_options(argv):
         print(e)
         sys.exit(2)
 
+    # create dictionary containing all parameters
     cfg = dict()
 
     # default settings (use test data images for MKL conversion)
@@ -71,7 +72,6 @@ def parse_options(argv):
             if opt in ("-w", "--win"):
                 cfg['win'] = True
 
-    # create dictionary containing all parameters for the light field
     return cfg
 
 
@@ -94,7 +94,7 @@ def main():
         print('Canceled due to missing image file path\n')
         sys.exit()
 
-    # select light field image(s) considering provided folder or file
+    # select image(s) considering provided folder or file
     if os.path.isdir(cfg['src_path']):
         filenames = [f for f in os.listdir(cfg['src_path']) if f.lower().endswith(FILE_EXTS)]
     elif not os.path.isfile(cfg['src_path']) or not os.path.isfile(cfg['ref_path']):
