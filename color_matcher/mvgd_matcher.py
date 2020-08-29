@@ -86,13 +86,13 @@ class TransferMVGD(MatcherBaseclass):
 
         :param cov_r: Covariance matrix of source image
         :param cov_z: Covariance matrix of reference image
-        :param T: Transfer matrix
+        :param transfer_mat: Transfer matrix
 
         :type cov_r: :class:`~numpy:numpy.ndarray`
         :type cov_z: :class:`~numpy:numpy.ndarray`
-        :type T: :class:`~numpy:numpy.ndarray`
+        :type transfer_mat: :class:`~numpy:numpy.ndarray`
 
-        :return: **T**
+        :return: **transfer_mat**
         :rtype: np.ndarray
 
         """
@@ -107,6 +107,6 @@ class TransferMVGD(MatcherBaseclass):
         Dc = np.diag(np.sqrt(Dc2))
         Da_inv = np.diag(1. / (np.diag(Da + np.spacing(1))))
 
-        T = np.dot(Ua, np.dot(Da_inv, np.dot(Uc, np.dot(Dc, np.dot(Uc.T, np.dot(Da_inv, Ua.T))))))
+        transfer_mat = np.dot(Ua, np.dot(Da_inv, np.dot(Uc, np.dot(Dc, np.dot(Uc.T, np.dot(Da_inv, Ua.T))))))
 
-        return T
+        return transfer_mat
