@@ -96,7 +96,8 @@ def main():
 
     # select image(s) considering provided folder or file
     if os.path.isdir(cfg['src_path']):
-        filenames = [f for f in os.listdir(cfg['src_path']) if f.lower().endswith(FILE_EXTS)]
+        filenames = [os.path.join(cfg['src_path'], f) for f in os.listdir(cfg['src_path'])
+                     if f.lower().endswith(FILE_EXTS)]
     elif not os.path.isfile(cfg['src_path']) or not os.path.isfile(cfg['ref_path']):
         print('File(s) not found \n')
         sys.exit()
