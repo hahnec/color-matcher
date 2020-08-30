@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>color-matcher &#8212; color-matcher 0.2.4 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>color-matcher &#8212; color-matcher 0.2.6 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,56 +33,10 @@
         <li class="right" >
           <a href="index.html" title="color-matcher reference document"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">color-matcher 0.2.4 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">color-matcher 0.2.6 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">color-matcher</a></li> 
       </ul>
-    </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">color-matcher</a><ul>
-<li><a class="reference internal" href="#description">Description</a></li>
-<li><a class="reference internal" href="#results">Results</a><ul>
-<li><a class="reference internal" href="#photography">Photography</a></li>
-<li><a class="reference internal" href="#film-sequences">Film sequences</a></li>
-<li><a class="reference internal" href="#light-field-corrections">Light-field corrections</a></li>
-<li><a class="reference internal" href="#paintings">Paintings</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#installation">Installation</a><ul>
-<li><a class="reference internal" href="#command-line-usage">Command Line Usage</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#author">Author</a></li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">color-matcher reference document</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="apidoc.html"
-                        title="next chapter">API documentation</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/readme.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-        </div>
-      </div>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -100,92 +55,46 @@ Pitie <em>et al.</em> and classical histogram matching.</p>
 </div>
 <div class="section" id="results">
 <h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="photography">
-<h3>Photography<a class="headerlink" href="#photography" title="Permalink to this headline">¶</a></h3>
 <p></p>
 <table class="colwidths-given docutils align-default">
 <colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
 </colgroup>
+<thead>
+<tr class="row-odd"><th class="head stub"></th>
+<th class="head"><p>Source</p></th>
+<th class="head"><p>Target</p></th>
+<th class="head"><p>Result</p></th>
+</tr>
+</thead>
 <tbody>
-<tr class="row-odd"><td><p><img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/scotland_house.png" width="200px" max-width:"100%"></p></td>
+<tr class="row-even"><th class="stub"><p>Photograph</p></th>
+<td><p><img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/scotland_house.png" width="200px" max-width:"100%"></p></td>
 <td><p><img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/scotland_plain.png" width="200px" max-width:"100%"></p></td>
 <td><p><img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/scotland_pitie.png" width="200px" max-width:"100%"></p></td>
 </tr>
-<tr class="row-even"><td><p>Source image</p></td>
-<td><p>Target colors</p></td>
-<td><p>Result</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="film-sequences">
-<h3>Film sequences<a class="headerlink" href="#film-sequences" title="Permalink to this headline">¶</a></h3>
-<p></p>
-<table class="colwidths-given docutils align-default">
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/wave.gif" width="200px" max-width:"100%"></p></td>
+<tr class="row-odd"><th class="stub"><p>Film sequence</p></th>
+<td><p><img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/wave.gif" width="200px" max-width:"100%"></p></td>
 <td><p><img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/sunrise.png" width="200px" max-width:"100%"></p></td>
 <td><p><img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/wave_mvgd.gif" width="200px" max-width:"100%"></p></td>
 </tr>
-<tr class="row-even"><td><p>Source sequence</p></td>
-<td><p>Target colors</p></td>
-<td><p>Result</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="light-field-corrections">
-<h3>Light-field corrections<a class="headerlink" href="#light-field-corrections" title="Permalink to this headline">¶</a></h3>
-<p></p>
-<table class="colwidths-given docutils align-default">
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/view_animation_7px.gif" width="200px" max-width:"100%"></p></td>
+<tr class="row-even"><th class="stub"><p>Light-field correction</p></th>
+<td><p><img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/view_animation_7px.gif" width="200px" max-width:"100%"></p></td>
 <td><p><img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/bee_2.png" width="200px" max-width:"100%"></p></td>
 <td><p><img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/view_animation_7px_hm-mkl-hm.gif" width="200px" max-width:"100%"></p></td>
 </tr>
-<tr class="row-even"><td><p>Raw light-field</p></td>
-<td><p>Target colors</p></td>
-<td><p>Result</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="paintings">
-<h3>Paintings<a class="headerlink" href="#paintings" title="Permalink to this headline">¶</a></h3>
-<p></p>
-<table class="colwidths-given docutils align-default">
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/parismusees/cezanne_paul_trois_baigneuses.png" width="200px" max-width:"100%"></p></td>
+<tr class="row-odd"><th class="stub"><p>Paintings</p></th>
+<td><p><img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/parismusees/cezanne_paul_trois_baigneuses.png" width="200px" max-width:"100%"></p></td>
 <td><p><img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/parismusees/cezanne_paul_portrait_dambroise_vollard.png" width="200px" max-width:"100%"></p></td>
 <td><p><img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/test/data/parismusees/cezanne_paul_trois_baigneuses_mvgd.png" width="200px" max-width:"100%"></p></td>
-</tr>
-<tr class="row-even"><td><p>Source image</p></td>
-<td><p>Target colors</p></td>
-<td><p>Result</p></td>
 </tr>
 </tbody>
 </table>
 <div class="line-block">
 <div class="line"><br /></div>
-</div>
 </div>
 </div>
 <div class="section" id="installation">
@@ -231,7 +140,49 @@ Pitie <em>et al.</em> and classical histogram matching.</p>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">color-matcher</a><ul>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#results">Results</a></li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#command-line-usage">Command Line Usage</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#author">Author</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">color-matcher reference document</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="apidoc.html"
+                        title="next chapter">API documentation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/readme.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -251,12 +202,13 @@ Pitie <em>et al.</em> and classical histogram matching.</p>
         <li class="right" >
           <a href="index.html" title="color-matcher reference document"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">color-matcher 0.2.4 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">color-matcher 0.2.6 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">color-matcher</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Christopher Hahne.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
     </div>
   </body>
 </html>
