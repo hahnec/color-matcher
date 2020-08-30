@@ -35,7 +35,7 @@ class ColorMatcher(HistogramMatcher, TransferMVGD, ReinhardMatcher):
 
         self._method = kwargs['method'] if 'method' in kwargs else 'default'
 
-    def main(self, method: str=None) -> np.ndarray:
+    def main(self, method: str = None) -> np.ndarray:
         """
         The main function and high-level entry point performing the mapping. Valid methods are
 

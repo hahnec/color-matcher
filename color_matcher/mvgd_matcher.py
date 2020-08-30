@@ -33,7 +33,7 @@ class TransferMVGD(MatcherBaseclass):
 
         self._fun = kwargs['fun'] if 'fun' in kwargs else self.mkl_solver
 
-    def transfer(self, src: np.ndarray=None, ref: np.ndarray=None, fun: FunctionType=None) -> np.ndarray:
+    def transfer(self, src: np.ndarray = None, ref: np.ndarray = None, fun: FunctionType = None) -> np.ndarray:
         """
 
         Transfer function to map colors based on for Multi-Variate Gaussian Distributions (MVGDs).

@@ -30,7 +30,7 @@ class HistogramMatcher(MatcherBaseclass):
     def __init__(self, *args, **kwargs):
         super(HistogramMatcher, self).__init__(*args, **kwargs)
 
-    def hist_match(self, src: np.ndarray=None, ref: np.ndarray=None) -> np.ndarray:
+    def hist_match(self, src: np.ndarray = None, ref: np.ndarray = None) -> np.ndarray:
         """
 
         This function conducts channel-wise histogram matching which is invariant of image resolutions,

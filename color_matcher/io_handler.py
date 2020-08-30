@@ -33,7 +33,7 @@ from color_matcher.normalizer import Normalizer
 FILE_EXTS = ('bmp', 'png', 'tiff', 'tif', 'jpeg', 'jpg')
 
 
-def save_img_file(img, file_path=None, file_type=None):
+def save_img_file(img, file_path: str = None, file_type: str = None) -> bool:
 
     file_path = os.getcwd() if file_path is None else file_path
     ext = os.path.splitext(file_path)[-1][1:]
@@ -65,7 +65,7 @@ def save_img_file(img, file_path=None, file_type=None):
     return True
 
 
-def load_img_file(file_path):
+def load_img_file(file_path: str = None) -> np.ndarray:
 
     # get file extension
     file_type = file_path.split('.')[-1]
