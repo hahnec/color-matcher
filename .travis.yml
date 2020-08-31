@@ -31,7 +31,7 @@ install:
 # commands to run tests
 script:
   # trigger unit tests and code coverage
-  - python3 -m coverage run test/unit_test.py || python -m coverage run test/unit_test.py
+  - python3 -m coverage run tests/unit_test.py || python -m coverage run tests/unit_test.py
 
 after_success:
   - coveralls
@@ -42,7 +42,7 @@ before_deploy:
       python3 setup.py sdist bdist_wheel;
       python3 -m twine upload -r testpypi dist/* -u __token__ -p $TEST_PYPI;
       pip3 uninstall -y color-matcher;
-      pip3 install -i https://test.pypi.org/simple/ color-matcher;
+      pip3 install -i https://tests.pypi.org/simple/ color-matcher;
     fi
 
 deploy:

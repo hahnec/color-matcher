@@ -130,5 +130,5 @@ dmypy.json
 
 # user-defined
 
-# sub-directories of test data
-test/data/kodak/
+# sub-directories of tests data
+tests/data/kodak/

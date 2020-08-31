@@ -77,7 +77,7 @@ class MatchMethodTester(unittest.TestCase):
         # assertion
         self.assertEqual(True, refer_val > match_val)
 
-        # write images to test data directory (if option set)
+        # write images to tests data directory (if option set)
         if save:
             save_img_file(match, file_path=os.path.join(self.dat_path, 'scotland_'+method), file_type='png')
 
@@ -111,7 +111,7 @@ class MatchMethodTester(unittest.TestCase):
     @unittest.skipUnless('imageio' in sys.modules, "requires imageio")
     def test_match_method_imageio(self):
 
-        # get test data from imageio lib
+        # get tests data from imageio lib
         fn_img1 = 'chelsea'
         fn_img2 = 'astronaut'
         img1 = imageio.imread('imageio:'+fn_img1+'.png')
@@ -126,7 +126,7 @@ class MatchMethodTester(unittest.TestCase):
         print('\nAvg. histogram distance of original %s vs. %s' % (round(refer_val, 3), round(match_val, 3)))
 
         # save result
-        loc_path = './test/data'
+        loc_path = './tests/data'
         output_filename = os.path.join(loc_path, fn_img1.split('.')[0] + '_from_' + fn_img2)
         save_img_file(img1, file_path=os.path.join(loc_path, fn_img1))
         save_img_file(img2, file_path=os.path.join(loc_path, fn_img2))
