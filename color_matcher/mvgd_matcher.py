@@ -31,7 +31,26 @@ class TransferMVGD(MatcherBaseclass):
     def __init__(self, *args, **kwargs):
         super(TransferMVGD, self).__init__(*args, **kwargs)
 
-        self._fun = kwargs['fun'] if 'fun' in kwargs else self.mkl_solver
+        self._fun_dict = {'analytical': self.analytical_solver, 'mkl': self.mkl_solver}
+        self._fun_name = kwargs['fun'] if 'fun' in kwargs else 'mkl'    # use MKL as default
+        self._fun_call = self._fun_dict[self._fun_name] if self._fun_name in self._fun_dict else self.analytical_solver
+
+        # initialize variables
+        self.r = np.reshape(self._src, [-1, self._src.shape[2]])
+        self.z = np.reshape(self._ref, [-1, self._ref.shape[2]])
+        self.cov_r, self.cov_z = np.cov(self.r.T), np.cov(self.z.T)
+        self.mu_r, self.mu_z = np.mean(self.r, axis=0), np.mean(self.z, axis=0)
+
+    def _init_vars(self):
+
+        self.r = np.reshape(self._src, [-1, self._src.shape[2]])
+        self.z = np.reshape(self._ref, [-1, self._ref.shape[2]])
+
+        self.cov_r = np.cov(self.r.T)
+        self.cov_z = np.cov(self.z.T)
+
+        self.mu_r = np.mean(self.r, axis=0)
+        self.mu_z = np.mean(self.z, axis=0)
 
     def transfer(self, src: np.ndarray = None, ref: np.ndarray = None, fun: FunctionType = None) -> np.ndarray:
         """
@@ -41,13 +60,13 @@ class TransferMVGD(MatcherBaseclass):
         :param src: Source image that requires transfer
         :param ref: Palette image which serves as reference
         :param fun: optional argument to pass a transfer function to solve for covariance matrices
-        :param t_r: Resulting image after the mapping
+        :param res: Resulting image after the mapping
 
         :type src: :class:`~numpy:numpy.ndarray`
         :type ref: :class:`~numpy:numpy.ndarray`
-        :type t_r: :class:`~numpy:numpy.ndarray`
+        :type res: :class:`~numpy:numpy.ndarray`
 
-        :return: **t_r**
+        :return: **res**
         :rtype: np.ndarray
 
         """
@@ -59,54 +78,54 @@ class TransferMVGD(MatcherBaseclass):
         # check if three color channels are provided
         self.validate_color_chs()
 
-        # set solver function for transfer matrix (default is MKL)
-        self._fun = fun if fun is not None else self._fun
+        # re-initialize variables to account for change in src and ref when passed to self.transfer()
+        self._init_vars()
 
-        r = np.reshape(src, [-1, src.shape[2]])
-        z = np.reshape(ref, [-1, ref.shape[2]])
+        # set solver function for transfer matrix
+        self._fun_call = fun if fun is FunctionType else self._fun_call
 
-        cov_r = np.cov(r.T)
-        cov_z = np.cov(z.T)
+        # compute transfer matrix
+        transfer_mat = self._fun_call()
 
-        transfer_mat = self._fun(cov_r, cov_z)
+        # transfer the intensity distributions
+        res = np.dot((self.r - self.mu_r), transfer_mat) + self.mu_z
+        res = np.reshape(res, self._src.shape)
 
-        mu_r = np.mean(r, axis=0)
-        mu_z = np.mean(z, axis=0)
+        return res
 
-        t_r = np.dot((r - mu_r), transfer_mat) + mu_z
-        t_r = np.reshape(t_r, src.shape)
-
-        return t_r
-
-    @staticmethod
-    def mkl_solver(cov_r: np.ndarray, cov_z: np.ndarray):
+    def mkl_solver(self):
         """
-
         This function computes the transfer matrix based on the Monge-Kantorovich linearization.
 
-        :param cov_r: Covariance matrix of source image
-        :param cov_z: Covariance matrix of reference image
-        :param transfer_mat: Transfer matrix
-
-        :type cov_r: :class:`~numpy:numpy.ndarray`
-        :type cov_z: :class:`~numpy:numpy.ndarray`
+        :return: **transfer_mat**: Transfer matrix
         :type transfer_mat: :class:`~numpy:numpy.ndarray`
-
-        :return: **transfer_mat**
         :rtype: np.ndarray
 
         """
 
-        [Da2, Ua] = np.linalg.eig(cov_r)
+        [Da2, Ua] = np.linalg.eig(self.cov_r)
         Ua = np.array([Ua[:, 2] * -1, Ua[:, 1], Ua[:, 0] * -1]).T
         Da2[Da2 < 0] = 0
         Da = np.diag(np.sqrt(Da2[::-1]))
-        C = np.dot(Da, np.dot(Ua.T, np.dot(cov_z, np.dot(Ua, Da))))
+        C = np.dot(Da, np.dot(Ua.T, np.dot(self.cov_z, np.dot(Ua, Da))))
         [Dc2, Uc] = np.linalg.eig(C)
         Dc2[Dc2 < 0] = 0
         Dc = np.diag(np.sqrt(Dc2))
         Da_inv = np.diag(1. / (np.diag(Da + np.spacing(1))))
 
-        transfer_mat = np.dot(Ua, np.dot(Da_inv, np.dot(Uc, np.dot(Dc, np.dot(Uc.T, np.dot(Da_inv, Ua.T))))))
+        return np.dot(Ua, np.dot(Da_inv, np.dot(Uc, np.dot(Dc, np.dot(Uc.T, np.dot(Da_inv, Ua.T))))))
 
-        return transfer_mat
+    def analytical_solver(self) -> np.ndarray:
+        """
+        An analytical solution to the linear equation system of MVGDs.
+
+        :return: **transfer_mat**: Transfer matrix
+        :type transfer_mat: :class:`~numpy:numpy.ndarray`
+        :rtype: np.ndarray
+
+        """
+
+        cov_r_inv = np.linalg.inv(self.cov_r)
+        cov_z_inv = np.linalg.inv(self.cov_z)
+
+        return np.dot(np.dot(np.linalg.pinv(np.dot(self.z-self.mu_z, cov_z_inv)), self.r-self.mu_r), cov_r_inv).T
