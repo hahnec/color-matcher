@@ -95,7 +95,7 @@ class TransferMVGD(MatcherBaseclass):
 
     def mkl_solver(self):
         """
-        This function computes the transfer matrix based on the Monge-Kantorovich linearization.
+        This function computes the transfer matrix based on the Monge-Kantorovich Linearization (MKL).
 
         :return: **transfer_mat**: Transfer matrix
         :type transfer_mat: :class:`~numpy:numpy.ndarray`
