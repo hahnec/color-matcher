@@ -1,0 +1,14 @@
+docs/* linguist-vendored
+
+*.py linguist-detectable=true
+*.ipynb linguist-detectable=false
+*.json linguist-detectable=true
+*.yaml linguist-detectable=true
+*.bat linguist-detectable=true
+*.sh linguist-detectable=true
+
+*.java linguist-detectable=false
+*.java linguist-detectable=false
+*.js linguist-detectable=false
+*.html linguist-detectable=false
+*.xml linguist-detectable=false
