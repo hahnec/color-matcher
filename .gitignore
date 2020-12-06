@@ -129,6 +129,7 @@ dmypy.json
 .pyre/
 
 # user-defined
+**/.DS_Store
 
 # sub-directories of tests data
 tests/data/kodak/
