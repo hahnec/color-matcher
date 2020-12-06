@@ -42,7 +42,7 @@ before_deploy:
       python3 setup.py sdist bdist_wheel;
       twine upload -r testpypi dist/* -u __token__ -p $TEST_PYPI;
       pip3 uninstall -y color-matcher;
-      pip3 install -i https://tests.pypi.org/simple/ color-matcher;
+      pip3 install -i https://test.pypi.org/simple/ color-matcher;
     fi
 
 deploy:
