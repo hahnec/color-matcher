@@ -46,7 +46,7 @@ class ColorMatcher(HistogramMatcher, TransferMVGD, ReinhardMatcher):
         :rtype: np.ndarray
         """
 
-        self._method = self._method if method is None else method
+        self._method = self._method.lower() if method is None else method.lower()
 
         # color transfer methods (to be iterated through)
         if self._method == METHODS[0]:
