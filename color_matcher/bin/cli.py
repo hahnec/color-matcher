@@ -53,8 +53,8 @@ def parse_options(argv):
     cfg = dict()
 
     # default settings (use test data images for MKL conversion)
-    cfg['src_path'] = ''
-    cfg['ref_path'] = ''
+    cfg['src_path'] = '.'
+    cfg['ref_path'] = '.'
     cfg['method'] = None
     cfg['win'] = None
 
@@ -80,12 +80,12 @@ def main():
     # program info
     print("\ncolor-matcher v%s \n" % __version__)
 
-    # parse options
+    # retrieve parse options
     cfg = parse_options(sys.argv[1:])
 
     # select files from window (if option set)
     if cfg['win']:
-        cfg['src_path'] = select_file('.', 'Select source image')
+        cfg['src_path'] = select_file(cfg['src_path'], 'Select source image')
         cfg['ref_path'] = select_file(cfg['src_path'], 'Select reference image')
 
     # cancel if file paths not provided
