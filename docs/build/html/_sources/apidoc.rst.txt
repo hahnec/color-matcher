@@ -32,6 +32,8 @@ API
    :members:
 .. autoclass:: TransferMVGD
    :members:
+.. autoclass:: ReinhardMatcher
+   :members:
 .. autoclass:: MatcherBaseclass
    :members:
 ..	:inherited-members:
