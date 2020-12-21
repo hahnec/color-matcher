@@ -107,17 +107,16 @@ def main():
     # method handling
     cfg['method'] = cfg['method'] if cfg['method'] in METHODS else 'mvgd'
 
-    # file handling
+    # read reference image
     ref = load_img_file(cfg['ref_path'])
-    output_path = os.path.dirname(cfg['src_path'])
 
-    # process the images
+    # process images
     for f in filenames:
         src = load_img_file(f)
         res = ColorMatcher(src=src, ref=ref, method=cfg['method']).main()
-        filename = os.path.splitext(os.path.basename(cfg['src_path']))[0]+'_'+cfg['method']
-        file_ext = os.path.splitext(cfg['src_path'])[-1]
-        save_img_file(res, file_path=os.path.join(output_path, filename), file_type=file_ext[1:])
+        filename = os.path.splitext(os.path.basename(f))[0]+'_'+cfg['method']
+        file_ext = os.path.splitext(f)[-1]
+        save_img_file(res, file_path=os.path.join(os.path.dirname(f), filename), file_type=file_ext[1:])
 
     return True
 
