@@ -149,4 +149,4 @@ class TransferMVGD(MatcherBaseclass):
         :rtype: float
         """
 
-        return (mu_a-mu_b)**2+np.trace(cov_a+cov_b-2*(np.dot(cov_a**.5, np.dot(cov_b, cov_b**.5))**.5))
+        return sum((mu_a-mu_b)**2)+np.trace(cov_a+cov_b-2*(np.dot(cov_b**.5, np.dot(cov_a, cov_b**.5))**.5))

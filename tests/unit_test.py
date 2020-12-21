@@ -73,6 +73,13 @@ class MatchMethodTester(unittest.TestCase):
         refer_val = self.avg_hist_dist(plain, refer)
         match_val = self.avg_hist_dist(plain, match)
         print('\nAvg. histogram distance of original %s vs. %s %s' % (round(refer_val, 3), method, round(match_val, 3)))
+        obj = ColorMatcher(src=house, ref=plain, method='mvgd')
+        mu_house, mu_plain, cov_house, cov_plain = obj.mu_r, obj.mu_z, obj.cov_r, obj.cov_z
+        obj = ColorMatcher(src=house, ref=match, method='mvgd')
+        mu_match, cov_match = obj.mu_z, obj.cov_z
+        refer_w2 = ColorMatcher.wasserstein_two_dist(mu_a=mu_house, mu_b=mu_plain, cov_a=cov_house, cov_b=cov_plain)
+        match_w2 = ColorMatcher.wasserstein_two_dist(mu_a=mu_match, mu_b=mu_plain, cov_a=cov_match, cov_b=cov_plain)
+        print('Wasserstein-2 distance of original %s vs. %s %s' % (round(refer_w2, 3), method, round(match_w2, 3)))
 
         # assertion
         self.assertEqual(True, refer_val > match_val)
