@@ -84,6 +84,9 @@ class MatchMethodTester(unittest.TestCase):
     @unittest.skipUnless('imageio' in sys.modules, "requires imageio")
     def test_match_method_imageio(self):
 
+        # choose method
+        method = METHODS[0]
+
         # get tests data from imageio lib
         fn_img1 = 'chelsea'
         fn_img2 = 'astronaut'
@@ -91,7 +94,7 @@ class MatchMethodTester(unittest.TestCase):
         img2 = imageio.imread('imageio:'+fn_img2+'.png')
 
         # create color match object (without using keyword arguments)
-        match = ColorMatcher(img1, img2).main()
+        match = ColorMatcher(img1, img2, method=method).main()
 
         # assess quality
         refer_val = self.avg_hist_dist(img1, img2)
@@ -99,7 +102,7 @@ class MatchMethodTester(unittest.TestCase):
         print('\nAvg. histogram distance of original %s vs. %s' % (round(refer_val, 3), round(match_val, 3)))
 
         # save result
-        output_filename = os.path.join(self.dat_path, fn_img1.split('.')[0] + '_from_' + fn_img2)
+        output_filename = os.path.join(self.dat_path, fn_img1.split('.')[0] + '_from_' + fn_img2 + '_' + method)
         save_img_file(img1, file_path=os.path.join(self.dat_path, fn_img1))
         save_img_file(img2, file_path=os.path.join(self.dat_path, fn_img2))
         save_img_file(match, file_path=output_filename)
@@ -140,18 +143,20 @@ class MatchMethodTester(unittest.TestCase):
         except SystemExit:
             ret = False
 
+        # clear sys.argv
+        sys.argv = [sys.argv[0]]
+
         # assertion
         self.assertEqual(exp_val, ret)
 
-    @idata(([kw] for kw in [['-s ', '-r '], ['--src=', '--ref=']]))
-    @unpack
-    def test_batch_process(self, kw):
+    def test_batch_process(self):
 
-        # compose cli arguments
-        sys.argv.append(kw[0] + self.dat_path)                                        # pass directory path
-        sys.argv.append(kw[1] + os.path.join(self.dat_path, 'scotland_plain.png'))    # pass file path
+        # compose CLI arguments
+        sys.argv.append('-s ' + self.dat_path)                                        # pass directory path
+        sys.argv.append('-r ' + os.path.join(self.dat_path, 'scotland_plain.png'))    # pass file path
+        sys.argv.append('method==' + METHODS[0])                                      # pass method
 
-        # run cli command
+        # run CLI command
         ret = main()
 
         # assertion
