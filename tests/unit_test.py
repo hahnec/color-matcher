@@ -125,9 +125,7 @@ class MatchMethodTester(unittest.TestCase):
             [['--src=', '--ref='], True],
             [['--wrong', 'args'], False],
             [['.', '.'], False],
-            [[True, None], False],
-            [[None, True], False],
-            [[None, None], False],
+            [['', ''], False]
     ))
     @unpack
     def test_cli_args(self, kw, exp_val):
