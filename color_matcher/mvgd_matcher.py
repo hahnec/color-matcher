@@ -117,7 +117,7 @@ class TransferMVGD(MatcherBaseclass):
 
     def analytical_solver(self) -> np.ndarray:
         """
-        An analytical solution to the linear equation system of MVGDs.
+        An analytical solution to the linear equation system of Multi-Variate Gaussian Distributions (MVGDs).
 
         :return: **transfer_mat**: Transfer matrix
         :type transfer_mat: :class:`~numpy:numpy.ndarray`
@@ -129,3 +129,24 @@ class TransferMVGD(MatcherBaseclass):
         cov_z_inv = np.linalg.inv(self.cov_z)
 
         return np.dot(np.dot(np.linalg.pinv(np.dot(self.z-self.mu_z, cov_z_inv)), self.r-self.mu_r), cov_r_inv).T
+
+    @staticmethod
+    def wasserstein_two_dist(mu_a: np.ndarray, mu_b: np.ndarray, cov_a: np.ndarray, cov_b: np.ndarray) -> float:
+        """
+        Wasserstein-2 distance metric is a similarity measure for Gaussian distributions
+
+        :param mu_a: Gaussian mean of distribution *a*
+        :param mu_b: Gaussian mean of distribution *b*
+        :param cov_a: Covariance matrix of distribution *a*
+        :param cov_b: Covariance matrix of distribution *b*
+
+        :type mu_a: :class:`~numpy:numpy.ndarray`
+        :type mu_b: :class:`~numpy:numpy.ndarray`
+        :type cov_a: :class:`~numpy:numpy.ndarray`
+        :type cov_b: :class:`~numpy:numpy.ndarray`
+
+        :return: **scalar**: Wasserstein-2 metric as a scalar
+        :rtype: float
+        """
+
+        return (mu_a-mu_b)**2+np.trace(cov_a+cov_b-2*(np.dot(cov_a**.5, np.dot(cov_b, cov_b**.5))**.5))
