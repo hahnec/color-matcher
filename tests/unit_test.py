@@ -126,10 +126,9 @@ class MatchMethodTester(unittest.TestCase):
         print('\nAvg. histogram distance of original %s vs. %s' % (round(refer_val, 3), round(match_val, 3)))
 
         # save result
-        loc_path = './tests/data'
-        output_filename = os.path.join(loc_path, fn_img1.split('.')[0] + '_from_' + fn_img2)
-        save_img_file(img1, file_path=os.path.join(loc_path, fn_img1))
-        save_img_file(img2, file_path=os.path.join(loc_path, fn_img2))
+        output_filename = os.path.join(self.dat_path, fn_img1.split('.')[0] + '_from_' + fn_img2)
+        save_img_file(img1, file_path=os.path.join(self.dat_path, fn_img1))
+        save_img_file(img2, file_path=os.path.join(self.dat_path, fn_img2))
         save_img_file(match, file_path=output_filename)
 
         # assertion
