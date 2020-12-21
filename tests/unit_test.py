@@ -81,33 +81,6 @@ class MatchMethodTester(unittest.TestCase):
         if save:
             save_img_file(match, file_path=os.path.join(self.dat_path, 'scotland_'+method), file_type='png')
 
-    @idata(([kw] for kw in ['-h', '--help']))
-    @unpack
-    def test_cli_help(self, kw):
-
-        # print help message
-        sys.argv.append(kw)
-        try:
-            ret = main()
-        except SystemExit:
-            ret = True
-
-        self.assertEqual(True, ret)
-
-    @idata(([kw] for kw in [['-s ', '-r '], ['--src=', '--ref=']]))
-    @unpack
-    def test_cli_args(self, kw):
-
-        # compose cli arguments
-        sys.argv.append(kw[0]+os.path.join(self.dat_path, 'scotland_house.png'))
-        sys.argv.append(kw[1]+os.path.join(self.dat_path, 'scotland_plain.png'))
-
-        # run cli command
-        ret = main()
-
-        # assertion
-        self.assertEqual(True, ret)
-
     @unittest.skipUnless('imageio' in sys.modules, "requires imageio")
     def test_match_method_imageio(self):
 
@@ -133,6 +106,47 @@ class MatchMethodTester(unittest.TestCase):
 
         # assertion
         self.assertEqual(True, refer_val > match_val)
+
+    @idata(([kw] for kw in ['-h', '--help']))
+    @unpack
+    def test_cli_help(self, kw):
+
+        # print help message
+        sys.argv.append(kw)
+        try:
+            ret = main()
+        except SystemExit:
+            ret = True
+
+        self.assertEqual(True, ret)
+
+    @idata(([kw] for kw in [['-s ', '-r '], ['--src=', '--ref=']]))
+    @unpack
+    def test_cli_args(self, kw):
+
+        # compose cli arguments
+        sys.argv.append(kw[0] + os.path.join(self.dat_path, 'scotland_house.png'))
+        sys.argv.append(kw[1] + os.path.join(self.dat_path, 'scotland_plain.png'))
+
+        # run cli command
+        ret = main()
+
+        # assertion
+        self.assertEqual(True, ret)
+
+    @idata(([kw] for kw in [['-s ', '-r '], ['--src=', '--ref=']]))
+    @unpack
+    def test_batch_process(self, kw):
+
+        # compose cli arguments
+        sys.argv.append(kw[0] + self.dat_path)                                        # pass directory path
+        sys.argv.append(kw[1] + os.path.join(self.dat_path, 'scotland_plain.png'))    # pass file path
+
+        # run cli command
+        ret = main()
+
+        # assertion
+        self.assertEqual(True, ret)
 
 
 if __name__ == '__main__':
