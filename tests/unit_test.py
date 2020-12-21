@@ -159,12 +159,6 @@ class MatchMethodTester(unittest.TestCase):
         # assertion
         self.assertEqual(True, ret)
 
-    def test_select_file(self):
-
-        from color_matcher.io_handler import select_file
-
-        tk_widget = select_file(self.dir_path, 'test window title')
-
 
 if __name__ == '__main__':
     unittest.main()
