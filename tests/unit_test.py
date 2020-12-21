@@ -120,19 +120,30 @@ class MatchMethodTester(unittest.TestCase):
 
         self.assertEqual(True, ret)
 
-    @idata(([kw] for kw in [['-s ', '-r '], ['--src=', '--ref=']]))
+    @idata((
+            [['-s ', '-r '], True],
+            [['--src=', '--ref='], True],
+            [['--wrong', 'args'], False],
+            [['.', '.'], False],
+            [[True, None], False],
+            [[None, True], False],
+            [[None, None], False],
+    ))
     @unpack
-    def test_cli_args(self, kw):
+    def test_cli_args(self, kw, exp_val):
 
-        # compose cli arguments
+        # compose CLI arguments
         sys.argv.append(kw[0] + os.path.join(self.dat_path, 'scotland_house.png'))
         sys.argv.append(kw[1] + os.path.join(self.dat_path, 'scotland_plain.png'))
 
-        # run cli command
-        ret = main()
+        # run CLI command
+        try:
+            ret = main()
+        except SystemExit:
+            ret = False
 
         # assertion
-        self.assertEqual(True, ret)
+        self.assertEqual(exp_val, ret)
 
     @idata(([kw] for kw in [['-s ', '-r '], ['--src=', '--ref=']]))
     @unpack
@@ -147,6 +158,12 @@ class MatchMethodTester(unittest.TestCase):
 
         # assertion
         self.assertEqual(True, ret)
+
+    def test_select_file(self):
+
+        from color_matcher.io_handler import select_file
+
+        tk_widget = select_file(self.dir_path, 'test window title')
 
 
 if __name__ == '__main__':
