@@ -77,8 +77,8 @@ class MatchMethodTester(unittest.TestCase):
         mu_house, mu_plain, cov_house, cov_plain = obj.mu_r, obj.mu_z, obj.cov_r, obj.cov_z
         obj = ColorMatcher(src=house, ref=match, method='mvgd')
         mu_match, cov_match = obj.mu_z, obj.cov_z
-        refer_w2 = ColorMatcher.wasserstein_two_dist(mu_a=mu_house, mu_b=mu_plain, cov_a=cov_house, cov_b=cov_plain)
-        match_w2 = ColorMatcher.wasserstein_two_dist(mu_a=mu_match, mu_b=mu_plain, cov_a=cov_match, cov_b=cov_plain)
+        refer_w2 = ColorMatcher.w2_dist(mu_a=mu_house, mu_b=mu_plain, cov_a=cov_house, cov_b=cov_plain)
+        match_w2 = ColorMatcher.w2_dist(mu_a=mu_match, mu_b=mu_plain, cov_a=cov_match, cov_b=cov_plain)
         print('Wasserstein-2 distance of original %s vs. %s %s' % (round(refer_w2, 3), method, round(match_w2, 3)))
 
         # assertion

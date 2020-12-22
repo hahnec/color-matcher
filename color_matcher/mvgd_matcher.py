@@ -131,7 +131,7 @@ class TransferMVGD(MatcherBaseclass):
         return np.dot(np.dot(np.linalg.pinv(np.dot(self.z-self.mu_z, cov_z_inv)), self.r-self.mu_r), cov_r_inv).T
 
     @staticmethod
-    def wasserstein_two_dist(mu_a: np.ndarray, mu_b: np.ndarray, cov_a: np.ndarray, cov_b: np.ndarray) -> float:
+    def w2_dist(mu_a: np.ndarray, mu_b: np.ndarray, cov_a: np.ndarray, cov_b: np.ndarray) -> float:
         """
         Wasserstein-2 distance metric is a similarity measure for Gaussian distributions
 
