@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>color_matcher package &#8212; color-matcher 0.3.3 documentation</title>
+    <title>color_matcher package &#8212; color-matcher 0.3.4 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -24,7 +24,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">color-matcher 0.3.3 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">color-matcher 0.3.4 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -177,7 +177,7 @@ but requires the same number of color channels in both images.</p>
 <dl class="method">
 <dt id="color_matcher.mvgd_matcher.TransferMVGD.analytical_solver">
 <code class="descname">analytical_solver</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#color_matcher.mvgd_matcher.TransferMVGD.analytical_solver" title="Permalink to this definition">¶</a></dt>
-<dd><p>An analytical solution to the linear equation system of MVGDs.</p>
+<dd><p>An analytical solution to the linear equation system of Multi-Variate Gaussian Distributions (MVGDs).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><strong>transfer_mat</strong>: Transfer matrix</p>
@@ -220,6 +220,28 @@ but requires the same number of color channels in both images.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="color_matcher.mvgd_matcher.TransferMVGD.w2_dist">
+<em class="property">static </em><code class="descname">w2_dist</code><span class="sig-paren">(</span><em>mu_a: numpy.ndarray</em>, <em>mu_b: numpy.ndarray</em>, <em>cov_a: numpy.ndarray</em>, <em>cov_b: numpy.ndarray</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#color_matcher.mvgd_matcher.TransferMVGD.w2_dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wasserstein-2 distance metric is a similarity measure for Gaussian distributions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mu_a</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Gaussian mean of distribution <em>a</em></p></li>
+<li><p><strong>mu_b</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Gaussian mean of distribution <em>b</em></p></li>
+<li><p><strong>cov_a</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Covariance matrix of distribution <em>a</em></p></li>
+<li><p><strong>cov_b</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Covariance matrix of distribution <em>b</em></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>scalar</strong>: Wasserstein-2 metric as a scalar</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -318,7 +340,7 @@ but requires the same number of color channels in both images.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">color-matcher 0.3.3 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">color-matcher 0.3.4 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
