@@ -198,5 +198,6 @@ class MatchMethodTester(unittest.TestCase):
 
         self.assertEqual(exp_val, ret, msg=msg)
 
+
 if __name__ == '__main__':
     unittest.main()
