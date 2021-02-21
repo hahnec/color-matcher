@@ -31,9 +31,9 @@ class TransferMVGD(MatcherBaseclass):
     def __init__(self, *args, **kwargs):
         super(TransferMVGD, self).__init__(*args, **kwargs)
 
-        self._fun_dict = {'analytical': self.analytical_solver, 'mkl': self.mkl_solver}
-        self._fun_name = kwargs['fun'] if 'fun' in kwargs else 'mkl'    # use MKL as default
-        self._fun_call = self._fun_dict[self._fun_name] if self._fun_name in self._fun_dict else self.analytical_solver
+        self._fun_dict = {'mvgd': self.analytical_solver, 'mkl': self.mkl_solver}
+        self._fun_name = kwargs['method'] if 'method' in kwargs else 'mkl'    # use MKL as default
+        self._fun_call = self._fun_dict[self._fun_name] if self._fun_name in self._fun_dict else self.mkl_solver
 
         # initialize variables
         self.r = np.reshape(self._src, [-1, self._src.shape[2]])
