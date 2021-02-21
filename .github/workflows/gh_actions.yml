@@ -35,7 +35,7 @@ jobs:
           pip install codecov
           pip install coveralls
       - name: Run unit tests
-        run: python -m coverage run tests/test_all.py
+        run: python -m coverage run tests/unit_test.py
       - name: Submit Coverage Report to Coveralls
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
