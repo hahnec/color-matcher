@@ -28,7 +28,7 @@ import numpy as np
 METHODS = ('default', 'hm', 'reinhard', 'mvgd', 'mkl', 'hm-mvgd-hm', 'hm-mkl-hm')
 
 
-class ColorMatcher(HistogramMatcher, TransferMVGD, ReinhardMatcher):
+class ColorMatcher(HistogramMatcher, ReinhardMatcher, TransferMVGD):
 
     def __init__(self, *args, **kwargs):
         super(ColorMatcher, self).__init__(*args, **kwargs)
