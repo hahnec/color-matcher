@@ -73,6 +73,13 @@ class MatchMethodTester(unittest.TestCase):
         refer_val = self.avg_hist_dist(plain, refer)
         match_val = self.avg_hist_dist(plain, match)
         print('\nAvg. histogram distance of original %s vs. %s %s' % (round(refer_val, 3), method, round(match_val, 3)))
+        obj = ColorMatcher(src=house, ref=plain, method='mvgd')
+        mu_house, mu_plain, cov_house, cov_plain = obj.mu_r, obj.mu_z, obj.cov_r, obj.cov_z
+        obj = ColorMatcher(src=house, ref=match, method='mvgd')
+        mu_match, cov_match = obj.mu_z, obj.cov_z
+        refer_w2 = ColorMatcher.w2_dist(mu_a=mu_house, mu_b=mu_plain, cov_a=cov_house, cov_b=cov_plain)
+        match_w2 = ColorMatcher.w2_dist(mu_a=mu_match, mu_b=mu_plain, cov_a=cov_match, cov_b=cov_plain)
+        print('Wasserstein-2 distance of original %s vs. %s %s' % (round(refer_w2, 3), method, round(match_w2, 3)))
 
         # assertion
         self.assertEqual(True, refer_val > match_val)
@@ -80,6 +87,35 @@ class MatchMethodTester(unittest.TestCase):
         # write images to tests data directory (if option set)
         if save:
             save_img_file(match, file_path=os.path.join(self.dat_path, 'scotland_'+method), file_type='png')
+
+    @unittest.skipUnless('imageio' in sys.modules, "requires imageio")
+    def test_match_method_imageio(self):
+
+        # choose method
+        method = METHODS[0]
+
+        # get tests data from imageio lib
+        fn_img1 = 'chelsea'
+        fn_img2 = 'astronaut'
+        img1 = imageio.imread('imageio:'+fn_img1+'.png')
+        img2 = imageio.imread('imageio:'+fn_img2+'.png')
+
+        # create color match object (without using keyword arguments)
+        match = ColorMatcher(img1, img2, method=method).main()
+
+        # assess quality
+        refer_val = self.avg_hist_dist(img1, img2)
+        match_val = self.avg_hist_dist(img1, match)
+        print('\nAvg. histogram distance of original %s vs. %s' % (round(refer_val, 3), round(match_val, 3)))
+
+        # save result
+        output_filename = os.path.join(self.dat_path, fn_img1.split('.')[0] + '_from_' + fn_img2 + '_' + method)
+        save_img_file(img1, file_path=os.path.join(self.dat_path, fn_img1))
+        save_img_file(img2, file_path=os.path.join(self.dat_path, fn_img2))
+        save_img_file(match, file_path=output_filename)
+
+        # assertion
+        self.assertEqual(True, refer_val > match_val)
 
     @idata(([kw] for kw in ['-h', '--help']))
     @unpack
@@ -94,47 +130,73 @@ class MatchMethodTester(unittest.TestCase):
 
         self.assertEqual(True, ret)
 
-    @idata(([kw] for kw in [['-s ', '-r '], ['--src=', '--ref=']]))
+    @idata((
+            [['-s ', '-r '], True],
+            [['--src=', '--ref='], True],
+            [['--wrong', 'args'], False],
+            [['.', '.'], False],
+            [['', ''], False]
+    ))
     @unpack
-    def test_cli_args(self, kw):
+    def test_cli_args(self, kw, exp_val):
 
-        # compose cli arguments
-        sys.argv.append(kw[0]+os.path.join(self.dat_path, 'scotland_house.png'))
-        sys.argv.append(kw[1]+os.path.join(self.dat_path, 'scotland_plain.png'))
+        # compose CLI arguments
+        sys.argv.append(kw[0] + os.path.join(self.dat_path, 'scotland_house.png'))
+        sys.argv.append(kw[1] + os.path.join(self.dat_path, 'scotland_plain.png'))
 
-        # run cli command
+        # run CLI command
+        try:
+            ret = main()
+        except SystemExit:
+            ret = False
+
+        # clear sys.argv
+        sys.argv = [sys.argv[0]]
+
+        # assertion
+        self.assertEqual(exp_val, ret)
+
+    def test_batch_process(self):
+
+        # compose CLI arguments
+        sys.argv.append('-s ' + self.dat_path)                                        # pass directory path
+        sys.argv.append('-r ' + os.path.join(self.dat_path, 'scotland_plain.png'))    # pass file path
+        sys.argv.append('method==' + METHODS[0])                                      # pass method
+
+        # run CLI command
         ret = main()
 
         # assertion
         self.assertEqual(True, ret)
 
-    @unittest.skipUnless('imageio' in sys.modules, "requires imageio")
-    def test_match_method_imageio(self):
+    @idata((
+        [np.ones([5, 5, 3, 1]), np.ones([5, 5, 3, 1]), False],
+        [np.ones([5, 5, 3]), np.ones([5, 5, 3]), True],
+        [np.ones([5, 5, 3]), np.ones([9, 9, 3]), True],
+        [np.ones([5, 5, 3]), np.ones([2, 2, 3]), True],
+        [np.ones([5, 5, 1]), np.ones([5, 5, 1]), False],
+        [np.ones([5, 5, 2]), np.ones([5, 5, 2]), False],
+        [np.ones([5, 5, 3]), np.ones([5, 5, 1]), False],
+        [np.ones([5, 5, 1]), np.ones([5, 5, 3]), False],
+        [np.ones([5, 5]), np.ones([5, 5]), False],
+        [np.ones([5]), np.ones([5]), False],
+        [np.ones([1]), np.ones([1]), False],
+        [np.ones([0]), np.ones([0]), False],
+        [None, None, False]
+    ))
+    @unpack
+    def test_img_dims(self, src_img, img_ref, exp_val):
 
-        # get tests data from imageio lib
-        fn_img1 = 'chelsea'
-        fn_img2 = 'astronaut'
-        img1 = imageio.imread('imageio:'+fn_img1+'.png')
-        img2 = imageio.imread('imageio:'+fn_img2+'.png')
+        try:
+            obj = ColorMatcher(src=src_img, ref=img_ref)
+            res = obj.main()
+            ret = res.mean().astype('bool')
+            msg = ''
+        except BaseException as e:
+            ret = False
+            msg = e
 
-        # create color match object (without using keyword arguments)
-        match = ColorMatcher(img1, img2).main()
-
-        # assess quality
-        refer_val = self.avg_hist_dist(img1, img2)
-        match_val = self.avg_hist_dist(img1, match)
-        print('\nAvg. histogram distance of original %s vs. %s' % (round(refer_val, 3), round(match_val, 3)))
-
-        # save result
-        loc_path = './data'
-        output_filename = os.path.join(loc_path, fn_img1.split('.')[0] + '_from_' + fn_img2)
-        save_img_file(img1, file_path=os.path.join(loc_path, fn_img1))
-        save_img_file(img2, file_path=os.path.join(loc_path, fn_img2))
-        save_img_file(match, file_path=output_filename)
-
-        # assertion
-        self.assertEqual(True, refer_val > match_val)
-
+        self.assertEqual(exp_val, ret, msg=msg)
 
 if __name__ == '__main__':
     unittest.main()

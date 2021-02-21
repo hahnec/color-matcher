@@ -23,6 +23,7 @@ __license__ = """
 from color_matcher.top_level import ColorMatcher
 from color_matcher.io_handler import *
 from .img_downloader import download_stack
+from tests.unit_test import MatchMethodTester
 
 import unittest
 import os
@@ -64,7 +65,7 @@ class MatchKodakTester(unittest.TestCase):
                 res = ColorMatcher(img1, img2, method='hm-mkl-hm').main()
 
                 # assess quality
-                val = self.avg_hist_dist(res, img2)
+                val = MatchMethodTester.avg_hist_dist(res, img2)
                 print('Avg. histogram distance %s' % val)
 
                 # save result

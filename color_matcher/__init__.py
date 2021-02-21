@@ -21,4 +21,5 @@ __version__ = '0.4.0'
 from .top_level import ColorMatcher
 from .hist_matcher import HistogramMatcher
 from .mvgd_matcher import TransferMVGD
+from .reinhard_matcher import ReinhardMatcher
 from .baseclass import MatcherBaseclass

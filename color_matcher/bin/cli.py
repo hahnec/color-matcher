@@ -53,9 +53,9 @@ def parse_options(argv):
     cfg = dict()
 
     # default settings (use test data images for MKL conversion)
-    cfg['src_path'] = ''
-    cfg['ref_path'] = ''
-    cfg['method'] = None
+    cfg['src_path'] = '.'
+    cfg['ref_path'] = '.'
+    cfg['method'] = METHODS[0]
     cfg['win'] = None
 
     if opts:
@@ -80,12 +80,12 @@ def main():
     # program info
     print("\ncolor-matcher v%s \n" % __version__)
 
-    # parse options
+    # retrieve parse options
     cfg = parse_options(sys.argv[1:])
 
     # select files from window (if option set)
     if cfg['win']:
-        cfg['src_path'] = select_file('.', 'Select source image')
+        cfg['src_path'] = select_file(cfg['src_path'], 'Select source image')
         cfg['ref_path'] = select_file(cfg['src_path'], 'Select reference image')
 
     # cancel if file paths not provided
@@ -95,28 +95,37 @@ def main():
         sys.exit()
 
     # select image(s) considering provided folder or file
-    if os.path.isdir(cfg['src_path']):
+    if os.path.isdir(cfg['src_path']) and os.path.isfile(cfg['ref_path']):
+        # case where source is directory and reference is file
         filenames = [os.path.join(cfg['src_path'], f) for f in os.listdir(cfg['src_path'])
                      if f.lower().endswith(FILE_EXTS)]
-    elif not os.path.isfile(cfg['src_path']) or not os.path.isfile(cfg['ref_path']):
+        output_path = os.path.join(cfg['src_path'], 'batch_proc_'+str(cfg['method']))
+        os.makedirs(output_path, exist_ok=True)
+        print('Output files are placed in created directory %s' % os.path.join('.', os.path.basename(output_path)))
+    elif os.path.isfile(cfg['src_path']) and os.path.isfile(cfg['ref_path']):
+        # case where source is file and reference is file
+        filenames = [cfg['src_path']]
+        output_path = os.path.dirname(cfg['src_path'])
+        filename = os.path.splitext(os.path.basename(cfg['src_path']))[0]+'_'+cfg['method']
+        file_ext = os.path.splitext(cfg['src_path'])[-1]
+        print('Output file is named %s' % os.path.join('.', filename + file_ext))
+    else:
+        # unsupported cases
         print('File(s) not found \n')
         sys.exit()
-    else:
-        filenames = [cfg['src_path']]
 
     # method handling
-    cfg['method'] = cfg['method'] if cfg['method'] in METHODS else 'mvgd'
+    cfg['method'] = cfg['method'] if cfg['method'] in METHODS else METHODS[0]
 
-    # file handling
+    # read reference image
     ref = load_img_file(cfg['ref_path'])
-    output_path = os.path.dirname(cfg['src_path'])
 
-    # process the images
+    # process images
     for f in filenames:
         src = load_img_file(f)
         res = ColorMatcher(src=src, ref=ref, method=cfg['method']).main()
-        filename = os.path.splitext(os.path.basename(cfg['src_path']))[0]+'_'+cfg['method']
-        file_ext = os.path.splitext(cfg['src_path'])[-1]
+        filename = os.path.splitext(os.path.basename(f))[0]+'_'+cfg['method']
+        file_ext = os.path.splitext(f)[-1]
         save_img_file(res, file_path=os.path.join(output_path, filename), file_type=file_ext[1:])
 
     return True

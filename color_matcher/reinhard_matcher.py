@@ -19,13 +19,13 @@ class ReinhardMatcher(MatcherBaseclass):
 
         :param src: Source image that requires transfer
         :param ref: Palette image which serves as reference
-        :param ref: Resulting image after the mapping
+        :param res: Resulting image after the mapping
 
         :type src: :class:`~numpy:numpy.ndarray`
         :type ref: :class:`~numpy:numpy.ndarray`
         :type res: :class:`~numpy:numpy.ndarray`
 
-        :return: **result**
+        :return: **res**
         :rtype: np.ndarray
 
         """
@@ -76,9 +76,9 @@ class ReinhardMatcher(MatcherBaseclass):
         lms_res = 10**lms_res
 
         # convert back to RGB
-        res_img = np.dot(LMS_MAT_INV, lms_res).transpose()
+        res = np.dot(LMS_MAT_INV, lms_res).transpose()
 
         # reshape to 2-D image
-        res_img = res_img.reshape((m, n, p))
+        res = res.reshape((m, n, p))
 
-        return res_img
+        return res

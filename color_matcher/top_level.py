@@ -37,7 +37,7 @@ class ColorMatcher(HistogramMatcher, TransferMVGD, ReinhardMatcher):
 
     def main(self, method: str = None) -> np.ndarray:
         """
-        The main function and high-level entry point performing the mapping. Valid methods are
+        The main function is the high-level entry point performing the mapping. Valid methods are:
 
         :param method: ('default', 'hm', 'mvgd', 'hm-mvgd-hm', 'mkl', 'hm-mkl-hm', 'reinhard') determining color mapping
         :type method: :class:`str`

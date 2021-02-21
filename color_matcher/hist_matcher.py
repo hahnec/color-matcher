@@ -38,13 +38,13 @@ class HistogramMatcher(MatcherBaseclass):
 
         :param src: Source image that requires transfer
         :param ref: Palette image which serves as reference
-        :param ref: Resulting image after the mapping
+        :param res: Resulting image after the mapping
 
         :type src: :class:`~numpy:numpy.ndarray`
         :type ref: :class:`~numpy:numpy.ndarray`
-        :type result: :class:`~numpy:numpy.ndarray`
+        :type res: :class:`~numpy:numpy.ndarray`
 
-        :return: **result**
+        :return: **res**
         :rtype: np.ndarray
 
         """
@@ -54,7 +54,7 @@ class HistogramMatcher(MatcherBaseclass):
         self._ref = ref if ref is not None else self._ref
 
         # parameter init
-        result = np.zeros_like(self._src)
+        res = np.zeros_like(self._src)
 
         for ch in range(self._src.shape[2]):
 
@@ -72,6 +72,6 @@ class HistogramMatcher(MatcherBaseclass):
 
             # do the histogram mapping
             interp_vals = np.interp(src_cdf, ref_cdf, ref_vals)
-            result[..., ch] = interp_vals[src_idxs].reshape(src[..., ch].shape)
+            res[..., ch] = interp_vals[src_idxs].reshape(src[..., ch].shape)
 
-        return result
+        return res
