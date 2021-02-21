@@ -31,8 +31,8 @@ class TransferMVGD(MatcherBaseclass):
     def __init__(self, *args, **kwargs):
         super(TransferMVGD, self).__init__(*args, **kwargs)
 
-        self._fun_dict = {'mvgd': self.analytical_solver, 'mkl': self.mkl_solver}
         # extract method from kwargs (if available)
+        self._fun_dict = {'mvgd': self.analytical_solver, 'mkl': self.mkl_solver}
         try:
             self._fun_name = [kw for kw in list(self._fun_dict.keys()) if kwargs['method'].__contains__(kw)][0]
         except (BaseException, IndexError):
