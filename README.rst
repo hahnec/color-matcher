@@ -11,7 +11,7 @@ the mappings are based on the approach from Reinhard *et al.*, an analytical sol
 Distribution (MVGD) transfer, the Monge-Kantorovich solution as proposed by Pitie *et al.* and classical histogram
 matching.
 
-|release| |license| |build| |coverage| |pypi_total| |pypi|
+|release| |license| |build_github| |coverage| |pypi_total| |pypi|
 
 |binder|
 
@@ -153,8 +153,12 @@ Author
     :target: https://www.gnu.org/licenses/gpl-3.0.en.html
     :alt: License
 
-.. |build| image:: https://img.shields.io/travis/com/hahnec/color-matcher?style=square
+.. |build_travis| image:: https://img.shields.io/travis/com/hahnec/color-matcher?style=square
     :target: https://travis-ci.com/github/hahnec/color-matcher
+
+.. |build_github| image:: https://img.shields.io/github/workflow/status/hahnec/color-matcher/ColorMatcher's%20CI%20Pipeline/master?style=square
+    :target: https://github.com/hahnec/color-matcher/actions
+    :alt: GitHub Workflow Status
 
 .. |coverage| image:: https://img.shields.io/coveralls/github/hahnec/color-matcher?style=square
     :target: https://coveralls.io/github/hahnec/color-matcher
