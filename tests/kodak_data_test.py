@@ -39,7 +39,6 @@ class MatchKodakTester(unittest.TestCase):
         self.dir_path = os.path.dirname(os.path.realpath(__file__))
         self.dat_path = os.path.join(self.dir_path, 'data')
 
-
     def test_kodak_images(self):
         # prepare data
         url = 'https://www.math.purdue.edu/~lucier/PHOTO_CD/BMP_IMAGES/'
@@ -49,7 +48,7 @@ class MatchKodakTester(unittest.TestCase):
         try:
             os.makedirs(loc_path, 0o755)
             os.makedirs(os.path.join(loc_path, 'results'), 0o755)
-        except:
+        except OSError:
             pass
 
         if not os.path.exists(loc_path):
