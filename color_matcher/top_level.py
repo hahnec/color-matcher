@@ -25,7 +25,7 @@ from color_matcher.mvgd_matcher import TransferMVGD
 from color_matcher.reinhard_matcher import ReinhardMatcher
 import numpy as np
 
-METHODS = ('default', 'hm', 'mvgd', 'hm-mvgd-hm', 'mkl', 'hm-mkl-hm', 'reinhard')
+METHODS = ('default', 'hm', 'reinhard', 'mvgd', 'mkl', 'hm-mvgd-hm', 'hm-mkl-hm')
 
 
 class ColorMatcher(HistogramMatcher, TransferMVGD, ReinhardMatcher):
@@ -39,7 +39,7 @@ class ColorMatcher(HistogramMatcher, TransferMVGD, ReinhardMatcher):
         """
         The main function is the high-level entry point performing the mapping. Valid methods are:
 
-        :param method: ('default', 'hm', 'mvgd', 'hm-mvgd-hm', 'mkl', 'hm-mkl-hm', 'reinhard') determining color mapping
+        :param method: ('default', 'hm', 'reinhard', 'mvgd', 'mkl', 'hm-mvgd-hm', 'hm-mkl-hm') determining color mapping
         :type method: :class:`str`
 
         :return: Resulting image after color mapping
@@ -54,15 +54,11 @@ class ColorMatcher(HistogramMatcher, TransferMVGD, ReinhardMatcher):
         elif self._method == METHODS[1]:
             funs = [self.hist_match]
         elif self._method == METHODS[2]:
-            funs = [self.transfer]
-        elif self._method == METHODS[3]:
-            funs = [self.hist_match, self.transfer, self.hist_match]
-        elif self._method == METHODS[4]:
-            funs = [self.transfer]
-        elif self._method == METHODS[5]:
-            funs = [self.hist_match, self.transfer, self.hist_match]
-        elif self._method == METHODS[6]:
             funs = [self.reinhard]
+        elif self._method in METHODS[3:5]:
+            funs = [self.transfer]
+        elif self._method in METHODS[5:]:
+            funs = [self.hist_match, self.transfer, self.hist_match]
         else:
             raise BaseException('Method type \'%s\' not recognized' % method)
 

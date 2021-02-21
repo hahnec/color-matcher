@@ -32,7 +32,12 @@ class TransferMVGD(MatcherBaseclass):
         super(TransferMVGD, self).__init__(*args, **kwargs)
 
         self._fun_dict = {'mvgd': self.analytical_solver, 'mkl': self.mkl_solver}
-        self._fun_name = kwargs['method'] if 'method' in kwargs else 'mkl'    # use MKL as default
+        # extract method from kwargs (if available)
+        try:
+            self._fun_name = [kw for kw in list(self._fun_dict.keys()) if kwargs['method'].__contains__(kw)][0]
+        except (BaseException, IndexError):
+            # use MKL as default
+            self._fun_name = 'mkl'
         self._fun_call = self._fun_dict[self._fun_name] if self._fun_name in self._fun_dict else self.mkl_solver
 
         # initialize variables
