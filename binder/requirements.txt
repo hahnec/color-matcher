@@ -1,3 +1,4 @@
 jupyterlab>=2.2.0
 color_matcher>=0.4.0
 matplotlib==3.3.3
+color-space-converter
