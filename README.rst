@@ -82,6 +82,36 @@ More information on optional arguments, can be found using the help parameter
 
 ``color-matcher -h``
 
+API Usage
+=========
+
+.. code-block:: python
+
+    from color_matcher import ColorMatcher
+    from color_matcher.io_handler import load_img_file
+    from color_matcher.normalizer import Normalizer
+
+    # read files
+    img_ref = load_img_file('./tests/data/scotland_plain.png')
+    img_src = load_img_file('./tests/data/scotland_house.png')
+
+    # instantiate object and run process
+    obj = ColorMatcher(src=img_src, ref=img_ref, method='mkl')
+    img_res = obj.main()
+
+    # normalize image intensity to 8-bit unsigned integer
+    img_res = Normalizer(img_res).uint8_norm()
+
+    import matplotlib.pyplot as plt
+    f, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(20, 10))
+    ax1.imshow(img_ref)
+    ax1.set_title("Reference")
+    ax2.imshow(img_src)
+    ax2.set_title("Source")
+    ax3.imshow(img_res)
+    ax3.set_title("Result")
+    plt.show()
+
 Author
 ------
 
