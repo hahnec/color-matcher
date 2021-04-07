@@ -78,7 +78,7 @@ Alternatively, you can specify the method or select your images manually with
 
 ``color-matcher --win --method='hm-mkl-hm'``
 
-Note that batch processing is made possible by passing a source directory via
+Note that batch processing is possible by passing a source directory, e.g., via
 
 ``color-matcher -s './tests/data/' -r './tests/data/scotland_plain.png'``
 
