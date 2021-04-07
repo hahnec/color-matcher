@@ -63,8 +63,8 @@ Installation
     5. install with ``python3 setup.py install``
     6. if installation ran smoothly, enter ``color-matcher -h`` to the command line
 
-Command Line Usage
-==================
+CLI Usage
+---------
 
 From the root directory of your downloaded repo, you can run the tool on the provided test data by
 
@@ -87,7 +87,7 @@ More information on optional arguments, can be found using the help parameter
 ``color-matcher -h``
 
 API Usage
-=========
+---------
 
 .. code-block:: python
 
@@ -109,10 +109,6 @@ API Usage
         img_res = Normalizer(img_res).uint8_norm()
         save_img_file(img_res, os.path.join(os.path.dirname(fname), str(i)+'.png'))
 
-Author
-------
-
-`Christopher Hahne <http://www.christopherhahne.de/>`__
 
 .. Hyperlink aliases
 
@@ -202,7 +198,7 @@ Author
    :target: https://mybinder.org/v2/gh/hahnec/color-matcher/master?urlpath=lab
 
 Citation
-========
+--------
 
 .. code-block:: BibTeX
 
@@ -214,3 +210,8 @@ Citation
           archivePrefix={arXiv},
           primaryClass={eess.IV}
     }
+
+Author
+------
+
+`Christopher Hahne <http://www.christopherhahne.de/>`__
