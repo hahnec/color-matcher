@@ -8,8 +8,8 @@ Description
 *color-matcher* enables color transfer across images which comes in handy for automatic color-grading
 of photographs, paintings and film sequences as well as light-field and stopmotion corrections. The methods behind
 the mappings are based on the approach from Reinhard *et al.*, an analytical solution to a Multi-Variate Gaussian
-Distribution (MVGD) transfer, the Monge-Kantorovich solution as proposed by Pitie *et al.* and classical histogram
-matching.
+Distribution (MVGD) transfer, the Monge-Kantorovich solution as proposed by Pitie *et al.* in conjunction with
+classical histogram matching.
 
 |release| |license| |build_github| |coverage| |pypi_total| |pypi|
 
