@@ -41,21 +41,14 @@ class TransferMVGD(MatcherBaseclass):
         self._fun_call = self._fun_dict[self._fun_name] if self._fun_name in self._fun_dict else self.mkl_solver
 
         # initialize variables
-        self.r = np.reshape(self._src, [-1, self._src.shape[2]])
-        self.z = np.reshape(self._ref, [-1, self._ref.shape[2]])
-        self.cov_r, self.cov_z = np.cov(self.r.T), np.cov(self.z.T)
-        self.mu_r, self.mu_z = np.mean(self.r, axis=0), np.mean(self.z, axis=0)
+        self.r, self.z, self.cov_r, self.cov_z, self.mu_r, self.mu_z = [None]*6
+        self._init_vars()
 
     def _init_vars(self):
 
-        self.r = np.reshape(self._src, [-1, self._src.shape[2]])
-        self.z = np.reshape(self._ref, [-1, self._ref.shape[2]])
-
-        self.cov_r = np.cov(self.r.T)
-        self.cov_z = np.cov(self.z.T)
-
-        self.mu_r = np.mean(self.r, axis=0)
-        self.mu_z = np.mean(self.z, axis=0)
+        self.r, self.z = self._src.reshape([-1, self._src.shape[2]]), self._ref.reshape([-1, self._ref.shape[2]])
+        self.cov_r, self.cov_z = np.cov(self.r.T), np.cov(self.z.T)
+        self.mu_r, self.mu_z = self.r.mean(axis=0), self.z.mean(axis=0)
 
     def transfer(self, src: np.ndarray = None, ref: np.ndarray = None, fun: FunctionType = None) -> np.ndarray:
         """
