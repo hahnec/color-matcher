@@ -46,9 +46,14 @@ class TransferMVGD(MatcherBaseclass):
 
     def _init_vars(self):
 
-        self.r, self.z = self._src.reshape([-1, self._src.shape[2]]), self._ref.reshape([-1, self._ref.shape[2]])
-        self.cov_r, self.cov_z = np.cov(self.r.T), np.cov(self.z.T)
-        self.mu_r, self.mu_z = self.r.mean(axis=0), self.z.mean(axis=0)
+        # reshape source and reference images
+        self.r, self.z = self._src.reshape([-1, self._src.shape[2]]).T, self._ref.reshape([-1, self._ref.shape[2]]).T
+
+        # compute covariance matrices
+        self.cov_r, self.cov_z = np.cov(self.r), np.cov(self.z)
+
+        # compute color channel means
+        self.mu_r, self.mu_z = self.r.mean(axis=1)[..., np.newaxis], self.z.mean(axis=1)[..., np.newaxis]
 
     def transfer(self, src: np.ndarray = None, ref: np.ndarray = None, fun: FunctionType = None) -> np.ndarray:
         """
@@ -86,8 +91,10 @@ class TransferMVGD(MatcherBaseclass):
         transfer_mat = self._fun_call()
 
         # transfer the intensity distributions
-        res = np.dot((self.r - self.mu_r), transfer_mat) + self.mu_z
-        res = np.reshape(res, self._src.shape)
+        res = np.dot(transfer_mat, self.r - self.mu_r) + self.mu_z
+
+        # reshape pixel array
+        res = res.T.reshape(self._src.shape)
 
         return res
 
@@ -126,7 +133,10 @@ class TransferMVGD(MatcherBaseclass):
         cov_r_inv = np.linalg.inv(self.cov_r)
         cov_z_inv = np.linalg.inv(self.cov_z)
 
-        return np.dot(np.dot(np.linalg.pinv(np.dot(self.z-self.mu_z, cov_z_inv)), self.r-self.mu_r), cov_r_inv).T
+        # compute transfer matrix using analytical method
+        transfer_mat = np.linalg.pinv((self.z-self.mu_z).T @ cov_z_inv) @ (self.r-self.mu_r).T @ cov_r_inv
+
+        return transfer_mat
 
     @staticmethod
     def w2_dist(mu_a: np.ndarray, mu_b: np.ndarray, cov_a: np.ndarray, cov_b: np.ndarray) -> float:
@@ -147,4 +157,6 @@ class TransferMVGD(MatcherBaseclass):
         :rtype: float
         """
 
-        return sum((mu_a-mu_b)**2)+np.trace(cov_a+cov_b-2*(np.dot(cov_b**.5, np.dot(cov_a, cov_b**.5))**.5))
+        w2_dist = sum((mu_a-mu_b)**2) + np.trace(cov_a+cov_b-2*(np.dot(cov_b**.5, np.dot(cov_a, cov_b**.5))**.5))
+
+        return float(w2_dist)
