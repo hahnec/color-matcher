@@ -53,20 +53,18 @@ Results
 Experimental results
 ====================
 
-|metric|
+|metric_chart|
 
 The above diagram illustrates light-field color consistency from Wasserstein metric :math:`$W_1$` and histogram distance
 :math:`$D_2$` where low values indicate higher similarity between source :math:`$\mathbf{r}$` and target :math:`$\mathbf{z}$`.
 These distance metrics are computed as follows
 
-.. math::
+|metric_eqs|
 
-    W_1 = \int_{0}^{\infty} \left| F\left(\mathbf{r}^{(g)}\right) - F\left(\mathbf{z}^{(g)}\right) \right|_1 \, \mathrm{d}k
-
-    D_2 = \left\| f(\mathbf{r}) - f(\mathbf{z}) \right\|_2
+|metric_latex|
 
 where :math:`$f(\cdot)$` and :math:`$F(\cdot)$` represent the Probability Density Function (PDF) and Cumulative Density Function (CDF), respectively.
-More detailed information can be found in `our IEEE paper <https://arxiv.org/pdf/2010.11687.pdf/>`__.
+More detailed information can be found in `our IEEE paper <https://arxiv.org/pdf/2010.11687.pdf>`__.
 
 |vspace|
 
@@ -150,10 +148,6 @@ API Usage
 
 .. _source: https://github.com/hahnec/color-matcher/archive/master.zip
 
-.. |metric| raw:: html
-
-    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/develop/docs/img/hist+wasser_dist.svg" max-width="100%" align="center">
-
 .. |src_photo| raw:: html
 
     <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/scotland_house.png" width="200px" max-width:"100%">
@@ -205,6 +199,21 @@ API Usage
 .. |vspace| raw:: latex
 
    \vspace{1mm}
+
+.. |metric_chart| raw:: html
+
+    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/develop/docs/img/hist+wasser_dist.svg" max-width="100%" align="center">
+
+.. |metric_latex| raw:: latex
+
+    W_1 = \int_{0}^{\infty} \left| F\left(\mathbf{r}^{(g)}\right) - F\left(\mathbf{z}^{(g)}\right) \right|_1 \, \mathrm{d}k
+
+    D_2 = \left\| f(\mathbf{r}) - f(\mathbf{z}) \right\|_2
+
+.. |metric_eqs| raw:: html
+
+    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/develop/docs/img/distance_metrics.svg" max-width="100%" align="center">
+
 
 .. Image substitutions
 
