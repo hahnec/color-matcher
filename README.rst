@@ -227,7 +227,7 @@ These distance metrics are computed as follows
 
 |metric_eqs|
 
-where :math:`$f(k,\cdot)$` and :math:`$F(k,\cdot)$` represent the Probability Density Function (PDF) and Cumulative Density Function (CDF) at intensity :math:`$k$`, respectively.
+where :math:`$f(k,\cdot)$` and :math:`$F(k,\cdot)$` represent the Probability Density Function (PDF) and Cumulative Density Function (CDF) at intensity level :math:`$k$`, respectively.
 More detailed information can be found in `our IEEE paper <https://arxiv.org/pdf/2010.11687.pdf>`__.
 
 |vspace|
