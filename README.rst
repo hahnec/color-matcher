@@ -48,6 +48,12 @@ Results
 
 |
 
+|vspace|
+
+|metric|
+
+|vspace|
+
 Installation
 ------------
 
@@ -113,6 +119,10 @@ API Usage
 .. Hyperlink aliases
 
 .. _source: https://github.com/hahnec/color-matcher/archive/master.zip
+
+.. |metric| raw:: html
+
+    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/develop/hist+wasser_dist.svg" max-width:"100%">
 
 .. |src_photo| raw:: html
 

@@ -41,7 +41,7 @@ class TransferMVGD(MatcherBaseclass):
         self._fun_call = self._fun_dict[self._fun_name] if self._fun_name in self._fun_dict else self.mkl_solver
 
         # initialize variables
-        self.r, self.z, self.cov_r, self.cov_z, self.mu_r, self.mu_z = [None]*6
+        self.r, self.z, self.cov_r, self.cov_z, self.mu_r, self.mu_z, self.transfer_mat = [None]*7
         self._init_vars()
 
     def _init_vars(self):
@@ -88,10 +88,10 @@ class TransferMVGD(MatcherBaseclass):
         self._fun_call = fun if fun is FunctionType else self._fun_call
 
         # compute transfer matrix
-        transfer_mat = self._fun_call()
+        self.transfer_mat = self._fun_call()
 
         # transfer the intensity distributions
-        res = np.dot(transfer_mat, self.r - self.mu_r) + self.mu_z
+        res = np.dot(self.transfer_mat, self.r - self.mu_r) + self.mu_z
 
         # reshape pixel array
         res = res.T.reshape(self._src.shape)
@@ -130,13 +130,13 @@ class TransferMVGD(MatcherBaseclass):
 
         """
 
-        cov_r_inv = np.linalg.inv(self.cov_r)
-        cov_z_inv = np.linalg.inv(self.cov_z)
+        cov_r_inv = np.linalg.pinv(self.cov_r)
+        cov_z_inv = np.linalg.pinv(self.cov_z)
 
         # compute transfer matrix using analytical method
-        transfer_mat = np.linalg.pinv((self.z-self.mu_z).T @ cov_z_inv) @ (self.r-self.mu_r).T @ cov_r_inv
+        self.transfer_mat = np.linalg.pinv((self.z-self.mu_z).T @ cov_z_inv) @ (self.r-self.mu_r).T @ cov_r_inv
 
-        return transfer_mat
+        return self.transfer_mat
 
     @staticmethod
     def w2_dist(mu_a: np.ndarray, mu_b: np.ndarray, cov_a: np.ndarray, cov_b: np.ndarray) -> float:
