@@ -221,13 +221,13 @@ Experimental results
 
 |metric_chart|
 
-The above diagram illustrates light-field color consistency from Wasserstein metric :math:`$W_1$` and histogram distance
-:math:`$D_2$` where low values indicate higher similarity between source :math:`$\mathbf{r}$` and target :math:`$\mathbf{z}$`.
+The above diagram illustrates light-field color consistency from Wasserstein metric :math:`W_1` and histogram distance
+:math:`D_2` where low values indicate higher similarity between source :math:`\mathbf{r}` and target :math:`\mathbf{z}`.
 These distance metrics are computed as follows
 
 |metric_eqs|
 
-where :math:`$f(k,\cdot)$` and :math:`$F(k,\cdot)$` represent the Probability Density Function (PDF) and Cumulative Density Function (CDF) at intensity level :math:`$k$`, respectively.
+where :math:`f(k,\cdot)` and :math:`F(k,\cdot)` represent the Probability Density Function (PDF) and Cumulative Density Function (CDF) at intensity level :math:`k`, respectively.
 More detailed information can be found in `our IEEE paper <https://arxiv.org/pdf/2010.11687.pdf>`__.
 
 |vspace|
