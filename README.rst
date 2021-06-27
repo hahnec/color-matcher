@@ -61,8 +61,6 @@ These distance metrics are computed as follows
 
 |metric_eqs|
 
-|metric_latex|
-
 where :math:`$f(\cdot)$` and :math:`$F(\cdot)$` represent the Probability Density Function (PDF) and Cumulative Density Function (CDF), respectively.
 More detailed information can be found in `our IEEE paper <https://arxiv.org/pdf/2010.11687.pdf>`__.
 
