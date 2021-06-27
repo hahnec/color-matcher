@@ -48,38 +48,6 @@ Results
 
 |
 
-|vspace|
-
-Experimental results
-====================
-
-|metric_chart|
-
-The above diagram illustrates light-field color consistency from Wasserstein metric :math:`$W_1$` and histogram distance
-:math:`$D_2$` where low values indicate higher similarity between source :math:`$\mathbf{r}$` and target :math:`$\mathbf{z}$`.
-These distance metrics are computed as follows
-
-|metric_eqs|
-
-where :math:`$f(\cdot)$` and :math:`$F(\cdot)$` represent the Probability Density Function (PDF) and Cumulative Density Function (CDF), respectively.
-More detailed information can be found in `our IEEE paper <https://arxiv.org/pdf/2010.11687.pdf>`__.
-
-|vspace|
-
-Citation
---------
-
-.. code-block:: BibTeX
-
-    @article{hahne21:tip,
-        title={PlenoptiCam v1.0: A light-field imaging framework},
-        author={Christopher Hahne and Amar Aggoun},
-        journal={IEEE Transactions on Image Processing},
-        year={2021},
-        volume={31},
-        pages={1--15}
-    }
-
 Installation
 ------------
 
@@ -247,6 +215,36 @@ API Usage
 .. |paper| image:: http://img.shields.io/badge/paper-arxiv.2010.11687-red.svg?style=flat-square
     :target: https://arxiv.org/pdf/2010.11687.pdf
     :alt: arXiv link
+
+Experimental results
+--------------------
+
+|metric_chart|
+
+The above diagram illustrates light-field color consistency from Wasserstein metric :math:`$W_1$` and histogram distance
+:math:`$D_2$` where low values indicate higher similarity between source :math:`$\mathbf{r}$` and target :math:`$\mathbf{z}$`.
+These distance metrics are computed as follows
+
+|metric_eqs|
+
+where :math:`$f(k,\cdot)$` and :math:`$F(k,\cdot)$` represent the Probability Density Function (PDF) and Cumulative Density Function (CDF) at intensity $k$, respectively.
+More detailed information can be found in `our IEEE paper <https://arxiv.org/pdf/2010.11687.pdf>`__.
+
+|vspace|
+
+Citation
+--------
+
+.. code-block:: BibTeX
+
+    @article{hahne21:tip,
+        title={PlenoptiCam v1.0: A light-field imaging framework},
+        author={Christopher Hahne and Amar Aggoun},
+        journal={IEEE Transactions on Image Processing},
+        year={2021},
+        volume={31},
+        pages={1--15}
+    }
 
 Author
 ------
