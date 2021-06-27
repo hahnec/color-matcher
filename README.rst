@@ -59,7 +59,7 @@ The above diagram illustrates light-field color consistency from Wasserstein met
 :math:`$D_2$` where low values indicate higher similarity between source :math:`$\mathbf{r}$` and target :math:`$\mathbf{z}$`.
 These distance metrics are computed as follows
 
-.. math::
+.. code-block:: LaTeX
 
     W_1 = \int_{0}^{\infty} \left| F\left(\mathbf{r}^{(g)}\right) - F\left(\mathbf{z}^{(g)}\right) \right|_1 \, \mathrm{d}k
 
