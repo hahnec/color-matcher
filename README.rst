@@ -202,13 +202,13 @@ Citation
 
 .. code-block:: BibTeX
 
-    @misc{hahne2020plenopticam,
-          title={PlenoptiCam v1.0: A light-field imaging framework},
-          author={Christopher Hahne and Amar Aggoun},
-          year={2020},
-          eprint={2010.11687},
-          archivePrefix={arXiv},
-          primaryClass={eess.IV}
+    @article{hahne21:tip,
+        title={PlenoptiCam v1.0: A light-field imaging framework},
+        author={Christopher Hahne and Amar Aggoun},
+        journal={IEEE Transactions on Image Processing},
+        year={2021},
+        volume={31},
+        pages={1--15}
     }
 
 Author
