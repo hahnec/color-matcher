@@ -157,6 +157,7 @@ class TransferMVGD(MatcherBaseclass):
         :rtype: float
         """
 
-        w2_dist = sum((mu_a-mu_b)**2) + np.trace(cov_a+cov_b-2*(np.dot(cov_b**.5, np.dot(cov_a, cov_b**.5))**.5))
+        mean_dist = np.sum((mu_a-mu_b)**2)
+        vars_dist = np.trace(cov_a+cov_b - 2*(np.dot(np.abs(cov_b)**.5, np.dot(np.abs(cov_a), np.abs(cov_b)**.5))**.5))
 
-        return float(w2_dist)
+        return float(mean_dist + vars_dist)
