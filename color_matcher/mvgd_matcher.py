@@ -108,17 +108,20 @@ class TransferMVGD(MatcherBaseclass):
 
         """
 
-        [Da2, Ua] = np.linalg.eig(self.cov_r)
-        Ua = np.array([Ua[:, 2] * -1, Ua[:, 1], Ua[:, 0] * -1]).T
-        Da2[Da2 < 0] = 0
-        Da = np.diag(np.sqrt(Da2[::-1]))
-        C = np.dot(Da, np.dot(Ua.T, np.dot(self.cov_z, np.dot(Ua, Da))))
-        [Dc2, Uc] = np.linalg.eig(C)
-        Dc2[Dc2 < 0] = 0
-        Dc = np.diag(np.sqrt(Dc2))
-        Da_inv = np.diag(1. / (np.diag(Da + np.spacing(1))))
+        eig_val_r, eig_vec_r = np.linalg.eig(self.cov_r)
+        eig_val_r[eig_val_r < 0] = 0
+        val_r = np.diag(np.sqrt(eig_val_r[::-1]))
+        vec_r = np.array([eig_vec_r[:, 2] * -1, eig_vec_r[:, 1], eig_vec_r[:, 0] * -1]).T
+        inv_r = np.diag(1. / (np.diag(val_r + np.spacing(1))))
 
-        return np.dot(Ua, np.dot(Da_inv, np.dot(Uc, np.dot(Dc, np.dot(Uc.T, np.dot(Da_inv, Ua.T))))))
+        mat_c = np.dot(val_r, np.dot(vec_r.T, np.dot(self.cov_z, np.dot(vec_r, val_r))))
+        [eig_val_c, eig_vec_c] = np.linalg.eig(mat_c)
+        eig_val_c[eig_val_c < 0] = 0
+        val_c = np.diag(np.sqrt(eig_val_c))
+
+        self.transfer_mat = vec_r @ inv_r @ eig_vec_c @ val_c @ eig_vec_c.T @ inv_r @ vec_r.T
+
+        return self.transfer_mat
 
     def analytical_solver(self) -> np.ndarray:
         """
