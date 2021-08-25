@@ -34,36 +34,65 @@ class ColorMatcher(HistogramMatcher, ReinhardMatcher, TransferMVGD):
         super(ColorMatcher, self).__init__(*args, **kwargs)
 
         self._method = kwargs['method'] if 'method' in kwargs else 'default'
+        self._funs = []
 
-    def main(self, method: str = None) -> np.ndarray:
+    def main(self) -> np.ndarray:
         """
-        The main function is the high-level entry point performing the mapping. Valid methods are:
-
-        :param method: ('default', 'hm', 'reinhard', 'mvgd', 'mkl', 'hm-mvgd-hm', 'hm-mkl-hm') determining color mapping
-        :type method: :class:`str`
+        The main function is the high-level entry point performing the mapping based on instantiation arguments.
 
         :return: Resulting image after color mapping
         :rtype: np.ndarray
         """
 
+        self.transfer()
+
+        return self._src
+
+    def transfer(self, src: np.ndarray = None, ref: np.ndarray = None, method: str = None) -> np.ndarray:
+        """
+
+        Transfer function to map colors based on provided transfer method.
+
+        :param src: Source image that requires transfer
+        :param ref: Palette image which serves as reference
+        :param method: ('default', 'hm', 'reinhard', 'mvgd', 'mkl', 'hm-mvgd-hm', 'hm-mkl-hm') determining color mapping
+
+        :type src: :class:`~numpy:numpy.ndarray`
+        :type ref: :class:`~numpy:numpy.ndarray`
+        :type method: :class:`str`
+
+        :return: Resulting image after color mapping
+        :rtype: np.ndarray
+
+        """
+
+        # assign input arguments to variables (if provided)
         self._method = self._method.lower() if method is None else method.lower()
+        self._src = src if src is not None else self._src
+        self._ref = ref if ref is not None else self._ref
 
         # color transfer methods (to be iterated through)
         if self._method == METHODS[0]:
-            funs = [self.transfer]
+            self._funs = [self.multivar_transfer]
         elif self._method == METHODS[1]:
-            funs = [self.hist_match]
+            self._funs = [self.hist_match]
         elif self._method == METHODS[2]:
-            funs = [self.reinhard]
+            self._funs = [self.reinhard]
         elif self._method in METHODS[3:5]:
-            funs = [self.transfer]
+            self._funs = [self.multivar_transfer]
         elif self._method in METHODS[5:]:
-            funs = [self.hist_match, self.transfer, self.hist_match]
+            self._funs = [self.hist_match, self.multivar_transfer, self.hist_match]
         else:
             raise BaseException('Method type \'%s\' not recognized' % method)
 
+        # check if three color channels are provided
+        self.validate_img_dims()
+
+        # check provided color channels
+        self.validate_color_chs()
+
         # proceed with the color match
-        for fun in funs:
+        for fun in self._funs:
             self._src = fun(self._src, self._ref)
 
         return self._src

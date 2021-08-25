@@ -17,6 +17,7 @@ Copyright (c) 2020 Christopher Hahne <inbox@christopherhahne.de>
 """
 
 import numpy as np
+import warnings
 
 
 class MatcherBaseclass(object):
@@ -25,6 +26,7 @@ class MatcherBaseclass(object):
 
         self._src = None
         self._ref = None
+        self._funs = []
 
         if len(args) == 2:
             self._src = args[0]
@@ -33,8 +35,6 @@ class MatcherBaseclass(object):
         if bool(kwargs):
             self._src = kwargs['src'] if 'src' in kwargs else self._src
             self._ref = kwargs['ref'] if 'ref' in kwargs else self._ref
-
-        self.validate_img_dims()
 
     def validate_img_dims(self):
         """
@@ -45,17 +45,61 @@ class MatcherBaseclass(object):
         self._src = self._src[..., np.newaxis] if len(self._src.shape) == 2 else self._src
         self._ref = self._ref[..., np.newaxis] if len(self._ref.shape) == 2 else self._ref
 
-        if len(self._src.shape) != 3 or len(self._ref.shape) != 3:
-            raise BaseException('Wrong image dimensions')
+        if len(self._src.shape) not in (2, 3) or len(self._ref.shape) not in (2, 3):
+            raise BaseException('Each image must have 2 or 3 dimensions')
 
         return True
 
     def validate_color_chs(self):
         """
-        This function checks whether provided images consist of 3 color channels. An exception is thrown otherwise.
+        This function checks whether provided images consist of a valid number of color channels.
         """
 
-        if self._src.shape[2] != 3 or self._ref.shape[2] != 3:
-            raise BaseException('Each image must have 3 color channels')
+        if len(self._src.shape) == 3 or len(self._ref.shape) == 3:
+            if self._src.shape[2] > 4 or self._ref.shape[2] > 4:
+                raise BaseException('Each image cannot have more than 4 color channels')
+            elif self._src.shape[2] == 3 and self._ref.shape[2] == 4:
+                self._ref = self._ref[..., :3]
+            elif self._src.shape[2] == 4 and self._ref.shape[2] == 3:
+                self._src = self._src[..., :3]
+            elif self._src.shape[2] == 1 and self._ref.shape[2] == 3:
+                self._ref = self.rgb2gray(self._ref)
+            elif self._src.shape[2] == 3 and self._ref.shape[2] == 1:
+                self._src = self.rgb2gray(self._src)
+
+            if self._src.shape[2] == 1 and self._ref.shape[2] == 1:
+                # restrict monochromatic transfer to histogram matching
+                self._funs = [self.hist_match]
+                warnings.warn('Transfer restricted to histogram matching due to monochromatic input')
 
         return True
+
+    @staticmethod
+    def rgb2gray(rgb: np.ndarray = None, standard: str = 'HDTV') -> np.ndarray:
+        """ Convert RGB color space to monochromatic color space
+
+        :param rgb: input array in red, green and blue (RGB) space
+        :type rgb: :class:`~numpy:numpy.ndarray`
+        :param standard: option that determines whether head- and footroom are excluded ('HDTV') or considered otherwise
+        :type standard: :class:`string`
+        :return: array in monochromatic space
+        :rtype: ~numpy:np.ndarray
+
+        """
+
+        # store shape
+        shape = rgb.shape
+
+        # reshape image to channel vectors
+        rgb = rgb.reshape(-1, 3).T
+
+        # choose standard
+        mat = np.array([0.2126, 0.7152, 0.0722]) if standard == 'HDTV' else np.array([0.299, 0.587, 0.114])
+
+        # convert to gray
+        arr = np.dot(mat, rgb)
+
+        # reshape to 2-D image
+        arr = arr.reshape(shape[:2] + (1,))
+
+        return arr

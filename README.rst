@@ -102,10 +102,10 @@ API Usage
     filenames = [os.path.join(src_path, f) for f in os.listdir(src_path)
                          if f.lower().endswith(FILE_EXTS)]
 
+    cm = ColorMatcher()
     for i, fname in enumerate(filenames):
         img_src = load_img_file(fname)
-        obj = ColorMatcher(src=img_src, ref=img_ref, method='mkl')
-        img_res = obj.main()
+        img_res = cm.transfer(src=img_src, ref=img_ref, method='mkl')
         img_res = Normalizer(img_res).uint8_norm()
         save_img_file(img_res, os.path.join(os.path.dirname(fname), str(i)+'.png'))
 

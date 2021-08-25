@@ -36,15 +36,14 @@ class TransferMVGD(MatcherBaseclass):
         try:
             self._fun_name = [kw for kw in list(self._fun_dict.keys()) if kwargs['method'].__contains__(kw)][0]
         except (BaseException, IndexError):
-            # use MKL as default
+            # default function
             self._fun_name = 'mkl'
         self._fun_call = self._fun_dict[self._fun_name] if self._fun_name in self._fun_dict else self.mkl_solver
 
         # initialize variables
         self.r, self.z, self.cov_r, self.cov_z, self.mu_r, self.mu_z, self.transfer_mat = [None]*7
-        self._init_vars()
 
-    def _init_vars(self):
+    def init_vars(self):
 
         # reshape source and reference images
         self.r, self.z = self._src.reshape([-1, self._src.shape[2]]).T, self._ref.reshape([-1, self._ref.shape[2]]).T
@@ -55,14 +54,17 @@ class TransferMVGD(MatcherBaseclass):
         # compute color channel means
         self.mu_r, self.mu_z = self.r.mean(axis=1)[..., np.newaxis], self.z.mean(axis=1)[..., np.newaxis]
 
-    def transfer(self, src: np.ndarray = None, ref: np.ndarray = None, fun: FunctionType = None) -> np.ndarray:
+        # validate dimensionality
+        self.check_dims()
+
+    def multivar_transfer(self, src: np.ndarray = None, ref: np.ndarray = None, fun: FunctionType = None) -> np.ndarray:
         """
 
         Transfer function to map colors based on for Multi-Variate Gaussian Distributions (MVGDs).
 
         :param src: Source image that requires transfer
         :param ref: Palette image which serves as reference
-        :param fun: optional argument to pass a transfer function to solve for covariance matrices
+        :param fun: Optional argument to pass a transfer function to solve for covariance matrices
         :param res: Resulting image after the mapping
 
         :type src: :class:`~numpy:numpy.ndarray`
@@ -82,7 +84,7 @@ class TransferMVGD(MatcherBaseclass):
         self.validate_color_chs()
 
         # re-initialize variables to account for change in src and ref when passed to self.transfer()
-        self._init_vars()
+        self.init_vars()
 
         # set solver function for transfer matrix
         self._fun_call = fun if fun is FunctionType else self._fun_call
@@ -108,14 +110,17 @@ class TransferMVGD(MatcherBaseclass):
 
         """
 
+        # validate dimensionality
+        self.check_dims()
+
         eig_val_r, eig_vec_r = np.linalg.eig(self.cov_r)
         eig_val_r[eig_val_r < 0] = 0
         val_r = np.diag(np.sqrt(eig_val_r[::-1]))
         vec_r = np.array(eig_vec_r[:, ::-1])
         inv_r = np.diag(1. / (np.diag(val_r + np.spacing(1))))
 
-        mat_c = np.dot(val_r, np.dot(vec_r.T, np.dot(self.cov_z, np.dot(vec_r, val_r))))
-        [eig_val_c, eig_vec_c] = np.linalg.eig(mat_c)
+        mat_c = val_r @ vec_r.T @ self.cov_z @ vec_r @ val_r
+        eig_val_c, eig_vec_c = np.linalg.eig(mat_c)
         eig_val_c[eig_val_c < 0] = 0
         val_c = np.diag(np.sqrt(eig_val_c))
 
@@ -132,6 +137,11 @@ class TransferMVGD(MatcherBaseclass):
         :rtype: np.ndarray
 
         """
+
+        # validate dimensionality
+        self.check_dims()
+        if self.r.shape[-1] != self.z.shape[-1]:
+            raise Exception('Analytical MVGD solution requires spatial dimensions of both images to be equal')
 
         cov_r_inv = np.linalg.pinv(self.cov_r)
         cov_z_inv = np.linalg.pinv(self.cov_z)
@@ -164,3 +174,13 @@ class TransferMVGD(MatcherBaseclass):
         vars_dist = np.trace(cov_a+cov_b - 2*(np.dot(np.abs(cov_b)**.5, np.dot(np.abs(cov_a), np.abs(cov_b)**.5))**.5))
 
         return float(mean_dist + vars_dist)
+
+    def check_dims(self):
+        """
+        Catch error for wrong color channel number (e.g., gray scale image)
+
+        :return: None
+        """
+
+        if np.ndim(self.cov_r) == 0 or np.ndim(self.cov_z) == 0:
+            raise Exception('Wrong color channel dimensionality for %s method' % self._fun_name)

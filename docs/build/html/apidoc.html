@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API documentation &#8212; color-matcher 0.4.1 documentation</title>
+    <title>API documentation &#8212; color-matcher 0.5.0 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -30,7 +30,7 @@
         <li class="right" >
           <a href="readme.html" title="color-matcher"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">color-matcher 0.4.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">color-matcher 0.5.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">API documentation</a></li> 
       </ul>
     </div>  
@@ -63,11 +63,29 @@
 
 <dl class="py method">
 <dt id="color_matcher.ColorMatcher.main">
-<code class="sig-name descname">main</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">method</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a><a class="headerlink" href="#color_matcher.ColorMatcher.main" title="Permalink to this definition">¶</a></dt>
-<dd><p>The main function is the high-level entry point performing the mapping. Valid methods are:</p>
+<code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a><a class="headerlink" href="#color_matcher.ColorMatcher.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main function is the high-level entry point performing the mapping based on instantiation arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Resulting image after color mapping</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="color_matcher.ColorMatcher.transfer">
+<code class="sig-name descname">transfer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ref</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">method</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a><a class="headerlink" href="#color_matcher.ColorMatcher.transfer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transfer function to map colors based on provided transfer method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – (‘default’, ‘hm’, ‘reinhard’, ‘mvgd’, ‘mkl’, ‘hm-mvgd-hm’, ‘hm-mkl-hm’) determining color mapping</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Source image that requires transfer</p></li>
+<li><p><strong>ref</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Palette image which serves as reference</p></li>
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – (‘default’, ‘hm’, ‘reinhard’, ‘mvgd’, ‘mkl’, ‘hm-mvgd-hm’, ‘hm-mkl-hm’) determining color mapping</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Resulting image after color mapping</p>
@@ -137,6 +155,22 @@ but requires the same number of color channels in both images.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="color_matcher.TransferMVGD.check_dims">
+<code class="sig-name descname">check_dims</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#color_matcher.TransferMVGD.check_dims" title="Permalink to this definition">¶</a></dt>
+<dd><p>Catch error for wrong color channel number (e.g., gray scale image)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="color_matcher.TransferMVGD.init_vars">
+<code class="sig-name descname">init_vars</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#color_matcher.TransferMVGD.init_vars" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt id="color_matcher.TransferMVGD.mkl_solver">
 <code class="sig-name descname">mkl_solver</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#color_matcher.TransferMVGD.mkl_solver" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function computes the transfer matrix based on the Monge-Kantorovich Linearization (MKL).</p>
@@ -151,15 +185,15 @@ but requires the same number of color channels in both images.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="color_matcher.TransferMVGD.transfer">
-<code class="sig-name descname">transfer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ref</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fun</span><span class="p">:</span> <span class="n">function</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a><a class="headerlink" href="#color_matcher.TransferMVGD.transfer" title="Permalink to this definition">¶</a></dt>
+<dt id="color_matcher.TransferMVGD.multivar_transfer">
+<code class="sig-name descname">multivar_transfer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ref</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fun</span><span class="p">:</span> <span class="n">function</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a><a class="headerlink" href="#color_matcher.TransferMVGD.multivar_transfer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transfer function to map colors based on for Multi-Variate Gaussian Distributions (MVGDs).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>src</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Source image that requires transfer</p></li>
 <li><p><strong>ref</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Palette image which serves as reference</p></li>
-<li><p><strong>fun</strong> – optional argument to pass a transfer function to solve for covariance matrices</p></li>
+<li><p><strong>fun</strong> – Optional argument to pass a transfer function to solve for covariance matrices</p></li>
 <li><p><strong>res</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Resulting image after the mapping</p></li>
 </ul>
 </dd>
@@ -239,9 +273,29 @@ The paper of the original work can be found at <a class="reference external" hre
 </dd></dl>
 
 <dl class="py method">
+<dt id="color_matcher.MatcherBaseclass.rgb2gray">
+<em class="property">static </em><code class="sig-name descname">rgb2gray</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rgb</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">standard</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">'HDTV'</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a><a class="headerlink" href="#color_matcher.MatcherBaseclass.rgb2gray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert RGB color space to monochromatic color space</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rgb</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – input array in red, green and blue (RGB) space</p></li>
+<li><p><strong>standard</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – option that determines whether head- and footroom are excluded (‘HDTV’) or considered otherwise</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>array in monochromatic space</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="color_matcher.MatcherBaseclass.validate_color_chs">
 <code class="sig-name descname">validate_color_chs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#color_matcher.MatcherBaseclass.validate_color_chs" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function checks whether provided images consist of 3 color channels. An exception is thrown otherwise.</p>
+<dd><p>This function checks whether provided images consist of a valid number of color channels.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -307,7 +361,7 @@ The paper of the original work can be found at <a class="reference external" hre
         <li class="right" >
           <a href="readme.html" title="color-matcher"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">color-matcher 0.4.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">color-matcher 0.5.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">API documentation</a></li> 
       </ul>
     </div>

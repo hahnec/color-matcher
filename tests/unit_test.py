@@ -73,10 +73,12 @@ class MatchMethodTester(unittest.TestCase):
         refer_val = self.avg_hist_dist(plain, refer)
         match_val = self.avg_hist_dist(plain, match)
         print('\nAvg. histogram distance of original %s vs. %s %s' % (round(refer_val, 3), method, round(match_val, 3)))
-        obj = ColorMatcher(src=house, ref=plain, method='mvgd')
-        mu_house, mu_plain, cov_house, cov_plain = obj.mu_r, obj.mu_z, obj.cov_r, obj.cov_z
-        obj = ColorMatcher(src=house, ref=match, method='mvgd')
-        mu_match, cov_match = obj.mu_z, obj.cov_z
+        cm = ColorMatcher(src=house, ref=plain, method='mvgd')
+        cm.init_vars()
+        mu_house, mu_plain, cov_house, cov_plain = cm.mu_r, cm.mu_z, cm.cov_r, cm.cov_z
+        cm = ColorMatcher(src=house, ref=match, method='mvgd')
+        cm.init_vars()
+        mu_match, cov_match = cm.mu_z, cm.cov_z
         refer_w2 = ColorMatcher.w2_dist(mu_a=mu_house, mu_b=mu_plain, cov_a=cov_house, cov_b=cov_plain)
         match_w2 = ColorMatcher.w2_dist(mu_a=mu_match, mu_b=mu_plain, cov_a=cov_match, cov_b=cov_plain)
         print('Wasserstein-2 distance of original %s vs. %s %s' % (round(refer_w2, 3), method, round(match_w2, 3)))
@@ -170,26 +172,36 @@ class MatchMethodTester(unittest.TestCase):
         self.assertEqual(True, ret)
 
     @idata((
-        [np.ones([5, 5, 3, 1]), np.ones([5, 5, 3, 1]), False],
-        [np.ones([5, 5, 3]), np.ones([5, 5, 3]), True],
-        [np.ones([5, 5, 3]), np.ones([9, 9, 3]), True],
-        [np.ones([5, 5, 3]), np.ones([2, 2, 3]), True],
-        [np.ones([5, 5, 1]), np.ones([5, 5, 1]), False],
-        [np.ones([5, 5, 2]), np.ones([5, 5, 2]), False],
-        [np.ones([5, 5, 3]), np.ones([5, 5, 1]), False],
-        [np.ones([5, 5, 1]), np.ones([5, 5, 3]), False],
-        [np.ones([5, 5]), np.ones([5, 5]), False],
-        [np.ones([5]), np.ones([5]), False],
-        [np.ones([1]), np.ones([1]), False],
-        [np.ones([0]), np.ones([0]), False],
-        [None, None, False]
+            # gray scale images
+            [np.random.rand(5, 5, 1), np.random.rand(5, 5, 1), True],
+            [np.random.rand(5, 5), np.random.rand(5, 5), True],
+            # alpha channel images
+            [np.random.rand(5, 5, 4), np.random.rand(5, 5, 4), True],
+            [np.random.rand(5, 5, 3), np.random.rand(5, 5, 4), True],
+            [np.random.rand(5, 5, 4), np.random.rand(5, 5, 3), True],
+            # varying spatial resolutions
+            [np.random.rand(5, 5, 3), np.random.rand(5, 5, 3), True],
+            [np.random.rand(5, 5, 3), np.random.rand(9, 9, 3), True],
+            [np.random.rand(5, 5, 3), np.random.rand(2, 2, 3), True],
+            [np.random.rand(3, 3, 3), np.random.rand(5, 5, 3), True],
+            # different color channel number
+            [np.random.rand(5, 5, 3), np.random.rand(5, 5, 1), True],
+            [np.random.rand(5, 5, 1), np.random.rand(5, 5, 3), True],
+            [np.random.rand(5, 5, 2), np.random.rand(5, 5, 2), True],
+            # wrong dimensionality
+            [np.random.rand(5, 5, 3, 1), np.random.rand(5, 5, 3, 1), False],
+            [np.random.rand(5, 5, 5), np.random.rand(5, 5, 5), False],
+            [np.random.rand(5), np.random.rand(5), False],
+            [np.random.rand(1), np.random.rand(1), False],
+            [np.random.rand(0), np.random.rand(0), False],
+            [None, None, False]
     ))
     @unpack
-    def test_img_dims(self, src_img, img_ref, exp_val):
+    def test_img_dims(self, src_img, ref_img, exp_val):
 
         try:
-            obj = ColorMatcher(src=src_img, ref=img_ref)
-            res = obj.main()
+            cm = ColorMatcher()
+            res = cm.transfer(src=src_img, ref=ref_img, method='default')
             ret = res.mean().astype('bool')
             msg = ''
         except BaseException as e:

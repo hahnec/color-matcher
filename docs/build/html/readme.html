@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>color-matcher &#8212; color-matcher 0.4.1 documentation</title>
+    <title>color-matcher &#8212; color-matcher 0.5.0 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -34,7 +34,7 @@
         <li class="right" >
           <a href="index.html" title="color-matcher reference document"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">color-matcher 0.4.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">color-matcher 0.5.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">color-matcher</a></li> 
       </ul>
     </div>  
@@ -151,10 +151,10 @@ classical histogram matching. As shown below our HM-MVGD-HM compound outperforms
 <span class="n">filenames</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">src_path</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">src_path</span><span class="p">)</span>
                      <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">FILE_EXTS</span><span class="p">)]</span>
 
+<span class="n">cm</span> <span class="o">=</span> <span class="n">ColorMatcher</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">fname</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">filenames</span><span class="p">):</span>
     <span class="n">img_src</span> <span class="o">=</span> <span class="n">load_img_file</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-    <span class="n">obj</span> <span class="o">=</span> <span class="n">ColorMatcher</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">img_src</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="n">img_ref</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;mkl&#39;</span><span class="p">)</span>
-    <span class="n">img_res</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+    <span class="n">img_res</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">transfer</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">img_src</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="n">img_ref</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;mkl&#39;</span><span class="p">)</span>
     <span class="n">img_res</span> <span class="o">=</span> <span class="n">Normalizer</span><span class="p">(</span><span class="n">img_res</span><span class="p">)</span><span class="o">.</span><span class="n">uint8_norm</span><span class="p">()</span>
     <span class="n">save_img_file</span><span class="p">(</span><span class="n">img_res</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">fname</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.png&#39;</span><span class="p">))</span>
 </pre></div>
@@ -256,7 +256,7 @@ More detailed information can be found in <a class="reference external" href="ht
         <li class="right" >
           <a href="index.html" title="color-matcher reference document"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">color-matcher 0.4.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">color-matcher 0.5.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">color-matcher</a></li> 
       </ul>
     </div>
