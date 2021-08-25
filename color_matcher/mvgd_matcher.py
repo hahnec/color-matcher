@@ -111,7 +111,7 @@ class TransferMVGD(MatcherBaseclass):
         eig_val_r, eig_vec_r = np.linalg.eig(self.cov_r)
         eig_val_r[eig_val_r < 0] = 0
         val_r = np.diag(np.sqrt(eig_val_r[::-1]))
-        vec_r = np.array([eig_vec_r[:, 2] * -1, eig_vec_r[:, 1], eig_vec_r[:, 0] * -1]).T
+        vec_r = np.array(eig_vec_r[:, ::-1])
         inv_r = np.diag(1. / (np.diag(val_r + np.spacing(1))))
 
         mat_c = np.dot(val_r, np.dot(vec_r.T, np.dot(self.cov_z, np.dot(vec_r, val_r))))
