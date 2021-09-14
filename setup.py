@@ -64,14 +64,20 @@ else:
         data_files=FILES,
  )
 
+path = os.path.dirname(os.path.realpath(__file__))
 # parse description section text
-readme_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'README.rst')
+readme_path = os.path.join(path, 'README.rst')
 with open(readme_path, "r") as f:
     data = f.read()
     readme_nodes = list(core.publish_doctree(data))
     for node in readme_nodes:
         if node.astext().startswith('Description'):
                 long_description = node.astext().rsplit('\n\n')[1]
+
+# parse package requirements from text file
+reqtxt_path = os.path.join(path, 'requirements.txt')
+with open(reqtxt_path, 'r') as f:
+    req_list = f.read().split('\n')
 
 setup(
       name='color-matcher',
@@ -90,7 +96,7 @@ setup(
       scripts=['color_matcher/bin/cli.py'],
       entry_points={'console_scripts': ['color-matcher=color_matcher.bin.cli:main'], },
       packages=find_packages(),
-      install_requires=['numpy', 'imageio', 'docutils', 'ddt'],
+      install_requires=req_list,
       include_package_data=True,
       python_requires='>=3',
       zip_safe=False,
