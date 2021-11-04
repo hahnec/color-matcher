@@ -175,6 +175,28 @@ class TransferMVGD(MatcherBaseclass):
 
         return float(mean_dist + vars_dist)
 
+    def w2_img_dist(self, img_a: np.ndarray, img_b:np.ndarray):
+
+        """
+        Wasserstein-2 image distance metric is a similarity measure for Gaussian distributions
+
+        :param img_a: Image array *a*
+        :param img_b: Image array *b*
+
+        :type img_a: :class:`~numpy:numpy.ndarray`
+        :type img_b: :class:`~numpy:numpy.ndarray`
+
+        :return: **scalar**: Wasserstein-2 image metric as a scalar
+        :rtype: float
+        """
+
+        img_src, img_ref = img_a, img_b
+        mu_a, mu_b = np.mean(img_src, axis=(0, 1)), np.mean(img_ref, axis=(0, 1))
+        cov_a, cov_b = np.cov(img_src.reshape(-1, 3).T), np.cov(img_ref.reshape(-1, 3).T)
+        w2_img_dist = self.w2_dist(mu_a, mu_b, cov_a, cov_b)
+
+        return w2_img_dist
+
     def check_dims(self):
         """
         Catch error for wrong color channel number (e.g., gray scale image)
