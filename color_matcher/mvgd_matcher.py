@@ -190,9 +190,8 @@ class TransferMVGD(MatcherBaseclass):
         :rtype: float
         """
 
-        img_src, img_ref = img_a, img_b
-        mu_a, mu_b = np.mean(img_src, axis=(0, 1)), np.mean(img_ref, axis=(0, 1))
-        cov_a, cov_b = np.cov(img_src.reshape(-1, 3).T), np.cov(img_ref.reshape(-1, 3).T)
+        mu_a, mu_b = np.mean(img_a, axis=(0, 1)), np.mean(img_b, axis=(0, 1))
+        cov_a, cov_b = np.cov(img_a.reshape(-1, 3).T), np.cov(img_b.reshape(-1, 3).T)
         w2_img_dist = self.w2_dist(mu_a, mu_b, cov_a, cov_b)
 
         return w2_img_dist
