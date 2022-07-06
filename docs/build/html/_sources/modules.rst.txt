@@ -1,7 +1,0 @@
-color_matcher
-=============
-
-.. toctree::
-   :maxdepth: 4
-
-   color_matcher

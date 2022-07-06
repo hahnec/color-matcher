@@ -26,8 +26,6 @@ API
 .. automodule:: color_matcher
 .. autoclass:: ColorMatcher
    :members:
-   :private-members:
-   :special-members:
 .. autoclass:: HistogramMatcher
    :members:
 .. autoclass:: TransferMVGD

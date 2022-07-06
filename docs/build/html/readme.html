@@ -4,16 +4,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>color-matcher &#8212; color-matcher 0.5.0 documentation</title>
-    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="API documentation" href="apidoc.html" />
@@ -44,9 +44,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="color-matcher">
+  <section id="color-matcher">
 <h1>color-matcher<a class="headerlink" href="#color-matcher" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="description">
+<section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p><em>color-matcher</em> enables color transfer across images which comes in handy for automatic color-grading
 of photographs, paintings and film sequences as well as light-field and stopmotion corrections. The methods behind
@@ -55,8 +55,8 @@ Pitie <em>et al.</em> and our analytical solution to a Multi-Variate Gaussian Di
 classical histogram matching. As shown below our HM-MVGD-HM compound outperforms existing methods.</p>
 <p><a class="reference external" href="https://github.com/hahnec/color-matcher/releases/"><img alt="release" src="https://img.shields.io/github/v/release/hahnec/color-matcher?style=square" /></a> <a class="reference external" href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img alt="License" src="https://img.shields.io/badge/License-GPL%20v3.0-orange.svg?style=square" /></a> <a class="reference external" href="https://github.com/hahnec/color-matcher/actions"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/hahnec/color-matcher/ColorMatcher's%20CI%20Pipeline/master?style=square" /></a> <a class="reference external" href="https://coveralls.io/github/hahnec/color-matcher"><img alt="coverage" src="https://img.shields.io/coveralls/github/hahnec/color-matcher?style=square" /></a> <a class="reference external" href="https://pepy.tech/project/color-matcher"><img alt="PyPi Dl2" src="https://pepy.tech/badge/color-matcher?style=flat-square" /></a> <a class="reference external" href="https://pypi.org/project/color-matcher/"><img alt="PyPI Downloads" src="https://img.shields.io/pypi/dm/color-matcher?label=PyPI%20downloads&amp;style=square" /></a></p>
 <p><a class="reference external" href="https://gesis.mybinder.org/binder/v2/gh/hahnec/color-matcher/3a85a06bb546fa6d4294c7fc241de9e3cce2b2e0?urlpath=lab%2Ftree%2F01_api_demo.ipynb"><img alt="binder" src="https://img.shields.io/badge/launch-binder-579aca.svg?logo=data:image/png;base64,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" /></a></p>
-</div>
-<div class="section" id="results">
+</section>
+<section id="results">
 <h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
 <p></p>
 <table class="colwidths-given docutils align-default">
@@ -99,8 +99,8 @@ classical histogram matching. As shown below our HM-MVGD-HM compound outperforms
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-</div>
-<div class="section" id="installation">
+</section>
+<section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><dl class="simple">
@@ -124,8 +124,8 @@ classical histogram matching. As shown below our HM-MVGD-HM compound outperforms
 </dl>
 </li>
 </ul>
-</div>
-<div class="section" id="cli-usage">
+</section>
+<section id="cli-usage">
 <h2>CLI Usage<a class="headerlink" href="#cli-usage" title="Permalink to this headline">¶</a></h2>
 <p>From the root directory of your downloaded repo, you can run the tool on the provided test data by</p>
 <p><code class="docutils literal notranslate"><span class="pre">color-matcher</span> <span class="pre">-s</span> <span class="pre">'./tests/data/scotland_house.png'</span> <span class="pre">-r</span> <span class="pre">'./tests/data/scotland_plain.png'</span></code></p>
@@ -137,8 +137,8 @@ classical histogram matching. As shown below our HM-MVGD-HM compound outperforms
 <p><code class="docutils literal notranslate"><span class="pre">color-matcher</span> <span class="pre">-s</span> <span class="pre">'./tests/data/'</span> <span class="pre">-r</span> <span class="pre">'./tests/data/scotland_plain.png'</span></code></p>
 <p>More information on optional arguments, can be found using the help parameter</p>
 <p><code class="docutils literal notranslate"><span class="pre">color-matcher</span> <span class="pre">-h</span></code></p>
-</div>
-<div class="section" id="api-usage">
+</section>
+<section id="api-usage">
 <h2>API Usage<a class="headerlink" href="#api-usage" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">color_matcher</span> <span class="kn">import</span> <span class="n">ColorMatcher</span>
 <span class="kn">from</span> <span class="nn">color_matcher.io_handler</span> <span class="kn">import</span> <span class="n">load_img_file</span><span class="p">,</span> <span class="n">save_img_file</span><span class="p">,</span> <span class="n">FILE_EXTS</span>
@@ -159,8 +159,8 @@ classical histogram matching. As shown below our HM-MVGD-HM compound outperforms
     <span class="n">save_img_file</span><span class="p">(</span><span class="n">img_res</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">fname</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.png&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="experimental-results">
+</section>
+<section id="experimental-results">
 <h2>Experimental results<a class="headerlink" href="#experimental-results" title="Permalink to this headline">¶</a></h2>
 <p><img src="https://raw.githubusercontent.com/hahnec/color-matcher/develop/docs/img/hist+wasser_dist.svg" max-width="100%" align="center"></p>
 <p>The above diagram illustrates light-field color consistency from Wasserstein metric <span class="math notranslate nohighlight">\(W_1\)</span> and histogram distance
@@ -170,8 +170,8 @@ These distance metrics are computed as follows</p>
 <p>where <span class="math notranslate nohighlight">\(f(k,\cdot)\)</span> and <span class="math notranslate nohighlight">\(F(k,\cdot)\)</span> represent the Probability Density Function (PDF) and Cumulative Density Function (CDF) at intensity level <span class="math notranslate nohighlight">\(k\)</span>, respectively.
 More detailed information can be found in <a class="reference external" href="https://arxiv.org/pdf/2010.11687.pdf">our IEEE paper</a>.</p>
 <p></p>
-</div>
-<div class="section" id="citation">
+</section>
+<section id="citation">
 <h2>Citation<a class="headerlink" href="#citation" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-BibTeX notranslate"><div class="highlight"><pre><span></span><span class="nc">@ARTICLE</span><span class="p">{</span><span class="nl">plenopticam</span><span class="p">,</span>
     <span class="na">author</span><span class="p">=</span><span class="s">{Hahne, Christopher and Aggoun, Amar}</span><span class="p">,</span>
@@ -185,12 +185,12 @@ More detailed information can be found in <a class="reference external" href="ht
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="author">
+</section>
+<section id="author">
 <h2>Author<a class="headerlink" href="#author" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="http://www.christopherhahne.de/">Christopher Hahne</a></p>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -231,7 +231,7 @@ More detailed information can be found in <a class="reference external" href="ht
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -262,7 +262,7 @@ More detailed information can be found in <a class="reference external" href="ht
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Christopher Hahne.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
     </div>
   </body>
 </html>
