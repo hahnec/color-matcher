@@ -116,51 +116,51 @@ API Usage
 
 .. |src_photo| raw:: html
 
-    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/scotland_house.png" max-height="160px">
+    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/scotland_house.png" max-height="150px">
 
 .. |ref_photo| raw:: html
 
-    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/scotland_plain.png" max-height="160px">
+    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/scotland_plain.png" max-height="150px">
 
 .. |res_photo| raw:: html
 
-    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/scotland_pitie.png" max-height="160px">
+    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/scotland_pitie.png" max-height="150px">
 
 .. |src_paint| raw:: html
 
-    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/parismusees/cezanne_paul_trois_baigneuses.png" max-height="160px">
+    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/parismusees/cezanne_paul_trois_baigneuses.png" max-height="150px">
 
 .. |ref_paint| raw:: html
 
-    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/parismusees/cezanne_paul_portrait_dambroise_vollard.png" max-height="160px">
+    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/parismusees/cezanne_paul_portrait_dambroise_vollard.png" max-height="150px">
 
 .. |res_paint| raw:: html
 
-    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/parismusees/cezanne_paul_trois_baigneuses_mvgd.png" max-height="160px">
+    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/parismusees/cezanne_paul_trois_baigneuses_mvgd.png" max-height="150px">
 
 .. |src_seq| raw:: html
 
-    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/wave.gif" max-height="160px">
+    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/wave.gif" max-height="150px">
 
 .. |ref_seq| raw:: html
 
-    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/sunrise.png" max-height="160px">
+    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/sunrise.png" max-height="150px">
 
 .. |res_seq| raw:: html
 
-    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/wave_mvgd.gif" max-height="160px">
+    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/wave_mvgd.gif" max-height="150px">
 
 .. |src_lfp| raw:: html
 
-    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/view_animation_7px.gif" max-height="160px">
+    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/view_animation_7px.gif" max-height="150px">
 
 .. |ref_lfp| raw:: html
 
-    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/bee_2.png" max-height="160px">
+    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/bee_2.png" max-height="150px">
 
 .. |res_lfp| raw:: html
 
-    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/view_animation_7px_hm-mkl-hm.gif" max-height="160px">
+    <img src="https://raw.githubusercontent.com/hahnec/color-matcher/master/tests/data/view_animation_7px_hm-mkl-hm.gif" max-height="150px">
 
 .. |vspace| raw:: latex
 
