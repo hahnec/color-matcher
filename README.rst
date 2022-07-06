@@ -21,7 +21,7 @@ Results
 |vspace|
 
 .. list-table::
-   :widths: 4 4 4 4
+   :widths: 3 3 3 3
    :header-rows: 1
    :stub-columns: 1
 
