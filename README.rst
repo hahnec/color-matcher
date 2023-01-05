@@ -194,7 +194,7 @@ API Usage
 .. |build_travis| image:: https://img.shields.io/travis/com/hahnec/color-matcher?style=square
     :target: https://travis-ci.com/github/hahnec/color-matcher
 
-.. |build_github| image:: https://img.shields.io/github/workflow/status/hahnec/color-matcher/ColorMatcher's%20CI%20Pipeline/master?style=square
+.. |build_github| image:: https://img.shields.io/github/actions/workflow/status/hahnec/color-matcher/gh_actions.yml?branch=master&style=square
     :target: https://github.com/hahnec/color-matcher/actions
     :alt: GitHub Workflow Status
 
