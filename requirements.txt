@@ -3,3 +3,4 @@ imageio
 docutils
 ddt
 matplotlib
+packaging>=24.2
