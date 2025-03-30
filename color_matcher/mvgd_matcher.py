@@ -84,7 +84,7 @@ class TransferMVGD(MatcherBaseclass):
         self.validate_color_chs()
 
         # re-initialize variables to account for change in src and ref when passed to self.transfer()
-        self._init_vars()
+        self.init_vars()
 
         # set solver function for transfer matrix
         self._fun_call = fun if fun is FunctionType else self._fun_call
