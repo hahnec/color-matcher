@@ -15,6 +15,8 @@ classical histogram matching. As shown below our HM-MVGD-HM compound outperforms
 
 |binder|
 
+|hf_spaces|
+
 Results
 -------
 
@@ -215,6 +217,10 @@ API Usage
 .. |paper| image:: http://img.shields.io/badge/paper-arxiv.2010.11687-red.svg?style=flat-square
     :target: https://arxiv.org/pdf/2010.11687.pdf
     :alt: arXiv link
+
+.. |hf_spaces| image:: https://huggingface.co/datasets/huggingface/badges/resolve/main/deploy-on-spaces-md-dark.svg
+   :target: https://huggingface.co/spaces/hahnec/color-matcher
+   :alt: Deploy on Spaces
 
 Experimental results
 --------------------
