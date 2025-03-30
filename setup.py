@@ -88,7 +88,6 @@ setup(
       url='http://github.com/hahnec/color-matcher',
       author='Christopher Hahne',
       author_email='inbox@christopherhahne.de',
-      license='GNU GPL V3.0',
       keywords='color match histogram matching image colour transfer monge kantorovich mkl pitie reinhard'
                'recolor re-color recolour re-colour paintings '
                'film movie sequence automatic grading color-grading colour-grading '
