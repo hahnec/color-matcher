@@ -20,6 +20,8 @@ __license__ = """
 
 """
 
+import sys
+sys.path.append('../')
 from color_matcher.top_level import ColorMatcher, METHODS
 from color_matcher.io_handler import *
 from color_matcher.bin.cli import main
