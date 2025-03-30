@@ -219,7 +219,7 @@ API Usage
     :alt: arXiv link
 
 .. |hf_spaces| image:: https://huggingface.co/datasets/huggingface/badges/resolve/main/deploy-on-spaces-md-dark.svg
-   :target: https://huggingface.co/spaces/hahnec/color-matcher
+   :target: http://www.hahne.website/color_matcher.html
    :alt: Deploy on Spaces
 
 Experimental results
