@@ -43,7 +43,7 @@ class TransferMVGD(MatcherBaseclass):
         # initialize variables
         self.r, self.z, self.cov_r, self.cov_z, self.mu_r, self.mu_z, self.transfer_mat = [None]*7
 
-    def _init_vars(self):
+    def init_vars(self):
 
         # reshape source and reference images
         self.r, self.z = self._src.reshape([-1, self._src.shape[2]]).T, self._ref.reshape([-1, self._ref.shape[2]]).T
